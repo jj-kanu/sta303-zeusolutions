@@ -84,8 +84,27 @@ ggsave("images/example.png", width = 7, height = 4)
 
 ![](images/example.png)
 
-## Informative title for section addressing a research question
-## Informative title for section addressing a research question
+
+```{r wrangle_application_data, message = FALSE}
+phase1_applicants <- read_csv("data/phase1-new-grad-applicants-2020.csv")
+phase2_applicants <- read_csv("data/phase2-new-grad-applicants-2020.csv")
+phase3_applicants <- read_csv("data/phase3-new-grad-applicants-2020.csv")
+final_hires <- read_csv("data/final-hires-newgrad_2020.csv")
+
+# Adds Applicant Info to Phase 3
+phase3_applicants <- phase3_applicants %>% 
+  left_join(phase2_applicants, by = "applicant_id")
+# Adds Applicant Info to Final Hires
+final_hires <- final_hires %>%  left_join(phase3_applicants, by = "applicant_id")
+```
+
+
+## (Hiring Question) What factors affect AI scoring of leadership and speaking skills in the second phase of the application process?
+
+## (Promotion Question)
+
+## (Salary Question)
+
 
 ```{r, include = FALSE}
 library(tidyverse)
