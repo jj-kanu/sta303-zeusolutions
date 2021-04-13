@@ -129,7 +129,7 @@ _In this section you will summarize your findings across all the research questi
 
 **James F. Kanu**. James is a junior consultant with Zeusolutions. He specializes in data visualization. James earned his Bachelor of Science, Majoring in Mathematics and Minoring in Computer Science and Statistics from the University of Toronto in 2021.
 
-**Justin Lee**. 
+**Justin Lee**. Justin is a junior consultant with Zeusolutions. He specializes in data analytics. Justin earned his Bachelor of Science, Majoring in Statistics and Mathematics from the Unviversity of Toronto in 2021. 
 
 ## Code of ethical conduct
 
