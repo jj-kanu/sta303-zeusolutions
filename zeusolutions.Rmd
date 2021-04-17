@@ -83,7 +83,22 @@ ggsave("images/example.png", width = 7, height = 4)
 ```
 
 ![](images/example.png)
+```{r}
+gender_to_currentroles <- select(black_saber_current_employees, gender, role_seniority) 
 
+#creating visual to display  reported gender ratios of current employees
+gender_to_currentroles%>%
+  gather(gender,role_seniority)%>%
+  mutate(roles = factor(role_seniority))%>%
+  ggplot(aes(roles,fill=gender))+
+  geom_bar(preserve="single",position="dodge")+
+  theme(axis.text.x = element_text(angle=30))+
+  labs(title = "Gender Parity of Current Employees",fill="Gender")+
+  xlab("Role Seniority")
+
+ggsave("images/currentgender.png", width = 7, height = 4)
+```
+![](images/currentgender.png)
 
 ```{r wrangle_application_data, message = FALSE}
 phase1_applicants <- read_csv("data/phase1-new-grad-applicants-2020.csv")
