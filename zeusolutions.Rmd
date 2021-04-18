@@ -66,8 +66,7 @@ _For each research question, you will want to briefly describe any data manipula
 # This chunk provides an example of some things you can do with RMarkdown to make your report creation process easier
 
 # read in the data
-black_saber_current_employees <- read_csv("data/black-saber-current-employees.csv") %>% 
-        arrange(employee_id, financial_q)
+black_saber_current_employees <- read_csv("data/black-saber-current-employees.csv")
 
 # create a visualisation
 my_plot <- black_saber_current_employees %>% 
@@ -118,7 +117,8 @@ final_hires <- final_hires %>%
 ```
 
 ```{r wrangle_employee_data, message = FALSE}
-current_employees <- read.csv("data/black-saber-current-employees.csv")
+current_employees <- read.csv("data/black-saber-current-employees.csv")  %>% 
+      arrange(employee_id, financial_q)
 ```
 
 ## (Hiring Question) What factors affect AI scoring of leadership and speaking skills in the second phase of the application process?
