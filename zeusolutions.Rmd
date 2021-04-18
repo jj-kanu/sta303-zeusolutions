@@ -85,6 +85,7 @@ ggsave("images/example.png", width = 7, height = 4)
 ![](images/example.png)
 ```{r}
 gender_to_currentroles <- select(black_saber_current_employees, gender, role_seniority) 
+hierarchy <- c('Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president')
 
 #creating visual to display  reported gender ratios of current employees
 gender_to_currentroles%>%
@@ -92,6 +93,7 @@ gender_to_currentroles%>%
   mutate(roles = factor(role_seniority))%>%
   ggplot(aes(roles,fill=gender))+
   geom_bar(preserve="single",position="dodge")+
+  scale_x_discrete(limits = hierarchy) +
   theme(axis.text.x = element_text(angle=30))+
   labs(title = "Gender Parity of Current Employees",fill="Gender")+
   xlab("Role Seniority")
