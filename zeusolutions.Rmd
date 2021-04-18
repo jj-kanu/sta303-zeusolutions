@@ -66,10 +66,10 @@ _For each research question, you will want to briefly describe any data manipula
 # This chunk provides an example of some things you can do with RMarkdown to make your report creation process easier
 
 # read in the data
-black_saber_current_employees <- read_csv("data/black-saber-current-employees.csv")
+current_employees <- read_csv("data/black-saber-current-employees.csv")
 
 # create a visualisation
-my_plot <- black_saber_current_employees %>% 
+my_plot <- current_employees %>% 
   ggplot(aes(x = productivity)) +
   geom_histogram(colour = "grey", fill = "#6C3082") +
   theme_minimal() +
@@ -83,7 +83,22 @@ ggsave("images/example.png", width = 7, height = 4)
 ```
 
 ![](images/example.png)
+```{r}
+gender_to_currentroles <- select(current_employees, gender, role_seniority) 
 
+#creating visual to display  reported gender ratios of current employees
+gender_to_currentroles%>%
+  gather(gender,role_seniority)%>%
+  mutate(roles = factor(role_seniority))%>%
+  ggplot(aes(roles,fill=gender))+
+  geom_bar(preserve="single",position="dodge")+
+  theme(axis.text.x = element_text(angle=30))+
+  labs(title = "Gender Parity of Current Employees",fill="Gender")+
+  xlab("Role Seniority")
+
+ggsave("images/currentgender.png", width = 7, height = 4)
+```
+![](images/currentgender.png)
 
 ```{r wrangle_application_data, message = FALSE}
 phase1_applicants <- read_csv("data/phase1-new-grad-applicants-2020.csv")
@@ -100,12 +115,10 @@ final_hires <- final_hires %>%
 ```
 
 ```{r wrangle_employee_data, message = FALSE}
-current_employees <- read.csv("data/black-saber-current-employees.csv")
+current_employees <- current_employees
 ```
 
 ## (Hiring Question) What factors affect AI scoring of leadership and speaking skills in the second phase of the application process?
-
-
 
 ## (Promotion Question)
 
