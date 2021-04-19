@@ -86,19 +86,19 @@ ggsave("images/example.png", width = 7, height = 4)
 # notice how the image is included with the ![](file/path.png) below
 ```
 
-```{r fig.show='hide'}
-gender_to_currentroles <- select(current_employees, gender, role_seniority) 
-
+```{r, warning=FALSE}
+gender_to_currentroles <- select(black_saber_current_employees, gender, role_seniority) 
+hierarchy <- c('Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president')
 #creating visual to display  reported gender ratios of current employees
 gender_to_currentroles%>%
   gather(gender,role_seniority)%>%
   mutate(roles = factor(role_seniority))%>%
   ggplot(aes(roles,fill=gender))+
   geom_bar(preserve="single",position="dodge")+
+  scale_x_discrete(limits = hierarchy) +
   theme(axis.text.x = element_text(angle=30))+
   labs(title = "Gender Parity of Current Employees",fill="Gender")+
   xlab("Role Seniority")
-
 ggsave("images/currentgender.png", width = 7, height = 4)
 ```
 ![](images/currentgender.png)
@@ -189,6 +189,37 @@ Based on the model, it is evident that `gpa`, `extracurriculars` and `work_exper
 ### (Phase 2) AI Scoring Influences
 
 ## (Promotion Question)
+Black Saber aims to promote an equitable and inclusive work environment based on merit. The board wants to assure that its promotion processes are not only fair, but strictly based on talent to the company. We have been given the data for the company's current employees and their key performance indicators throughout their time at the company marked by financial quarters. We wish to determine which factors contribute to employees moving up the ranks of Black Saber seniority.
+
+### Features Recorded of Black Saber's Current Employees
+
+While employed at Black Saber Software, employee performance indicators are recorded every financial quarter. Each line of `black-saber-current-employees.csv` contains the information of each employee at the financial quarters they were employed:
+
+* `employee_id` = A unique ID given to each employee of Black Saber
+* `gender` = 'Man', 'Woman', or 'Prefer not to say' as the only options
+* `team` = Divisions of Black Saber staff categorized into: "Software", "People and talent", "Operations", "Marketing and sales", "Legal and financial", "Design", "Data", and "Client services".
+* `financial_q` = Financial quarter where following features were recorded.
+* `role_seniority` = Hierarchy of employees within each team. Rank order from least senior to most senior: 'Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president'. 
+* `leadership_for_level` = Quality of demonstrated leadership, taking into account role level. (i.e. “Appropriate for level” requires much less for entry-levelemployees than for a manager). Categorized into "Needs Improvement", "Appropriate for Level", and "Exceeds Expectations".
+* `productivity` = Work output in relation to job description, rated on a 0-100 scale with 50 being satisfactory and above 50 indicating better than expected productivity.
+* `salary` = Salary at at the given financial quarter (note: these are effective yearly values for the current wage, but don’t take in to account previous salary steps in the same year, etc.)
+
+```{r}
+sample_n(distinct(current_employees, employee_id, .keep_all = TRUE), 5) %>% 
+  kbl(caption = "Five Anonymous Employees at Black Saber Software", booktabs = T) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position") %>% 
+  row_spec(0, angle = 45)
+
+```
+
+For this question, we are interested in how many promotions an employee received while working at Black Saber Software. For this reason, we will create a variable called `number_of_promotions` counting the change in role_seniority of each employee. This will be the response variable we are interested in for developing our model.
+
+```{r promotion_data, message = FALSE}
+promoted_employees <- read.csv("data/black-saber-current-employees.csv")  %>% 
+    arrange(employee_id, financial_q) %>% 
+    group_by(employee_id) %>% 
+    mutate(number_of_promotions = length(unique(role_seniority))-1)
+```
 
 ## (Salary Question)
 
