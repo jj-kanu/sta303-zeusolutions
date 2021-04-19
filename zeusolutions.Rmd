@@ -18,8 +18,12 @@ titlepage-rule-height: 2
 
 ```{r, message = FALSE, echo=FALSE}
 library(tidyverse)
+# Run `install.packages("kableExtra")`, install.packages("gtsummary"), install.packages('huxtable') and install.packages("broom.mixed") if needed
+library(huxtable)
+library(kableExtra)
+library(gtsummary)
 # this should supress all code and messages
-knitr::opts_chunk$set(include=FALSE)
+knitr::opts_chunk$set(echo=FALSE)
 ```
 
 # General comments (you can delete this section)
@@ -62,7 +66,7 @@ _Use bullet points to to describe the research questions you are going to addres
 
 _For each research question, you will want to briefly describe any data manipulation, show some exploratory plots/summary tables, report on any methods you use (i.e. models you fit) and the conclusions you draw from these_
 
-```{r}
+```{r include = FALSE, fig.show='hide'}
 # This chunk provides an example of some things you can do with RMarkdown to make your report creation process easier
 
 # read in the data
@@ -82,8 +86,7 @@ ggsave("images/example.png", width = 7, height = 4)
 # notice how the image is included with the ![](file/path.png) below
 ```
 
-![](images/example.png)
-```{r}
+```{r fig.show='hide'}
 gender_to_currentroles <- select(current_employees, gender, role_seniority) 
 
 #creating visual to display  reported gender ratios of current employees
@@ -100,6 +103,14 @@ ggsave("images/currentgender.png", width = 7, height = 4)
 ```
 ![](images/currentgender.png)
 
+```{r wrangle_employee_data, message = FALSE}
+current_employees <- current_employees
+```
+
+## (Hiring Question) Fairness of the AI Recruitment Pipeline Manager
+
+The company Black Saber has a new AI recruitment pipeline manager that has been trialing for the Data and Software teams. The board has concerns about the process and questions whether or not it is fair and based on value and talent of each applicant. We have been given the data for each phase of the process, in which there are a total of three. Through each phase there is certain data collected through question and tasks in which the AI uses to narrow down the field of applicants from one phase to another. We want to determine what factors play a major role in being hired through Black Saber's recruitment pipeline manager.
+
 ```{r wrangle_application_data, message = FALSE}
 phase1_applicants <- read_csv("data/phase1-new-grad-applicants-2020.csv")
 phase2_applicants <- read_csv("data/phase2-new-grad-applicants-2020.csv")
@@ -114,11 +125,68 @@ final_hires <- final_hires %>%
   left_join(phase3_applicants, by = "applicant_id")
 ```
 
-```{r wrangle_employee_data, message = FALSE}
-current_employees <- current_employees
+### (Phase 1) Defining Features of the Application Form
+
+The first phase of the hiring pipeline is submission of an application form, cover letter and CV. Each line of `phase1-new-grad-applicants-2020.csv` contains the information of each applicant in phase 1:
+
+* `applicant_id` = A unique ID given to each applicant in Phase 1
+* `team_applied_for` = Software or Data
+* `cover_letter` = 1 if present, 0 if not.
+* `cv` = 1 if present, 0 if not
+* `gpa` = 0.0 to 4.0
+* `gender` = 'Man', 'Woman', or 'Prefer not to say' as the only options
+* `extracurriculars` = 0, 1 or 2. Description in which is accessed automatically by keywords where 2 indicates high, 1 indicates some and 0 indicates no relevant skill building extracurriculars.
+* `work_experience` = 0, 1 or 2. Description in which is accessed automatically by keywords where 2 indicates high, 1 indicates some and 0 indicates no relevant work experiences.
+
+```{r}
+phase1_applicants[1:5,] %>% 
+  kbl(caption = "The first five applicants from phase 1 of the hiring pipeline", booktabs = T) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position") %>% 
+  row_spec(0, angle = 45)
+
 ```
 
-## (Hiring Question) What factors affect AI scoring of leadership and speaking skills in the second phase of the application process?
+Similarly, we are also given the list of applicants who have made it to phase 2 along with the factors assessed in phase 2. However, in this section we are only interested in which applicants made it to phase 2. For this reason I will create a variable called `passed_1` and set it to 1, if the applicant made it from phase 1 to phase 2 and 0, if not. This will be the response variable we are interested in for developing our model. The other variables will be fixed effects besides `team_applied_for`. We believe that `team_applied_for` should be added as a random effect because each team has a different set of required skills and/or experiences. Other than that, since each row corresponds to a unique applicant, this suggests that the observations are independent, hence our assumptions are not violated. We want to determine which is the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process.
+
+```{r}
+phase1_applicants <- phase1_applicants %>% 
+  mutate(passed_1 = as.integer(applicant_id %in% phase2_applicants$applicant_id)) 
+```
+
+Given the binomial response variable and random effect, we will be constructing a generalized linear mixed model. Before constructing the model, we want to first consider the gender distribution for those who passed phase 1 and those who did not. In addition, consider also the marginal probabilities and odd ratios.\newpage
+
+```{r}
+table_gender_passsed <- table(phase1_applicants$gender, phase1_applicants$passed_1)
+table_gender_passsed %>% 
+  kbl(col.names = c("Did Not Pass Phase 1", "Passed Phase 1"),caption = "The number of applicants that passed phase 1 based on gender", booktabs = T) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position")
+
+prop.table(table_gender_passsed, margin = 2) %>% 
+  kbl(col.names = c("Did Not Pass Phase 1", "Passed Phase 1"),caption = "The probability of an applicant's gender given that they pass phase 1", booktabs = T) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position")
+
+table_mw_passed <- table_gender_passsed[-2,]
+odds_mw_passes <- (table_mw_passed[2,2]/table_mw_passed[2,1])/(table_mw_passed[1,2]/table_mw_passed[1,1]) 
+```
+
+Hence from the table above, given that the applicant passes phase 1, the probability that their gender is a 'Man' is 48%, whereas a 'Woman' is 51%. Also, the odds ratio of Woman vs Man who pass phase 1 is approximately 0.96. That is, the odds of a 'Woman' passing phase 1 is less than that of a 'Man'. This odds ratio is relatively close to 1, hence there is no reason to suspect that there are any gender biases in those who passed phase 1. 
+
+Now consider the Generalized linear mixed model.
+
+```{r message=FALSE, warning=FALSE}
+full_p1_model <- lme4::glmer(passed_1 ~ cover_letter + cv + gpa + gender + extracurriculars + work_experience + (1|team_applied_for), family = binomial(link="logit"), data = phase1_applicants)
+
+tbl_regression(full_p1_model) %>% 
+  as_hux_table() %>%
+  set_caption("Generalized linear mixed model of applicants who passed Phase 1") %>% 
+  set_position("left") %>% 
+  set_top_padding(0.5) %>% 
+  set_bottom_padding(0.5)
+```
+
+Based on the model, it is evident that `gpa`, `extracurriculars` and `work_experience` have the most significant effect on passing Phase 1, based on their p-values. Hence I can conclude that the most impactful components of the application form that allowd the applicants to proceed to phase 2 of the hiring process are `gpa`, `extracurriculars` and `work_experience`.
+
+### (Phase 2) AI Scoring Influences
 
 ## (Promotion Question)
 
