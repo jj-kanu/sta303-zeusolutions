@@ -204,7 +204,7 @@ While employed at Black Saber Software, employee performance indicators are reco
 * `productivity` = Work output in relation to job description, rated on a 0-100 scale with 50 being satisfactory and above 50 indicating better than expected productivity.
 * `salary` = Salary at at the given financial quarter (note: these are effective yearly values for the current wage, but don’t take in to account previous salary steps in the same year, etc.)
 
-```{r}
+```{r five_current_employees}
 sample_n(distinct(current_employees, employee_id, .keep_all = TRUE), 5) %>% 
   kbl(caption = "Five Anonymous Employees at Black Saber Software", booktabs = T) %>% 
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position") %>% 
@@ -212,14 +212,57 @@ sample_n(distinct(current_employees, employee_id, .keep_all = TRUE), 5) %>%
 
 ```
 
-For this question, we are interested in how many promotions an employee received while working at Black Saber Software. For this reason, we will create a variable called `number_of_promotions` counting the change in role_seniority of each employee. This will be the response variable we are interested in for developing our model.
+For this question, we are interested in how many promotions an employee received while working at Black Saber Software. For this reason, we will create a variable called `number_of_promotions` counting the change in role_seniority of each employee. 
+This will be the response variable we are interested in for developing our model. The other variables will be fixed effects besides `team_applied_for`. We believe that `team_applied_for` should be added as a random effect because each team has a different set of required skills and/or experiences. Other than that, since each row corresponds to a unique applicant, this suggests that the observations are independent, hence our assumptions are not violated. We want to determine which is the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process.
 
 ```{r promotion_data, message = FALSE}
 promoted_employees <- read.csv("data/black-saber-current-employees.csv")  %>% 
     arrange(employee_id, financial_q) %>% 
     group_by(employee_id) %>% 
-    mutate(number_of_promotions = length(unique(role_seniority))-1)
+    mutate(number_of_promotions = max(length(unique(role_seniority)))-1)
 ```
+
+Given the ... response variable and random effect, we will be constructing a ... model. Before constructing the model, we want to first consider the gender distribution in number of promotions of current employees. In addition, consider also the joint probabilities.\newpage
+
+
+```{r gender_to_promotion, warning=FALSE, message = FALSE}
+# Promoted_employees_dist takes only the most recent role seniority, and tracks average of all features and initial position.
+promoted_employees_dist <- promoted_employees %>% 
+  group_by(employee_id) %>%
+  mutate(quarters_since_hiring = n()) %>% 
+  group_by(employee_id) %>% 
+  mutate(starting_role_seniority = first(role_seniority)) %>% 
+  add_count(employee_id, leadership_for_level) %>%
+  mutate(avg_leadership = leadership_for_level[n == max(n)][1]) %>%
+  mutate(avg_productivity = round(mean(productivity), digits = 0)) %>%
+  select(-n) %>% 
+  slice(n())
+
+gender_to_promotion <- select(promoted_employees_dist, gender, number_of_promotions) 
+#creating visual to display  reported gender ratios of current employees
+gender_to_promotion%>%
+  ggplot(aes(number_of_promotions,fill=gender))+
+  geom_bar(preserve="single",position="dodge")+
+  theme(axis.text.x = element_text(angle=30))+
+  labs(title = "Gender Parity in Number of Promotions of Current Employees",fill="Gender")+
+  xlab("Number of Promotions") +
+  ylab("Number of Employees")
+ggsave("images/currentgender_promotion.png", width = 7, height = 4)
+```
+
+
+```{r promo_prob}
+table_gender_promotion <- table(promoted_employees_dist$gender, promoted_employees_dist$number_of_promotions)
+table_gender_promotion %>% 
+  kbl(caption = "The number of employee promotions based on gender", booktabs = T) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position")
+
+prop.table(table_gender_promotion, margin = 2) %>% 
+  kbl(caption = "The probability of an employee's gender given number of promotions", booktabs = T) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position")
+```
+
+From the tables above, the only time the probability of an employee being a woman is higher is given the employee has not had any promotions. Conversely, seeing that given a higher number of promotions, the probability of being a man becomes proportionally larger, a gender bias may be suspected however we will withold any conclusions until we consider our model.
 
 ## (Salary Question) Fairness of Salary assignment for current employees at Black Saber
  Information of each employee at the financial quarters they were employed will be utilized again from `black-saber-current-employees.csv`.
