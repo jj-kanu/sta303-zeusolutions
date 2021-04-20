@@ -298,6 +298,16 @@ _In this section you will summarize your findings across all the research questi
 
 ## Code of ethical conduct
 
+Zeusolutions strives to be a forefront in professional statistical work while maintaining the integrity, security and privacy of our customers. We believe in executing our work with proper due diligence and informative research. This is why we believe in the following.
+
+1.	Maintaining the trust of our customers as a vital part of our company’s asset.  
+2.	Privacy of our customers is essential in all our statistical work. We do not disclose or seek personal gain from any information given to us by our customers. Any possible interest that can be regarded as influencing the results of our statistical work will be clearly communicated. 
+3.	Appropriate security measures and practices take place amongst our employees to ensure sensitive information is kept safe. 
+4.	Support for all employees. All statistical work performed with Zeusolutions is appropriately credited to all employees involved. 
+5.	Ensure the disclosure of all limitations and assumptions made in relevance to data of any particular work. 
+
+We recognize these importance’s and responsibilities we ought to uphold to our customers. 
+
 _This section should be fairly short, no more than half a page. Assume a general audience, much like your executive summary._
 
 * _Make at least three relevant statements about your company’s approach to ethical statistical consulting. These should be appropriately in line with professional conduct advice like the (Statistical Society of Canada Code of Conduct)[https://ssc.ca/sites/default/files/data/Members/public/Accreditation/ethics_e.pdf] or the (Ethical Guidelines for Statistical Practice from the American Statistical Society)[https://www.amstat.org/ASA/Your-Career/Ethical-Guidelines-for-Statistical-Practice.aspx]. For example, "the customer is always right" ISN’T the type of thing an ethical statistical consultant would include._
