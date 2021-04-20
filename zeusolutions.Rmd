@@ -87,7 +87,7 @@ ggsave("images/example.png", width = 7, height = 4)
 ```
 
 ```{r, warning=FALSE}
-gender_to_currentroles <- select(black_saber_current_employees, gender, role_seniority) 
+gender_to_currentroles <- select(current_employees, gender, role_seniority) 
 hierarchy <- c('Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president')
 #creating visual to display  reported gender ratios of current employees
 gender_to_currentroles%>%
@@ -146,7 +146,7 @@ phase1_applicants[1:5,] %>%
 
 ```
 
-Similarly, we are also given the list of applicants who have made it to phase 2 along with the factors assessed in phase 2. However, in this section we are only interested in which applicants made it to phase 2. For this reason I will create a variable called `passed_1` and set it to 1, if the applicant made it from phase 1 to phase 2 and 0, if not. This will be the response variable we are interested in for developing our model. The other variables will be fixed effects besides `team_applied_for`. We believe that `team_applied_for` should be added as a random effect because each team has a different set of required skills and/or experiences. Other than that, since each row corresponds to a unique applicant, this suggests that the observations are independent, hence our assumptions are not violated. We want to determine which is the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process.
+Similarly, we are also given the list of applicants who have made it to phase 2 along with the factors assessed in phase 2. However, in this section we are only interested in which applicants made it to phase 2. For this reason we will create a variable called `passed_1` and set it to 1, if the applicant made it from phase 1 to phase 2 and 0, if not. This will be the response variable we are interested in for developing our model. The other variables will be fixed effects besides `team_applied_for`. We believe that `team_applied_for` should be added as a random effect because each team has a different set of required skills and/or experiences. Other than that, since each row corresponds to a unique applicant, this suggests that the observations are independent, hence our assumptions are not violated. We want to determine which is the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process.
 
 ```{r}
 phase1_applicants <- phase1_applicants %>% 
@@ -184,7 +184,7 @@ tbl_regression(full_p1_model) %>%
   set_bottom_padding(0.5)
 ```
 
-Based on the model, it is evident that `gpa`, `extracurriculars` and `work_experience` have the most significant effect on passing Phase 1, based on their p-values. Hence I can conclude that the most impactful components of the application form that allowd the applicants to proceed to phase 2 of the hiring process are `gpa`, `extracurriculars` and `work_experience`.
+Based on the model, it is evident that `gpa`, `extracurriculars` and `work_experience` have the most significant effect on passing Phase 1, based on their p-values. Hence we can conclude that the most impactful components of the application form that allowd the applicants to proceed to phase 2 of the hiring process are `gpa`, `extracurriculars` and `work_experience`.
 
 ### (Phase 2) AI Scoring Influences
 
@@ -221,8 +221,12 @@ promoted_employees <- read.csv("data/black-saber-current-employees.csv")  %>%
     mutate(number_of_promotions = length(unique(role_seniority))-1)
 ```
 
-## (Salary Question)
-
+## (Salary Question) Fairness of Salary assignment for current employees at Black Saber
+ Information of each employee at the financial quarters they were employed will be utilized again from `black-saber-current-employees.csv`.
+ 
+ In this section, we are interested in the fairness of salary assignment for current employees at Black Saber. We will be looking how role seniority, leader
+ 
+ 
 
 ```{r, include = FALSE}
 library(tidyverse)
