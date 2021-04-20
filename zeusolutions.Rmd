@@ -267,7 +267,7 @@ From the tables above, the only time the probability of an employee being a woma
 ## (Salary Question) Fairness of Salary assignment for current employees at Black Saber
  Information of each employee at the financial quarters they were employed will be utilized again from `black-saber-current-employees.csv`.
  
- In this section, we are interested in the fairness of salary assignment for current employees at Black Saber. We will be looking how role seniority, leader
+ In this section, we are interested in the fairness of salary assignment for current employees at Black Saber. We will be looking how `role_seniority`, `leadership_for_level`,`productivity`, and `gender`.
  
  
 
