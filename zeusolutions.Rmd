@@ -51,10 +51,8 @@ The aim of the present research is to examine factors that contribute to hiring,
 
 ## Limitations
 
-*  
-* 2
-* 3
-
+* The scope of the findings are based current and provided data and cannot be used to infer about the future Black Saber Software.
+* There may be confounds such as race and ethnicity that could account for the bias in Black Saber Software, however data for such factors were not provided.
 
 \newpage
 
@@ -619,7 +617,7 @@ tbl_regression(salary_model2) %>%
 
 Taking into account the gender and average productivity of a given current employee while randomly selecting based team and role seniority, we see that women are, on average, paid $1998 less than men. We evidently see that there is a disparity between the salary assignment of current employees as women are being paid less. As a result, we can conclude that the salary processes at Black Saber show evidence of being unfair.
 
-
+\newpage
 ## Discussion
 
 For the first phase of the hiring pipeline, we fitted a generalized linear model to predict whether a candidate passed phase 1 using six fixed effects and one random effect. We found that the most significant factors that contribute to whether a candidate passes phase 1 are GPA, skills from extracurricular activities, and work experience, in the order of most to least importance. 
