@@ -36,14 +36,15 @@ knitr::opts_chunk$set(echo=FALSE)
 # Executive summary
 
 ## Background and Aim
-Black Saber Software has been implementing an AI service in its application screening process. The AI system is responsible for rating candidates from a pre-recorded video and assessing both a timed technical coding task and a writing sample that are submitted by the candidates. The final interview in Phase 3 is conducted and scored by people while the final hiring decision is made by the HR team. No data on ethnicity or race is collected, thus the AI system does not take those factors into account. However, the company is interested in knowing whether they may influence the salary of an individual. 
 
-The aim of the present research is to examine factors that contribute to hiring, promotion and salary processes of Black Saber Software and determine whether they are fair. In particular, the hiring pipeline using AI is of most interest. Factors that may be of interest are gpa, gender, number of extracurricular activity, number of previous work experience, presence of cv, presence of cover letter, etc.
+Black Saber Software has been implementing an AI service in its application screening process. The AI system is responsible for rating candidates from a pre-recorded video and assessing both a timed technical coding task and a writing sample that are submitted by the candidates. The final interview in Phase 3 is conducted and scored by people while the final hiring decision is made by the HR team. No data on ethnicity or race is collected, thus the AI system does not take those factors into account. In addition, the company also collected data on the salaries and promotions of their current employees. 
+
+The aim of the present research is to examine factors that contribute to hiring, promotion and salary processes of Black Saber Software and determine whether they are fair. In particular, the hiring pipeline using AI is of most interest. Factors that may be of interest are gpa, gender, number of extracurricular activity, number of previous work experience, presence of CV, presence of cover letter, etc.
 
 ## Key findings
 
-* 1
-* 2
+* The AI recruitment pipeline is unbiased in its scoring/rating, but gender biased in those who proceed from one phase to another.
+* In Figure 2, one can see the gender disposition between each phase and the final hires, where in a 'Woman' dominated pool of applicants, 'Man' dominated the final hires.
 * 3 
 * 4
 * 5
@@ -144,8 +145,6 @@ The following research questions are going to be addressed within this report.
 * What factors contribute to promotions of Black Saber's current employee's?
 * What factors dictate the salary assignment of current employees at Black Saber?
 
-\newpage
-
 ## Fairness of the AI Recruitment Pipeline Manager
 
 The company Black Saber has a new AI recruitment pipeline manager that has been trialing for the Data and Software teams. The board has concerns about the process and questions whether or not it is fair and based on value and talent of each applicant. We have been given the data for each phase of the process, in which there are a total of three. Through each phase there is certain data collected through question and tasks in which the AI uses to narrow down the field of applicants from one phase to another. We want to determine what factors play a major role in being hired through Black Saber's recruitment pipeline manager.
@@ -211,7 +210,7 @@ table_mw_passed <- table_gender_passsed[-2,]
 odds_mw_passes <- (table_mw_passed[2,2]/table_mw_passed[2,1])/(table_mw_passed[1,2]/table_mw_passed[1,1]) 
 ```
 
-Hence from the table above, given that the applicant passes phase 1, the probability that their gender is a 'Man' is 48%, whereas a 'Woman' is 51%. Also, the odds ratio of Woman vs Man who pass phase 1 is approximately 0.96. That is, the odds of a 'Woman' passing phase 1 is less than that of a 'Man'. This odds ratio is relatively close to 1, hence there is no reason to suspect that there are any gender biases in those who passed phase 1. 
+Hence from Table 3, given that the applicant passes phase 1, the probability that their gender is a 'Man' is 48%, whereas a 'Woman' is 51%. Also, the odds ratio of Woman vs Man who pass phase 1 is approximately 0.96. That is, the odds of a 'Woman' passing phase 1 is less than that of a 'Man'. This odds ratio is relatively close to 1, hence there is no reason to suspect that there are any gender biases in those who passed phase 1. 
 
 Then, based on the response variable and random effect we will be considering a generalized linear mixed model. \newline
 
@@ -229,7 +228,7 @@ tbl_regression(p1_model_full) %>%
   set_bottom_padding(0.5)
 ```
 
-It is evident that GPA, relevant extracurriculars and relevant work experience have the most significant effect on passing Phase 1, based on their log odds. We cannot interpret the odds ratio of GPA because their is no one with a 0.0 GPA, however we can interpret the odds ratio of the coefficients for relevant skills from extracurriculars and work experience to an extent. Since the variables for relevant skills from extracurriculars and work experience are given scores of either 0, 1 or 2, the odds ratio is an average of scores 1 and 2. Nonetheless, we find that the the odds of passing Phase 1 with some to high relevant skills from extracurriculars is 21267.4 times that of those without and the odds of passing Phase 1 with some to high relevant work experience is 107591 times that of those without. Overall, we can conclude that the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process in order of is GPA, followed by relevant skills from extracurriculars and work experience.
+In the model seen in Table 4, it is evident that GPA, relevant extracurriculars and relevant work experience have the most significant effect on passing Phase 1, based on their log odds. We cannot interpret the odds ratio of GPA because their is no one with a 0.0 GPA, however we can interpret the odds ratio of the coefficients for relevant skills from extracurriculars and work experience to an extent. Since the variables for relevant skills from extracurriculars and work experience are given scores of either 0, 1 or 2, the odds ratio is an average of scores 1 and 2. Nonetheless, we find that the the odds of passing Phase 1 with some to high relevant skills from extracurriculars is 21267.4 times that of those without and the odds of passing Phase 1 with some to high relevant work experience is 107591 times that of those without. Overall, we can conclude that the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process in order of is GPA, followed by relevant skills from extracurriculars and work experience.
 
 ### AI Grading Influences
 
@@ -263,7 +262,7 @@ tbl_regression(p2_model_tech) %>%
   set_bottom_padding(0.5)
 ```
 
-From the linear mixed model of the Technical Skill Score, it follows that the most influential fixed effect is GPA followed by relevant skills from extracurriculars. Moreover, each 1.0 increase in GPA increases the score by 8.8 on average. Those with some relevant skills from extracurriculars have a higher score than those who do not by an average of 4.6 and doubled for those with high relevant skills. We also notice that those who put 'Prefer not to say' for their gender have higher score than those who put 'Man' by an average of 23. This is not concerning because the sample of those who put 'Prefer not to say' is very small and thus can be seen as outliers to the overall average. Besides that, those who put 'Woman' for their gender only have a higher score than those who put 'Man' by an average of 1. 
+From the linear mixed model seen in Table 5, it follows that the most influential fixed effect is GPA followed by relevant skills from extracurriculars. Moreover, each 1.0 increase in GPA increases the score by 8.8 on average. Those with some relevant skills from extracurriculars have a higher score than those who do not by an average of 4.6 and doubled for those with high relevant skills. We also notice that those who put 'Prefer not to say' for their gender have higher score than those who put 'Man' by an average of 23. This is not concerning because the sample of those who put 'Prefer not to say' is very small and thus can be seen as outliers to the overall average. Besides that, those who put 'Woman' for their gender only have a higher score than those who put 'Man' by an average of 1. 
 
 ```{r message=FALSE, warning=FALSE}
 tbl_regression(p2_model_write) %>% 
@@ -274,7 +273,7 @@ tbl_regression(p2_model_write) %>%
   set_bottom_padding(0.5)
 ```
 
-The linear mixed model of the Writing Skill Score shows similar results to the one for the Technical Skill Score with the most influential fixed effect being GPA. Each 1.0 increase in GPA here increases the score by 9.9 on average. Unlike the Technical Skill Score, the second most influential fixed effect for the of the Writing Skill Score is from relevant work experience. Those with some relevant work experience have a higher score than those who do not by an average of 4.1 and doubled for those with high relevant experiences. We also find that those who put 'Woman' for their gender only have a higher score than those who put 'Man' by an average of 3.8.
+The linear mixed model in Table 6 shows similar results to the one for the Technical Skill Score with the most influential fixed effect being GPA. Each 1.0 increase in GPA here increases the score by 9.9 on average. Unlike the Technical Skill Score, the second most influential fixed effect for the of the Writing Skill Score is from relevant work experience. Those with some relevant work experience have a higher score than those who do not by an average of 4.1 and doubled for those with high relevant experiences. We also find that those who put 'Woman' for their gender only have a higher score than those who put 'Man' by an average of 3.8.
 
 ```{r message=FALSE, warning=FALSE}
 tbl_regression(p2_model_speak) %>% 
@@ -285,7 +284,7 @@ tbl_regression(p2_model_speak) %>%
   set_bottom_padding(0.5)
 ```
 
-The linear mixed model of the Speaking Skills Rating is significantly different from the previous models. The model shows that the most influential factor of the rating is from relevant work experience. More specifically, those with some relevant work experience have a higher rating than those who do not by an average of 0.93 and doubled for those with high relevant experiences. The second most influential factor of the rating is relevant skills from extracurriculars, showing a higher rating on average of 0.47 for those who have some relevant skills from extracurriculars compared to those who do not and doubled for those with high relevant skills. Surprisingly, there is a negative coefficient for GPA, showing that those with higher GPAs have a lower rating on average. We also see a negative coefficient for those who put 'Woman' for their gender as they have a lower rating compared to those who put 'Man' by an average of 1.8.
+The linear mixed model in Table 7 is significantly different from the previous models. The model shows that the most influential factor of the rating is from relevant work experience. More specifically, those with some relevant work experience have a higher rating than those who do not by an average of 0.93 and doubled for those with high relevant experiences. The second most influential factor of the rating is relevant skills from extracurriculars, showing a higher rating on average of 0.47 for those who have some relevant skills from extracurriculars compared to those who do not and doubled for those with high relevant skills. Surprisingly, there is a negative coefficient for GPA, showing that those with higher GPAs have a lower rating on average. We also see a negative coefficient for those who put 'Woman' for their gender as they have a lower rating compared to those who put 'Man' by an average of 1.8.
 
 ```{r message=FALSE, warning=FALSE}
 tbl_regression(p2_model_lead) %>% 
@@ -296,7 +295,7 @@ tbl_regression(p2_model_lead) %>%
   set_bottom_padding(0.5)
 ```
 
-The linear mixed model of the Leadership Presence Rating shows that the most influential factor is no other than from relevant skills from extracurriculars. This is followed by GPA and then relevant skills from work experiences. By interpreting the coefficients of the relevant skills from extracurriculars and work experiences, we find that those who have some of the relevant skills for each, compared to those who do not, have a higher rating on average of 0.76 and 0.16, respectively, and doubled if they have higher relevant skills and/or experiences. As for GPA, each 1.0 increase in GPA increases the score by an average of 0.22. Similar to the Speaking Skills Rating, we also see a negative coefficient for those who put 'Woman' for their gender as they have a lower rating compared to those who put 'Man' by an average of 0.91.
+The linear mixed model in Table 8 shows that the most influential factor is no other than from relevant skills from extracurriculars. This is followed by GPA and then relevant skills from work experiences. By interpreting the coefficients of the relevant skills from extracurriculars and work experiences, we find that those who have some of the relevant skills for each, compared to those who do not, have a higher rating on average of 0.76 and 0.16, respectively, and doubled if they have higher relevant skills and/or experiences. As for GPA, each 1.0 increase in GPA increases the score by an average of 0.22. Similar to the Speaking Skills Rating, we also see a negative coefficient for those who put 'Woman' for their gender as they have a lower rating compared to those who put 'Man' by an average of 0.91.
 
 After analyzing all of the possible factors that can affect the scores and rating given by the AI. we conclude that the top most influential factors are GPA, and relevant skills from extracurriculars and work experiences. We also find that those who put 'Woman' as their gender, score higher than those who put 'Man' on average for the Technical and Writing Task. On the other hand, those who put 'Man' as their gender, were rated higher than those who put 'Woman' on average for the Speaking Skills and Leadership Presence. Ultimately the differences between the genders are small relative to the other factors, hence there is no concern about bias in gender parity for the AI scores and ratings.
 
@@ -309,7 +308,7 @@ The third phase of the hiring pipeline is the final interview. Each line of \new
 * `interviewer_rating_1` = First interviewer's rating from 0 to 100 for overall job fit
 * `interviewer_rating_2` = Second interviewer's rating from 0 to 100 for overall job fit
 
-In this phase, we are interested in what factors from the application form and the AI scoring/rating affect the overall job rating given by each interviewer. Thus we will be using the data from `phase1-new-grad-applicants-2020.csv` and `phase2-new-grad-applicants-2020.csv`, which has been explained in the previous sections. We will have 2 models with the response variables being the overall job fit ratings given to the applicants by the first and second interviewer. For the fixed effects and random effects, we will be using the exact same found in the models presented for phase 2 with the inclusion of the 4 variables which were the response variables. That is, the AI scores for the techincal and writing tasks ans rating for speaking and leadership presence will be added as fixed effects. We will also scale up the ratings for speaking and leadership presence by 10, so that they are on the same scale as the scores for the technical and writing tasks. Based on the response variables, the model will be similar to that of phase 2, hence we will be using a linear mixed model for each. 
+In this phase, we are interested in what factors from the application form and the AI scoring/rating affect the overall job rating given by each interviewer. Thus we will be using the data from `phase1-new-grad-applicants-2020.csv` and `phase2-new-grad-applicants-2020.csv`, which has been explained in the previous sections. We will have 2 models with the response variables being the overall job fit ratings given to the applicants by the first and second interviewer. For the fixed effects and random effects, we will be using the exact same found in the models presented for phase 2 with the inclusion of the 4 variables which were the response variables. That is, the AI scores for the techincal and writing tasks ans rating for speaking and leadership presence will be added as fixed effects. We will also scale up the ratings for speaking and leadership presence by 10, so that they are on the same scale as the scores for the technical and writing tasks. Based on the response variables, the model will be similar to that of phase 2, hence we will be using a linear mixed model for each. \newpage
 
 ```{r}
 # Re-scaling speaking and leadership ratings
@@ -334,7 +333,7 @@ tbl_regression(p3_model_int1) %>%
   set_bottom_padding(0.5)
 ```
 
-Looking at the model for the ratings given by Interviewer 1, we only need to look at each coefficient relative to each other. It is evident that the least influential factor is in fact gender. It is seen that on average, those of the gender 'Women' have a score that is 0.24 higher than that of those who are the gender 'Man'. \newline 
+Looking at the model in Table 9 for the ratings given by Interviewer 1, we only need to look at each coefficient relative to each other. It is evident that the least influential factor is in fact gender. It is seen that on average, those of the gender 'Women' have a score that is 0.24 higher than that of those who are the gender 'Man'. \newline 
 
 ```{r message=FALSE, warning=FALSE}
 tbl_regression(p3_model_int2) %>% 
@@ -345,7 +344,7 @@ tbl_regression(p3_model_int2) %>%
   set_bottom_padding(0.5) 
 ```
 
-The same results are evident in the ratings given by Interviewer 2. In fact, the result is most apparent here where on average, those of the gender 'Women' have a score that is only 0.02 higher than that of those who are the gender 'Man'. The only concerning thing here is that on average, those with higher GPA and/or more relevant work experience have a lower rating for the second interviewer. Since being listed as 'first' or 'second' interviewer is arbitrary, there only reason for this is possibly outliers in the data. 
+The same results are evident in Table 10 for the ratings given by Interviewer 2. In fact, the result is most apparent here where on average, those of the gender 'Women' have a score that is only 0.02 higher than that of those who are the gender 'Man'. The only concerning thing here is that on average, those with higher GPA and/or more relevant work experience have a lower rating for the second interviewer. Since being listed as 'first' or 'second' interviewer is arbitrary, there only reason for this is possibly outliers in the data. 
 
 All in all, there are no strong evidence that suggest applicants are not judged on their talents and value to the company.
 
@@ -380,7 +379,7 @@ prop.table(table_gender_offered, margin = 1) %>%
 odds_mw_offered <- (table_gender_offered[2,2]/table_gender_offered[2,1])/(table_gender_offered[1,2]/table_gender_offered[1,1]) 
 ```
 
-Hence from the table above, given that the applicant got an offer letter, the probability that their gender is a 'Man' is 80%, whereas a 'Woman' is 20%. We also see that the probability of getting an offer letter for an applicant whose gender is 'Man' is 53%, whereas a 'Woman' is 29%. Also, the odds ratio of Woman vs Man who pass phase 1 is approximately 0.35. That is, the odds of a 'Woman' passing phase 1 is less than that of a 'Man'. This odds ratio is relatively close to 0, hence there is reason to suspect that there are possible gender biases in those who received an offer letter. Thus lets now look at the model and see if there is a possible case of bias between those who received and not received an offer letter. 
+Hence from Table 12, given that the applicant got an offer letter, the probability that their gender is a 'Man' is 80%, whereas a 'Woman' is 20%. We also see that the probability of getting an offer letter for an applicant whose gender is 'Man' is 53%, whereas a 'Woman' is 29%, from Table 13. Also, the computed odds ratio of Woman vs Man who pass phase 1 is approximately 0.35. That is, the odds of a 'Woman' passing phase 1 is less than that of a 'Man'. This odds ratio is relatively close to 0, hence there is reason to suspect that there are possible gender biases in those who received an offer letter. Thus lets now look at the model and see if there is a possible case of bias between those who received and not received an offer letter. 
 
 ```{r message=FALSE, warning=FALSE, results='hide'}
 # GLMM for applicants who got an offer letter after phase 3
@@ -396,7 +395,7 @@ tbl_regression(final_model_full) %>%
   set_bottom_padding(0.1)
 ```
 
-From the model above, we can see that the coefficients and p-values are absurdly large, however it is still useful to interpret. We see that the coefficient of 'Women' is a large negative, where as the ones for the interview ratings are only somewhat large positives. Hence, the odds of the gender, 'Women' are essentially 0 compared to 'Man'. However, this does not change the fact that the overall job fit ratings from the interview increases the odds of getting an offer letter significantly. This is knowing that the overall job fit ratings giver by the interviewers are unbiased bases on the analysis in the previous section. In either case, for whatever reason, those who are the gender 'Woman', do not have the a chance at getting an offer letter compared to those who are of the gender, 'Man'. Though the process of the recruitment pipeline seemed fair, there seems to be a gender disparity in the selection of those who were sent an offer letter in the end.   
+From the model seen in Table 14, we can see that the coefficients and p-values are absurdly large, however it is still useful to interpret. We see that the coefficient of 'Women' is a large negative, where as the ones for the interview ratings are only somewhat large positives. Hence, the odds of the gender, 'Women' are essentially 0 compared to 'Man'. However, this does not change the fact that the overall job fit ratings from the interview increases the odds of getting an offer letter significantly. This is knowing that the overall job fit ratings giver by the interviewers are unbiased bases on the analysis in the previous section. In either case, for whatever reason, those who are the gender 'Woman', do not have the a chance at getting an offer letter compared to those who are of the gender, 'Man'. Though the process of the recruitment pipeline seemed fair, there seems to be a gender disparity in the selection of those who were sent an offer letter in the end.   
 
 ## Fairness of Promotion process
 
@@ -481,9 +480,9 @@ pmfd <- pmfd %>% group_by(employee_id, role_seniority) %>%
 
 ```
 
-Given the response variable is a count we will be consider a Poisson Regression model. Before constructing the model, we want to first consider the gender distribution in number of promotions of current employees. In addition, consider also the joint probabilities.\newpage
+Given the response variable is a count we will be consider a Poisson Regression model. Before constructing the model, we want to first consider the gender distribution in number of promotions of current employees. In addition, consider also the joint probabilities.
 
-```{r gender_to_promotion, fig.align="center"}
+```{r gender_to_promotion, fig.align="center", out.width="70%"}
 # Promoted_employees_dist takes only the most recent role seniority, and tracks average of all features and initial position.
 promoted_employees_dist <- promoted_employees %>%
   slice(n())
@@ -568,7 +567,7 @@ salary_employees <- current_employees %>%
  
 First, let's compare gender parity in the salaries of the most recent quarter for every employee.
  
-```{r gender_to_salary, fig.align="center"}
+```{r gender_to_salary, fig.align="center", out.width="80%"}
 hierarchy <- c('Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president')
 
 cur_salary_employees <- salary_employees %>% 

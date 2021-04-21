@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.11)  21 APR 2021 17:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.11)  21 APR 2021 18:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1343,7 +1343,7 @@ File: zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type
 pdf)
 <use zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf>
 Package pdftex.def Info: zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf 
- used on input line 369.
+ used on input line 372.
 (pdftex.def)             Requested size: 364.19672pt x 252.1333pt.
 <zeusolutions_files/figure-latex/unnamed-chunk-2-2.pdf, id=58, 469.755pt x 325.
 215pt>
@@ -1351,118 +1351,129 @@ File: zeusolutions_files/figure-latex/unnamed-chunk-2-2.pdf Graphic file (type
 pdf)
 <use zeusolutions_files/figure-latex/unnamed-chunk-2-2.pdf>
 Package pdftex.def Info: zeusolutions_files/figure-latex/unnamed-chunk-2-2.pdf 
- used on input line 369.
+ used on input line 372.
 (pdftex.def)             Requested size: 364.19672pt x 252.1333pt.
 [4 <./zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf> <./zeusolutions_fi
-les/figure-latex/unnamed-chunk-2-2.pdf>] [5]
+les/figure-latex/unnamed-chunk-2-2.pdf>]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
-33.
+34.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Overfull \hbox (39.31245pt too wide) in paragraph at lines 465--476
+) [5]
+Overfull \hbox (39.31245pt too wide) in paragraph at lines 466--477
 [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 536--538
+Underfull \hbox (badness 10000) in paragraph at lines 537--539
 
  []
 
 [7]
-Overfull \hbox (33.64662pt too wide) in paragraph at lines 679--683
+Overfull \hbox (33.64662pt too wide) in paragraph at lines 680--684
 \T1/lmr/m/n/10.95 writ-ing sam-ple and sub-mit a pre-recorded video. Each line 
 of \T1/lmtt/m/n/10.95 phase2-new-grad-applicants-2020.csv
  []
 
 [8] [9] [10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 1316--1321
+Underfull \hbox (badness 10000) in paragraph at lines 1316--1322
 
  []
 
-[12] [13] [14] [15]
-Overfull \hbox (4.9483pt too wide) in paragraph at lines 1705--1705
+[12]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[13] [14]
+Overfull \hbox (4.9483pt too wide) in paragraph at lines 1707--1707
  [][]|
  []
 
 
-Overfull \hbox (9.12111pt too wide) in paragraph at lines 1705--1705
+Overfull \hbox (9.12111pt too wide) in paragraph at lines 1707--1707
 [][]|  
  []
 
 
-Overfull \hbox (31.91876pt too wide) in paragraph at lines 1705--1705
+Overfull \hbox (31.91876pt too wide) in paragraph at lines 1707--1707
 [][]|  
  []
 
 
-Overfull \hbox (3.67984pt too wide) in paragraph at lines 1705--1705
+Overfull \hbox (3.67984pt too wide) in paragraph at lines 1707--1707
  [][]|
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1705--1705
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1707--1707
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1705--1705
-[]\T1/lmr/m/n/10.95 Appropriate 
- []
-
-
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1705--1705
-[]\T1/lmr/m/n/10.95 Appropriate 
- []
-
-
-Overfull \hbox (4.09636pt too wide) in paragraph at lines 1705--1705
+Overfull \hbox (4.09636pt too wide) in paragraph at lines 1707--1707
 []\T1/lmr/m/n/10.95 Marketing 
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1705--1705
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1707--1707
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1705--1705
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1707--1707
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
-[16]
-<zeusolutions_files/figure-latex/gender_to_promotion-1.pdf, id=178, 469.755pt x
+
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1707--1707
+[]\T1/lmr/m/n/10.95 Appropriate 
+ []
+
+
+Overfull \hbox (4.09636pt too wide) in paragraph at lines 1707--1707
+[]\T1/lmr/m/n/10.95 Marketing 
+ []
+
+
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1707--1707
+[]\T1/lmr/m/n/10.95 Appropriate 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[15]
+<zeusolutions_files/figure-latex/gender_to_promotion-1.pdf, id=173, 469.755pt x
  325.215pt>
 File: zeusolutions_files/figure-latex/gender_to_promotion-1.pdf Graphic file (t
 ype pdf)
 <use zeusolutions_files/figure-latex/gender_to_promotion-1.pdf>
 Package pdftex.def Info: zeusolutions_files/figure-latex/gender_to_promotion-1.
-pdf  used on input line 1724.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+pdf  used on input line 1726.
+(pdftex.def)             Requested size: 318.66953pt x 220.61726pt.
 
-Overfull \hbox (14.50969pt too wide) in paragraph at lines 1724--1724
- [] 
- []
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[17 <./zeusolutions_files/figure-latex/gender_to_promotion-1.pdf>] [18]
-<zeusolutions_files/figure-latex/gender_to_salary-1.pdf, id=200, 469.755pt x 32
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[16 <./zeusolutions_files/figure-latex/gender_to_promotion-1.pdf>] [17]
+<zeusolutions_files/figure-latex/gender_to_salary-1.pdf, id=193, 469.755pt x 32
 5.215pt>
 File: zeusolutions_files/figure-latex/gender_to_salary-1.pdf Graphic file (type
  pdf)
 <use zeusolutions_files/figure-latex/gender_to_salary-1.pdf>
 Package pdftex.def Info: zeusolutions_files/figure-latex/gender_to_salary-1.pdf
-  used on input line 1917.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Overfull \hbox (14.50969pt too wide) in paragraph at lines 1917--1917
- [] 
- []
-
-[19 <./zeusolutions_files/figure-latex/gender_to_salary-1.pdf>] [20]
-Underfull \hbox (badness 10000) in paragraph at lines 2070--2073
+  used on input line 1919.
+(pdftex.def)             Requested size: 364.19672pt x 252.1333pt.
+[18] [19 <./zeusolutions_files/figure-latex/gender_to_salary-1.pdf>] [20]
+Underfull \hbox (badness 10000) in paragraph at lines 2072--2075
 
  []
 
@@ -1474,7 +1485,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  24030 strings out of 480954
  486137 string characters out of 5905582
- 991515 words of memory out of 5000000
+ 992515 words of memory out of 5000000
  40707 multiletter control sequences out of 15000+600000
  464784 words of font info for 66 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -1491,7 +1502,7 @@ ype1/public/lm/lmss10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fon
 ts/type1/public/lm/lmss12.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist
 /fonts/type1/public/lm/lmssbx10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texm
 f-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on zeusolutions.pdf (21 pages, 237052 bytes).
+Output written on zeusolutions.pdf (21 pages, 236744 bytes).
 PDF statistics:
  337 PDF objects out of 1000 (max. 8388607)
  295 compressed objects within 3 object streams
