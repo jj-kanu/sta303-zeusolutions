@@ -1,5 +1,5 @@
 ---
-title: "Report title"
+title: "Gender Parity in Black Saber Software"
 author: "Report prepared for Black Saber Software by Zeusolutions"
 date: '2021-04-21'
 output:
@@ -12,7 +12,7 @@ output:
     toc_depth: '2'
     df_print: paged
 lang: en
-subtitle: Subtitle
+subtitle: Evidence of Gender Bias in Hiring, Promotion and Salary Assignment Processes
 titlepage: yes
 titlepage-color: 9d45b4
 titlepage-text-color: FFFFFF
@@ -45,10 +45,10 @@ The aim of the present research is to examine factors that contribute to hiring,
 
 * The AI recruitment pipeline is unbiased in its scoring/rating, but gender biased in those who proceed from one phase to another.
 * In Figure 2, one can see the gender disposition between each phase and the final hires, where in a 'Woman' dominated pool of applicants, 'Man' dominated the final hires.
-* 3 
-* 4
-* 5
-* 6
+* Average productivity and average leadership for level do not have a great effect on promotion.
+* Women on average received 0.33 less promotions for every promotion received by their male counterparts.
+* Within the same roles, males tend to be paid more than their female counterparts across almost all positions.
+* We see that women, on average, are paid $1998 less than men.
 
 ## Limitations
 
@@ -625,10 +625,15 @@ Taking into account the gender and average productivity of a given current emplo
 
 ## Discussion
 
-_In this section you will summarize your findings across all the research questions and discuss the strengths and limitations of your work. It doesn't have to be long, but keep in mind that often people will just skim the intro and the discussion of a document like this, so make sure it is useful as a semi-standalone section (doesn't have to be completely standalone like the executive summary)._
+
+<<<<<<< HEAD
+### Limitations and Concerns
+=======
+>>>>>>> 3fd61b97870dd8a8c5de3078e8ac7ac1efe76de8
 
 ### Limitations and Concerns
-
+  Findings from this report analysis on Black Saber’s hiring, promotion and salary processes are limited to the data provided. Evidently we recognize that race and ethnicity was not information that was collected or provided by Black Saber. While we attempt to perform analysis on fairness in gender disparity across these processes in Black Saber, we did not consider the race and ethnicity of current and possible hired employees. It is suggested that collecting information on race and ethnicity would be beneficial towards analyzing fairness across race/ethnicity for future considerations.
+  
 \newpage
 # Consultant information
 
