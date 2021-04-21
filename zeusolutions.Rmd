@@ -326,6 +326,8 @@ promo_model3
 ```
 
 ## (Salary Question) Fairness of Salary assignment for current employees at Black Saber
+Along with the fairness of their promotion practices, the Black Saber board members also want to know that compensation of employees is set by the same standards of merit. Using the same dataset of Black Saber's current employees, we wish to determine which factors contribute to setting employee salaries.
+
  Information of each employee at the financial quarters they were employed will be utilized again from `black-saber-current-employees.csv`.
  
  In this section, we are interested in the fairness of salary assignment for current employees at Black Saber. We will be looking how `role_seniority`, `leadership_for_level`,`productivity`, and `gender`.
@@ -343,7 +345,28 @@ salary_employees <- black_saber_current_employees %>%
   group_by(employee_id, role_seniority) %>% 
   slice(n())
 ```
+ 
+First, let's compare gender parity in the salaries of the most recent quarter for every employee.
+ 
+```{r gender_to_salary}
+hierarchy <- c('Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president')
 
+cur_salary_employees <- salary_employees %>% 
+  arrange(employee_id, financial_q) %>% 
+  group_by(employee_id) %>% 
+  slice(n())
+
+cur_salary_employees %>%
+  ggplot(aes(x = role_seniority, y= salary, fill=gender))+
+  geom_boxplot() + 
+  scale_x_discrete(limits = hierarchy) + 
+  labs(title = "Gender Parity in Salaries of Current Employees",fill="Gender")+
+  xlab("Role") +
+  ylab("Salary")
+```
+ 
+Just by looking at this figure, it seems that within the same roles, males tend to be paid more than their female counterparts. Before we reach any conclusions, let's compare some models.
+ 
  
 ```{r play_with_salary_models}
 salary_model0 <- lme4::lmer(salary ~ (1|team) + (1|role_seniority), data = salary_employees)
@@ -353,11 +376,27 @@ salary_model3 <- lme4::lmer(salary ~ gender + avg_productivity + avg_leadership_
 
 ```
 
-
-```{r, include = FALSE}
-library(tidyverse)
-library(lme4)
+```{r}
+lmtest::lrtest(salary_model0, salary_model1)
+lmtest::lrtest(salary_model2, salary_model3)
+lmtest::lrtest(salary_model1, salary_model2)
 ```
+Want to use salary_model_2(?)
+
+```{r}
+salary_model2
+
+
+tbl_regression(salary_model2) %>% 
+  as_hux_table() %>%
+  set_caption("Linear mixed model of employee salaries") %>% 
+  set_position("left") %>% 
+  set_top_padding(0.5) %>% 
+  set_bottom_padding(0.5)
+```
+
+Given same role, women are paid -$1997.94 less(?)
+
 
 ## Discussion
 
