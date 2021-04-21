@@ -170,6 +170,7 @@ Given the binomial response variable and random effect, we will be constructing 
 
 ```{r}
 table_gender_passsed <- table(phase1_applicants$gender, phase1_applicants$passed_1)
+
 table_gender_passsed %>% 
   kbl(col.names = c("Did Not Pass Phase 1", "Passed Phase 1"),caption = "The number of applicants that passed phase 1 based on gender", booktabs = T) %>% 
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position")
@@ -201,7 +202,7 @@ tbl_regression(p1_model_full) %>%
 
 It is evident that `gpa`, `extracurriculars` and `work_experience` have the most significant effect on passing Phase 1, based on their log odds. We cannot interpret the odds ratio of `gpa` because their is no one with a 0.0 GPA, however we can interpret the odds ratio of `extracurriculars` and `work_experience` to an extent. Since `extracurriculars` and `work_experience` are given scores of either 0, 1 or 2, the odds ratio is an average of scores 1 and 2. Nonetheless, we find that the the odds of passing Phase 1 with some to high relevant skills from extracurriculars is 21267.4 times that of those without and the odds of passing Phase 1 with some to high relevant work experience is 107591 times that of those without. Overall, we can conclude that the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process in order of is `gpa`, followed by `extracurriculars` and `work_experience`.
 
-### (Phase 2) AI Scoring Influences
+### (Phase 2) AI Grading Influences
 
 The second phase of the hiring pipeline invites applicants to do a timed technical coding task, writing sample and submit a pre-recorded video. Each line of `phase2-new-grad-applicants-2020.csv` contains the AI graded scores for skills relevant to each task:
 
@@ -232,18 +233,18 @@ tbl_regression(p2_model_tech) %>%
   set_bottom_padding(0.5)
 ```
 
-From the linear mixed model of the Technical Skill Score, it follows that the most influential fixed effect is `gpa` followed by `extracurriculars`. Similar to before, we cannot interpret `gpa` because there is no one with a 0.0 GPA. As for `extracurriculars`, those with relevant skills from extracurriculars have a higher score than those who do not by an average of 4.6. We also notice that those who put 'Prefer not to say' for their gender have higher score than those who put 'Man' by an average of 23. This is not concerning because the sample of those who put 'Prefer not to say' is very small and thus can be seen as outliers to the overall average. Besides that, those who put 'Woman' for their gender only have a higher score than those who put 'Man' by an average of 1. \newpage 
+From the linear mixed model of the Technical Skill Score, it follows that the most influential fixed effect is `gpa` followed by `extracurriculars`. Moreover, each 1.0 in `gpa` increases the score by 8.8 on average. As for `extracurriculars`, those with some relevant skills from extracurriculars have a higher score than those who do not by an average of 4.6 and doubled for those with high relevant skills. We also notice that those who put 'Prefer not to say' for their gender have higher score than those who put 'Man' by an average of 23. This is not concerning because the sample of those who put 'Prefer not to say' is very small and thus can be seen as outliers to the overall average. Besides that, those who put 'Woman' for their gender only have a higher score than those who put 'Man' by an average of 1. \newpage 
 
 ```{r message=FALSE, warning=FALSE}
 tbl_regression(p2_model_write) %>% 
   as_hux_table() %>%
-  set_caption("Linear mixed model of the Technical Skills Score") %>% 
+  set_caption("Linear mixed model of the Writing Skills Score") %>% 
   set_position("center") %>% 
   set_top_padding(0.5) %>% 
   set_bottom_padding(0.5)
 ```
 
-The linear mixed model of the Writing Skill Score shows similar results to the one for the Technical Skill Score with the most influential fixed effect being `gpa`. Unlike the Technical Skill Score, the second most influential fixed effect for the of the Writing Skill Score is `work_experience`. That is, those with relevant work experience have a higher score than those who do not by an average of 4.1. We also find that those who put 'Woman' for their gender only have a higher score than those who put 'Man' by an average of 3.8.
+The linear mixed model of the Writing Skill Score shows similar results to the one for the Technical Skill Score with the most influential fixed effect being `gpa`. Each 1.0 in `gpa` here increases the score by 9.9 on average. Unlike the Technical Skill Score, the second most influential fixed effect for the of the Writing Skill Score is `work_experience`. Those with some relevant work experience have a higher score than those who do not by an average of 4.1 and doubled for those with high relevant experiences. We also find that those who put 'Woman' for their gender only have a higher score than those who put 'Man' by an average of 3.8.
 
 ```{r message=FALSE, warning=FALSE}
 tbl_regression(p2_model_speak) %>% 
@@ -254,7 +255,7 @@ tbl_regression(p2_model_speak) %>%
   set_bottom_padding(0.5)
 ```
 
-The linear mixed model of the Speaking Skills Rating is significantly different from the previous models. The model shows that the most influential factor of the rating is `work_experience`. More specifically, those with relevant work experience have a higher rating than those who do not by an average of 0.93. The second most influential factor of the rating is `extracurriculars`, showing a higher rating on average of 0.47 for those who have relevant skills from extracurriculars compared to those who do not. Surprisingly, there is a negative coefficient for `gpa`, showing that those with higher GPAs have a lower rating on average. We also see a negative coefficient for those who put 'Woman' for their gender as they have a lower rating compared to those who put 'Man' by an average of 1.8.
+The linear mixed model of the Speaking Skills Rating is significantly different from the previous models. The model shows that the most influential factor of the rating is `work_experience`. More specifically, those with some relevant work experience have a higher rating than those who do not by an average of 0.93 and doubled for those with high relevant experiences. The second most influential factor of the rating is `extracurriculars`, showing a higher rating on average of 0.47 for those who have relevant skills from extracurriculars compared to those who do not and doubled for those with high relevant skills. Surprisingly, there is a negative coefficient for `gpa`, showing that those with higher GPAs have a lower rating on average. We also see a negative coefficient for those who put 'Woman' for their gender as they have a lower rating compared to those who put 'Man' by an average of 1.8.
 
 ```{r message=FALSE, warning=FALSE}
 tbl_regression(p2_model_lead) %>% 
@@ -265,12 +266,106 @@ tbl_regression(p2_model_lead) %>%
   set_bottom_padding(0.5)
 ```
 
-The linear mixed model of the Leadership Presence Rating shows that the most influential factor is no other than `extracurriculars`. This is followed by `gpa` and then `work_wxperience`. By interpreting the coefficients of `extracurriculars` and `work_wxperience`, we find that those who have the relevant skills for each, compared to those who do not, have a higher rating on average of 0.76 and 0.16, respectively. Similar to the Speaking Skills Rating, we also see a negative coefficient for those who put 'Woman' for their gender as they have a lower rating compared to those who put 'Man' by an average of 0.91.
+The linear mixed model of the Leadership Presence Rating shows that the most influential factor is no other than `extracurriculars`. This is followed by `gpa` and then `work_wxperience`. By interpreting the coefficients of `extracurriculars` and `work_wxperience`, we find that those who have some of the relevant skills for each, compared to those who do not, have a higher rating on average of 0.76 and 0.16, respectively, and doubled if they have higher relevant skills and/or experiences. As for `gpa`, each 1.0 in `gpa` here increases the score by an average of 0.22. Similar to the Speaking Skills Rating, we also see a negative coefficient for those who put 'Woman' for their gender as they have a lower rating compared to those who put 'Man' by an average of 0.91.
 
 After analyzing all of the possible factors that can affect the scores and rating given by the AI. we conclude that the top most influential factors are no other than `gpa`, `extracurriculars` and `work_experience`. We also find that those who put 'Woman' as their gender, score higher than those who put 'Man' on average for the Technical and Writing Task. On the other hand, those who put 'Man' as their gender, were rated higher than those who put 'Woman' on average for the Speaking Skills and Leadership Presence. Ultimately the differences between the genders are small relative to the other factors, hence there is no concern about bias in gender parity for the AI scores and ratings.
 
-\newpage
+### (Phase 3) Human Rating Differences
+
+The third phase of the hiring pipeline is the final interview. Each line of \newline
+`phase3-new-grad-applicants-2020.csv` contains the overall job fit rating given by the interviewers:
+
+* `applicant_id` = A unique ID given to each applicant in Phase 1
+* `interviewer_rating_1` = First interviewer's rating from 0 to 100 for overall job fit
+* `interviewer_rating_2` = Second interviewer's rating from 0 to 100 for overall job fit
+
+In this phase, we are interested in what factors from the application form and the AI scoring/rating affect the overall job rating given by each interviewer. Thus we will be using the data from `phase1-new-grad-applicants-2020.csv` and `phase2-new-grad-applicants-2020.csv`, which has been explained in the previous sections. We will have 2 models with the response variables being `interviewer_rating_1` and `interviewer_rating_2`. For the fixed effects and random effects, we will be using the exact same found in the models presented for phase 2 with the inclusion of the 4 variables which were the response variables. That is, `technical_skills`, `writing_skills`, `speaking_skills` and `leadership_presence` will be added as fixed effects. We will also multiply the `speaking_skills` and `leadership_presence` ratings by 10, so that they are on the same scale as the `technical_skills` and `writing_skills` score. Based on the response variables, the model will be similar to that of phase 2, hence we will be using a linear mixed model for each. 
+
+```{r}
+phase3_applicants <- phase3_applicants %>% 
+  mutate(speaking_skills = speaking_skills*10) %>% 
+  mutate(leadership_presence = leadership_presence*10)
+```
+
+```{r message=FALSE, warning=FALSE}
+p3_model_int1 <- lmer(interviewer_rating_1 ~ gpa + gender + extracurriculars + work_experience + technical_skills + writing_skills + speaking_skills + leadership_presence + (1|team_applied_for), data = phase3_applicants)
+
+p3_model_int2  <- lmer(interviewer_rating_2 ~ gpa + gender + extracurriculars + work_experience + technical_skills + writing_skills + speaking_skills + leadership_presence + (1|team_applied_for), data = phase3_applicants)
+```
+
+```{r message=FALSE, warning=FALSE}
+tbl_regression(p3_model_int1) %>% 
+  as_hux_table() %>%
+  set_caption("Linear mixed model of Interviewer 1's Overall Job Ratings") %>% 
+  set_position("center") %>% 
+  set_top_padding(0.5) %>% 
+  set_bottom_padding(0.5)
+
+```
+
+Looking at the model for the ratings given by Interviewer 1, we only need to look at each coefficient relative to each other. It is evident that the least influential factor is in fact gender. It is seen that on average, those of the gender 'Women' have a score that is 0.24 higher than that of those who are the gender 'Man'. \newline 
+
+```{r message=FALSE, warning=FALSE}
+tbl_regression(p3_model_int2) %>% 
+  as_hux_table() %>%
+  set_caption("Linear mixed model of Interviewer 2's Overall Job Ratings") %>% 
+  set_position("center") %>% 
+  set_top_padding(0.5) %>% 
+  set_bottom_padding(0.5) 
+```
+
+The same results are evident in the ratings given by Interviewer 2. In fact, the result is most apparent here where on average, those of the gender 'Women' have a score that is only 0.02 higher than that of those who are the gender 'Man'. The only concerning thing here is that on average, those with higher GPA and/or more relevant work experience have a lower rating for `interviewer_rating_2`. Since being listed as 'first' or 'second' interviewer is arbitrary, there only reason for this is possibly outliers in the data. 
+
+All in all, there are no strong evidence that suggest applicants are not judged on their talents and value to the company.
+
+### (Final Hires) The Cost of the Job Offer
+
+Since there are only three phases of the recruitment pipeline, in this section we will be looking at those who were sent an offer letter. Each line of `data/final-hires-newgrad_2020.csv` contains the unique IDs of those who were sent an offer letter at the end of the recruitment pipeline. We are only interested in which applicants got an offer letter after phase 3. For this reason we will create a variable called `offered` and set it to 1, if the applicant got an offer letter after phase 3 and 0, if not. This will be the response variable we are interested in for developing our model. As for the fixed effects, we will be using `gender`and interview ratings, `interviewer_rating_1` and `interviewer_rating_2`. The reason for only using the interview ratings is because we find that the interview rating encompasses all of the data collected from each applicant from phases 1 and 2. Furthermore, the interview is usually the make or break situation for the applicants to prove themselves to the employer that they are worthy of a job offer. Then similar to the previous models, we will add `team_applied_for` as a random effect.
+
+```{r}
+phase3_applicants <- phase3_applicants %>% 
+  mutate(offered = as.integer(applicant_id %in% final_hires$applicant_id)) 
+```
+
+Analogous to the analysis in phase 1, we will be constructing a generalized linear mixed model, but before that we want to first consider the gender distribution for those who got an offered letter to those who did not. In addition, consider also the marginal probabilities and odd ratios.
+
+```{r}
+table_gender_offered <- table(phase3_applicants$gender, phase3_applicants$offered)
+
+table_gender_offered %>% 
+  kbl(col.names = c("Did not get an offer letter", "Got an offer letter"),caption = "The number of applicants that got an offer letter based on gender", booktabs = T) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position")
+
+prop.table(table_gender_offered, margin = 2) %>% 
+  kbl(col.names = c("Did not get an offer letter", "Got an offer letter"),caption = "The probability of an applicant's gender given that they got an offer letter", booktabs = T) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position")
+
+prop.table(table_gender_offered, margin = 1) %>% 
+  kbl(col.names = c("Did not get an offer letter", "Got an offer letter"),caption = "The probability of an applicant getting an offer letter given gender", booktabs = T) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position")
+
+odds_mw_offered <- (table_gender_offered[2,2]/table_gender_offered[2,1])/(table_gender_offered[1,2]/table_gender_offered[1,1]) 
+```
+
+Hence from the table above, given that the applicant got an offer letter, the probability that their gender is a 'Man' is 80%, whereas a 'Woman' is 20%. We also see that the probability of getting an offer letter for an applicant whose gender is 'Man' is 53%, whereas a 'Woman' is 29%. Also, the odds ratio of Woman vs Man who pass phase 1 is approximately 0.35. That is, the odds of a 'Woman' passing phase 1 is less than that of a 'Man'. This odds ratio is relatively close to 0, hence there is reason to suspect that there are possible gender biases in those who received an offer letter. That is, if we have not taken a look at the bigger picture. Thus lets now look at the model and see if there is possible bias between those who received and not revieved an offer letter. \newpage
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+final_model_full <- lme4::glmer(offered ~ gender + interviewer_rating_1 + interviewer_rating_2 + (1|team_applied_for), family = binomial(link="logit"), nAGQ=0, data = phase3_applicants)
+```
+
+```{r message=FALSE, warning=FALSE}
+tbl_regression(final_model_full) %>% 
+  as_hux_table() %>%
+  set_caption("Generalized linear mixed model of applicants who got an offer") %>% 
+  set_position("center") %>% 
+  set_top_padding(0.1) %>% 
+  set_bottom_padding(0.1)
+```
+
+From the model above, we can see that the coefficients and p-values are absurdly large, however it is still useful to interpret. We see that the coefficient of 'Women' is negative, where as `interviewer_rating_1` and `interviewer_rating_2` are positive. The odds of the `gender`, 'Women' are essentially 0 compared to 'Man', due to the fact that a majority of those who got offer letters are of the `gender`, 'Man'. However, this does not change the fact that the overall job fit ratings from the interview increases the odds of getting an offer letter significantly. This is knowing that `interviewer_rating_1` and `interviewer_rating_2` are unbiased bases on the analysis in the previous section. Hence it is to say that those who got an offer letter, got one because they were well suited for the position.   
+
 ## (Promotion Question)
+
 Black Saber aims to promote an equitable and inclusive work environment based on merit. The board wants to assure that its promotion processes are not only fair, but strictly based on talent to the company. We have been given the data for the company's current employees and their key performance indicators throughout their time at the company marked by financial quarters. We wish to determine which factors contribute to employees moving up the ranks of Black Saber seniority.
 
 ### Features Recorded of Black Saber's Current Employees
@@ -397,26 +492,27 @@ From the tables above, the only time the probability of an employee being a woma
 # 
 # promo_model <- glm(number_of_promotions ~ gender + avg_leadership + avg_productivity, family = poisson, offset = log(quarters_since_hiring), data = promoted_employees_dist)
 
-tbl_regression(promo_model1) %>% 
-  as_hux_table() %>%
-  set_caption("Generalized linear model of employee promotions") %>% 
-  set_position("left") %>% 
-  set_top_padding(0.5) %>% 
-  set_bottom_padding(0.5)
+# tbl_regression(promo_model1) %>% 
+#   as_hux_table() %>%
+#   set_caption("Generalized linear model of employee promotions") %>% 
+#   set_position("center") %>% 
+#   set_top_padding(0.5) %>% 
+#   set_bottom_padding(0.5)
 
-promo_model3
+# promo_model3
 ```
 
 ## (Salary Question) Fairness of Salary assignment for current employees at Black Saber
+
 Along with the fairness of their promotion practices, the Black Saber board members also want to know that compensation of employees is set by the same standards of merit. Using the same dataset of Black Saber's current employees, we wish to determine which factors contribute to setting employee salaries.
 
  Information of each employee at the financial quarters they were employed will be utilized again from `black-saber-current-employees.csv`.
  
- In this section, we are interested in the fairness of salary assignment for current employees at Black Saber. We will be looking how `role_seniority`, `leadership_for_level`,`productivity`, and `gender` effeect salary assignment.
+ In this section, we are interested in the fairness of salary assignment for current employees at Black Saber. We will be looking how `role_seniority`, `leadership_for_level`,`productivity`, and `gender` affect salary assignment.
  
 ```{r wrangle_salary_data}
 # In form where each row contributes to a different role seniority and salary at the time. leadership and productivity are averaged for length of time in each role.
-salary_employees <- black_saber_current_employees %>%
+salary_employees <- current_employees %>%
   arrange(employee_id, financial_q) %>% 
   group_by(employee_id, role_seniority) %>% 
   mutate(avg_productivity = round(mean(productivity), digits = 2)) %>%
@@ -450,7 +546,7 @@ cur_salary_employees %>%
 Just by looking at this figure, it seems that within the same roles, males tend to be paid more than their female counterparts. Before we reach any conclusions, let's compare some models.
  
  
-```{r play_with_salary_models}
+```{r play_with_salary_models, message=FALSE}
 salary_model0 <- lme4::lmer(salary ~ (1|team) + (1|role_seniority), data = salary_employees)
 salary_model1 <- lme4::lmer(salary ~ gender + (1|team) + (1|role_seniority), data = salary_employees)
 salary_model2 <- lme4::lmer(salary ~ gender + avg_productivity + (1|team) + (1|role_seniority), data = salary_employees)
@@ -458,7 +554,7 @@ salary_model3 <- lme4::lmer(salary ~ gender + avg_productivity + avg_leadership_
 
 ```
 
-```{r}
+```{r include=FALSE}
 lmtest::lrtest(salary_model0, salary_model1)
 lmtest::lrtest(salary_model2, salary_model3)
 lmtest::lrtest(salary_model1, salary_model2)
@@ -466,12 +562,12 @@ lmtest::lrtest(salary_model1, salary_model2)
 The following likelihood test performed across varying linear mixed model indicates that we should use salary_model2. This model which consist of salary as a response variable with `gender`and `avg_productivity` as fixed effects, and `team`, `role_seniority` as random effects. 
 
 ```{r}
-salary_model2
+#salary_model2
 
 tbl_regression(salary_model2) %>% 
   as_hux_table() %>%
   set_caption("Linear mixed model of employee salaries") %>% 
-  set_position("left") %>% 
+  set_position("center") %>% 
   set_top_padding(0.5) %>% 
   set_bottom_padding(0.5)
 ```
@@ -487,9 +583,8 @@ _In this section you will summarize your findings across all the research questi
 
 \newpage
 # Consultant information
-## Consultant profiles
 
-*Complete this section with a brief bio for each member of your group. If you are completing the project individually, you only need to complete one for yourself. In that case, change the title of this section to 'Consultant profile' instead. Examples below. This section is only marked for completeness, clarity and professionalism, not 'truth' so you can write it as if we're a few years in the future. Put your current degree in as completed and/or add your first choice grad school program, whatever you like. What skills related skills would you most like to highlight? What job title do you want?*
+## Consultant profiles
 
 **Andy Vu**. Andy is a junior consultant with Zeusolutions. He specializes in statistical modeling. Andy earned his Bachelor of Science, Specializing in Mathematics & Its Applications (Probability/Statistics) and Majoring in Statistics from the University of Toronto in 2021. 
 
@@ -510,11 +605,3 @@ Zeusolutions strives to be a forefront in professional statistical work while ma
 5.	Ensure the disclosure of all limitations and assumptions made in relevance to data of any particular work. 
 
 We recognize these importance’s and responsibilities we ought to uphold to our customers. 
-
-_This section should be fairly short, no more than half a page. Assume a general audience, much like your executive summary._
-
-* _Make at least three relevant statements about your company’s approach to ethical statistical consulting. These should be appropriately in line with professional conduct advice like the (Statistical Society of Canada Code of Conduct)[https://ssc.ca/sites/default/files/data/Members/public/Accreditation/ethics_e.pdf] or the (Ethical Guidelines for Statistical Practice from the American Statistical Society)[https://www.amstat.org/ASA/Your-Career/Ethical-Guidelines-for-Statistical-Practice.aspx]. For example, "the customer is always right" ISN’T the type of thing an ethical statistical consultant would include._
-*	_Be very careful not to just copy and paste from these other documents! Put things in your own words._
-
-
-__Final advice: KNIT EARLY AND OFTEN!__
