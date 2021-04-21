@@ -48,16 +48,16 @@ The aim of the present research is to examine factors that contribute to hiring,
 
 
 \newpage
-# Technical report
-_This part of the report is much more comprehensive than the executive summary. The audience is statistics/data-minded people, but you should NOT include code or unformatted R output here._
-
 
 ## Introduction
 
 _Provide a brief introduction to your report and outline what the report will cover. This section is valuable for setting scope and expectations. _
 
 ### Research questions
-_Use bullet points to to describe the research questions you are going to address. Write in full sentences._
+The following research questions are going to be addressed within this report. 
+* What factors play a role in being hired through Black Saber's recruitment pipeline manager?
+* What factors contribute to promotions of Black Saber's current employee's?
+* What factors dictate the salary assignment of current employees at Black Saber?
 
 \newpage
 
@@ -104,6 +104,7 @@ gender_to_currentroles%>%
 ```{r wrangle_employee_data, message = FALSE}
 current_employees <- current_employees
 ```
+# Technical report
 
 ## Hiring Question: Fairness of the AI Recruitment Pipeline Manager
 
