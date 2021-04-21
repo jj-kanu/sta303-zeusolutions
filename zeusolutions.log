@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.11)  21 APR 2021 15:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.11)  21 APR 2021 17:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -579,10 +579,77 @@ tnotebackref.sty
 Package: footnotebackref 2012/07/01 v1.0 Backreferences for footnotes (Holger L
 ange)
 \c@BackrefHyperFootnoteCounter=\count281
+) (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count282
+\float@exts=\toks26
+\float@box=\box53
+\@float@everytoks=\toks27
+\@floatcapt=\box54
 )
-(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.s
+(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.s
 ty
-Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen162
+\lightrulewidth=\dimen163
+\cmidrulewidth=\dimen164
+\belowrulesep=\dimen165
+\belowbottomsep=\dimen166
+\aboverulesep=\dimen167
+\abovetopsep=\dimen168
+\cmidrulesep=\dimen169
+\cmidrulekern=\dimen170
+\defaultaddspace=\dimen171
+\@cmidla=\count283
+\@cmidlb=\count284
+\@aboverulesep=\dimen172
+\@belowrulesep=\dimen173
+\@thisruleclass=\count285
+\@lastruleclass=\count286
+\@thisrulewidth=\dimen174
+)
+(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
+\LTleft=\skip70
+\LTright=\skip71
+\LTpre=\skip72
+\LTpost=\skip73
+\LTchunksize=\count287
+\LTcapwidth=\dimen175
+\LT@head=\box55
+\LT@firsthead=\box56
+\LT@foot=\box57
+\LT@lastfoot=\box58
+\LT@cols=\count288
+\LT@rows=\count289
+\c@LT@tables=\count290
+\c@LT@chunks=\count291
+\LT@p@ftn=\toks28
+)
+Class scrartcl Info: longtable captions redefined on input line 113.
+
+(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.s
+ty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip74
+\multirow@cntb=\count292
+\multirow@dima=\skip75
+\bigstrutjot=\dimen176
+)
+(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen177
+\WF@size=\dimen178
+\c@WF@wrappedlines=\count293
+\WF@box=\box59
+\WF@everypar=\toks29
+Package: wrapfig 2003/01/31  v 3.6
+)
+(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape
+.sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+
+(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.s
 ty
@@ -595,81 +662,7 @@ cs.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 105.
-)
-\Gin@req@height=\dimen162
-\Gin@req@width=\dimen163
-) (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count282
-\float@exts=\toks26
-\float@box=\box53
-\@float@everytoks=\toks27
-\@floatcapt=\box54
-)
-(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.s
-ty
-Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen164
-\lightrulewidth=\dimen165
-\cmidrulewidth=\dimen166
-\belowrulesep=\dimen167
-\belowbottomsep=\dimen168
-\aboverulesep=\dimen169
-\abovetopsep=\dimen170
-\cmidrulesep=\dimen171
-\cmidrulekern=\dimen172
-\defaultaddspace=\dimen173
-\@cmidla=\count283
-\@cmidlb=\count284
-\@aboverulesep=\dimen174
-\@belowrulesep=\dimen175
-\@thisruleclass=\count285
-\@lastruleclass=\count286
-\@thisrulewidth=\dimen176
-)
-(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
-Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip70
-\LTright=\skip71
-\LTpre=\skip72
-\LTpost=\skip73
-\LTchunksize=\count287
-\LTcapwidth=\dimen177
-\LT@head=\box55
-\LT@firsthead=\box56
-\LT@foot=\box57
-\LT@lastfoot=\box58
-\LT@cols=\count288
-\LT@rows=\count289
-\c@LT@tables=\count290
-\c@LT@chunks=\count291
-\LT@p@ftn=\toks28
-)
-Class scrartcl Info: longtable captions redefined on input line 126.
-
-(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.s
-ty
-Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
-\multirow@colwidth=\skip74
-\multirow@cntb=\count292
-\multirow@dima=\skip75
-\bigstrutjot=\dimen178
-)
-(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen179
-\WF@size=\dimen180
-\c@WF@wrappedlines=\count293
-\WF@box=\box59
-\WF@everypar=\toks29
-Package: wrapfig 2003/01/31  v 3.6
-)
-(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape
-.sty
-Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
-
-(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
-Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
-)
+))
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ) (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tabu/tabu.sty
 Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
@@ -679,8 +672,8 @@ ty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box60
 \sift@deathcycles=\count294
-\@vwid@loff=\dimen181
-\@vwid@roff=\dimen182
+\@vwid@loff=\dimen179
+\@vwid@roff=\dimen180
 )
 \c@taburow=\count295
 \tabu@nbcols=\count296
@@ -688,15 +681,15 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \tabu@Xcol=\count298
 \tabu@alloc=\count299
 \tabu@nested=\count300
-\tabu@target=\dimen183
-\tabu@spreadtarget=\dimen184
-\tabu@naturalX=\dimen185
-\tabucolX=\dimen186
-\tabu@Xsum=\dimen187
-\extrarowdepth=\dimen188
-\abovetabulinesep=\dimen189
-\belowtabulinesep=\dimen190
-\tabustrutrule=\dimen191
+\tabu@target=\dimen181
+\tabu@spreadtarget=\dimen182
+\tabu@naturalX=\dimen183
+\tabucolX=\dimen184
+\tabu@Xsum=\dimen185
+\extrarowdepth=\dimen186
+\abovetabulinesep=\dimen187
+\belowtabulinesep=\dimen188
+\tabustrutrule=\dimen189
 \tabu@thebody=\toks30
 \tabu@footnotes=\toks31
 \tabu@box=\box61
@@ -727,17 +720,17 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \UL@hyphenbox=\box67
 \UL@skip=\skip78
 \UL@hook=\toks32
-\UL@height=\dimen192
+\UL@height=\dimen190
 \UL@pe=\count301
-\UL@pixel=\dimen193
+\UL@pixel=\dimen191
 \ULC@box=\box68
 Package: ulem 2019/11/18
-\ULdepth=\dimen194
+\ULdepth=\dimen192
 )
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/makecell/makecell.s
 ty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen195
+\rotheadsize=\dimen193
 \c@nlinenum=\count302
 \TeXr@lab=\toks33
 )
@@ -747,13 +740,13 @@ Package: caption 2020/10/26 v3.5g Customizing captions (AR)
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption3.st
 y
 Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
-\captionmargin=\dimen196
-\captionmargin@=\dimen197
-\captionwidth=\dimen198
-\caption@tempdima=\dimen199
-\caption@indent=\dimen256
-\caption@parindent=\dimen257
-\caption@hangindent=\dimen258
+\captionmargin=\dimen194
+\captionmargin@=\dimen195
+\captionwidth=\dimen196
+\caption@tempdima=\dimen197
+\caption@indent=\dimen198
+\caption@parindent=\dimen199
+\caption@hangindent=\dimen256
 Package caption Info: KOMA-Script document class detected.
 
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption-kom
@@ -773,6 +766,12 @@ Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
 )
 Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
+)
+(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.s
+ty
+Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
+\Gin@req@height=\dimen257
+\Gin@req@width=\dimen258
 )
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/siunitx/siunitx.sty
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
@@ -1124,13 +1123,13 @@ Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
 (./zeusolutions.aux
 
-LaTeX Warning: Label `tab:unnamed-chunk-6' multiply defined.
+LaTeX Warning: Label `tab:unnamed-chunk-5' multiply defined.
 
 
-LaTeX Warning: Label `tab:unnamed-chunk-19' multiply defined.
+LaTeX Warning: Label `tab:unnamed-chunk-18' multiply defined.
 
 
-LaTeX Warning: Label `tab:unnamed-chunk-19' multiply defined.
+LaTeX Warning: Label `tab:unnamed-chunk-18' multiply defined.
 
 
 LaTeX Warning: Label `tab:promo_prob' multiply defined.
@@ -1138,27 +1137,27 @@ LaTeX Warning: Label `tab:promo_prob' multiply defined.
 )
 \openout1 = `zeusolutions.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 278.
-LaTeX Font Info:    ... okay on input line 278.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 278.
-LaTeX Font Info:    ... okay on input line 278.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 278.
-LaTeX Font Info:    ... okay on input line 278.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 278.
-LaTeX Font Info:    ... okay on input line 278.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 278.
-LaTeX Font Info:    ... okay on input line 278.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 278.
-LaTeX Font Info:    ... okay on input line 278.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 278.
-LaTeX Font Info:    ... okay on input line 278.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 278.
-LaTeX Font Info:    ... okay on input line 278.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 278.
-LaTeX Font Info:    ... okay on input line 278.
-Package scrbase Info: activating english \contentsname on input line 278.
-Package scrbase Info: activating english \listfigurename on input line 278.
-Package scrbase Info: activating english \listtablename on input line 278.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 265.
+LaTeX Font Info:    ... okay on input line 265.
+Package scrbase Info: activating english \contentsname on input line 265.
+Package scrbase Info: activating english \listfigurename on input line 265.
+Package scrbase Info: activating english \listtablename on input line 265.
 
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstop
 df-base.sty
@@ -1178,7 +1177,7 @@ f-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 278.
+Package hyperref Info: Link coloring OFF on input line 265.
 
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.st
 y
@@ -1194,9 +1193,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count344
 )
-LaTeX Info: Redefining \ref on input line 278.
-LaTeX Info: Redefining \pageref on input line 278.
-LaTeX Info: Redefining \nameref on input line 278.
+LaTeX Info: Redefining \ref on input line 265.
+LaTeX Info: Redefining \pageref on input line 265.
+LaTeX Info: Redefining \nameref on input line 265.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -1241,48 +1240,48 @@ reviations.cfg
 File: siunitx-abbreviations.cfg 2021-04-09 v2.8d siunitx: Abbreviated units
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
-78.
+65.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-78.
+65.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-278.
+265.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-278.
+265.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 278.
+(Font)              <10.95> on input line 265.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 278.
+(Font)              <8> on input line 265.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 278.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 278
+(Font)              <6> on input line 265.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 265
 .
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 278
+LaTeX Font Info:    Trying to load font information for U+msb on input line 265
 .
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 
-278.
+265.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 
-278.
+265.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1319,7 +1318,7 @@ File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 2
-99.
+86.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [1
@@ -1332,153 +1331,138 @@ File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
 [2
 
-] [3] [4]
-<zeusolutions_files/figure-latex/unnamed-chunk-3-1.pdf, id=68, 469.755pt x 325.
+]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 3
+41.
+(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [3]
+<zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf, id=57, 469.755pt x 325.
 215pt>
-File: zeusolutions_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type 
+File: zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type 
 pdf)
-<use zeusolutions_files/figure-latex/unnamed-chunk-3-1.pdf>
-Package pdftex.def Info: zeusolutions_files/figure-latex/unnamed-chunk-3-1.pdf 
- used on input line 378.
-(pdftex.def)             Requested size: 455.24608pt x 315.17035pt.
-
-Overfull \hbox (10.9519pt too wide) in paragraph at lines 378--379
-[][] 
- []
-
+<use zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf>
+Package pdftex.def Info: zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf 
+ used on input line 369.
+(pdftex.def)             Requested size: 364.19672pt x 252.1333pt.
+<zeusolutions_files/figure-latex/unnamed-chunk-2-2.pdf, id=58, 469.755pt x 325.
+215pt>
+File: zeusolutions_files/figure-latex/unnamed-chunk-2-2.pdf Graphic file (type 
+pdf)
+<use zeusolutions_files/figure-latex/unnamed-chunk-2-2.pdf>
+Package pdftex.def Info: zeusolutions_files/figure-latex/unnamed-chunk-2-2.pdf 
+ used on input line 369.
+(pdftex.def)             Requested size: 364.19672pt x 252.1333pt.
+[4 <./zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf> <./zeusolutions_fi
+les/figure-latex/unnamed-chunk-2-2.pdf>] [5]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
-00.
+33.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 4
-06.
-(c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [5 <./zeusolutions_files/figure-latex/unnamed-chunk-3-1.pdf>]
-Overfull \hbox (39.31245pt too wide) in paragraph at lines 432--443
+Overfull \hbox (39.31245pt too wide) in paragraph at lines 465--476
 [][] 
  []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 503--505
+Underfull \hbox (badness 10000) in paragraph at lines 536--538
 
  []
 
 [7]
-Overfull \hbox (33.64662pt too wide) in paragraph at lines 647--651
+Overfull \hbox (33.64662pt too wide) in paragraph at lines 679--683
 \T1/lmr/m/n/10.95 writ-ing sam-ple and sub-mit a pre-recorded video. Each line 
 of \T1/lmtt/m/n/10.95 phase2-new-grad-applicants-2020.csv
  []
 
 [8] [9] [10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 1284--1289
+Underfull \hbox (badness 10000) in paragraph at lines 1316--1321
 
  []
 
-[12]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[13] [14]
-Overfull \hbox (4.9483pt too wide) in paragraph at lines 1673--1673
+[12] [13] [14] [15]
+Overfull \hbox (4.9483pt too wide) in paragraph at lines 1705--1705
  [][]|
  []
 
 
-Overfull \hbox (9.12111pt too wide) in paragraph at lines 1673--1673
+Overfull \hbox (9.12111pt too wide) in paragraph at lines 1705--1705
 [][]|  
  []
 
 
-Overfull \hbox (31.91876pt too wide) in paragraph at lines 1673--1673
+Overfull \hbox (31.91876pt too wide) in paragraph at lines 1705--1705
 [][]|  
  []
 
 
-Overfull \hbox (3.67984pt too wide) in paragraph at lines 1673--1673
+Overfull \hbox (3.67984pt too wide) in paragraph at lines 1705--1705
  [][]|
  []
 
 
-Overfull \hbox (7.80681pt too wide) in paragraph at lines 1673--1673
-[]\T1/lmr/m/n/10.95 Operations|  
- []
-
-
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1673--1673
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1705--1705
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
 
-Overfull \hbox (7.80681pt too wide) in paragraph at lines 1673--1673
-[]\T1/lmr/m/n/10.95 Operations|  
- []
-
-
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1673--1673
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1705--1705
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1673--1673
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1705--1705
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1673--1673
+Overfull \hbox (4.09636pt too wide) in paragraph at lines 1705--1705
+[]\T1/lmr/m/n/10.95 Marketing 
+ []
+
+
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1705--1705
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
 
-Overfull \hbox (7.80681pt too wide) in paragraph at lines 1673--1673
-[]\T1/lmr/m/n/10.95 Operations|  
- []
-
-
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1673--1673
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1705--1705
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[15] [16]
-<zeusolutions_files/figure-latex/gender_to_promotion-1.pdf, id=172, 469.755pt x
+[16]
+<zeusolutions_files/figure-latex/gender_to_promotion-1.pdf, id=178, 469.755pt x
  325.215pt>
 File: zeusolutions_files/figure-latex/gender_to_promotion-1.pdf Graphic file (t
 ype pdf)
 <use zeusolutions_files/figure-latex/gender_to_promotion-1.pdf>
 Package pdftex.def Info: zeusolutions_files/figure-latex/gender_to_promotion-1.
-pdf  used on input line 1692.
-(pdftex.def)             Requested size: 455.24608pt x 315.17035pt.
+pdf  used on input line 1724.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Overfull \hbox (10.9519pt too wide) in paragraph at lines 1692--1693
-[][] 
+Overfull \hbox (14.50969pt too wide) in paragraph at lines 1724--1724
+ [] 
  []
 
 [17 <./zeusolutions_files/figure-latex/gender_to_promotion-1.pdf>] [18]
-<zeusolutions_files/figure-latex/gender_to_salary-1.pdf, id=195, 469.755pt x 32
+<zeusolutions_files/figure-latex/gender_to_salary-1.pdf, id=200, 469.755pt x 32
 5.215pt>
 File: zeusolutions_files/figure-latex/gender_to_salary-1.pdf Graphic file (type
  pdf)
 <use zeusolutions_files/figure-latex/gender_to_salary-1.pdf>
 Package pdftex.def Info: zeusolutions_files/figure-latex/gender_to_salary-1.pdf
-  used on input line 1925.
-(pdftex.def)             Requested size: 455.24608pt x 315.17035pt.
+  used on input line 1917.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Overfull \hbox (10.9519pt too wide) in paragraph at lines 1925--1926
-[][] 
+Overfull \hbox (14.50969pt too wide) in paragraph at lines 1917--1917
+ [] 
  []
 
 [19 <./zeusolutions_files/figure-latex/gender_to_salary-1.pdf>] [20]
-Underfull \hbox (badness 10000) in paragraph at lines 2078--2081
+Underfull \hbox (badness 10000) in paragraph at lines 2070--2073
 
  []
 
@@ -1488,16 +1472,16 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 24023 strings out of 480954
- 485783 string characters out of 5905582
- 991541 words of memory out of 5000000
- 40700 multiletter control sequences out of 15000+600000
+ 24030 strings out of 480954
+ 486137 string characters out of 5905582
+ 991515 words of memory out of 5000000
+ 40707 multiletter control sequences out of 15000+600000
  464784 words of font info for 66 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 111i,20n,116p,10639b,935s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathi
-t.enc}{c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-e
-c.enc}{c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-t
+ 111i,19n,116p,10639b,935s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.en
+c}{c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathi
+t.enc}{c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-t
 s1.enc}<c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/
 lmbx10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public
 /lm/lmmi10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/pu
@@ -1507,10 +1491,10 @@ ype1/public/lm/lmss10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fon
 ts/type1/public/lm/lmss12.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist
 /fonts/type1/public/lm/lmssbx10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texm
 f-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on zeusolutions.pdf (21 pages, 236063 bytes).
+Output written on zeusolutions.pdf (21 pages, 237052 bytes).
 PDF statistics:
- 331 PDF objects out of 1000 (max. 8388607)
- 291 compressed objects within 3 object streams
- 119 named destinations out of 1000 (max. 500000)
- 120 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 337 PDF objects out of 1000 (max. 8388607)
+ 295 compressed objects within 3 object streams
+ 118 named destinations out of 1000 (max. 500000)
+ 125 words of extra memory for PDF output out of 10000 (max. 10000000)
 

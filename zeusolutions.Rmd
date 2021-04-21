@@ -40,17 +40,31 @@ Black Saber Software has been implementing an AI service in its application scre
 
 The aim of the present research is to examine factors that contribute to hiring, promotion and salary processes of Black Saber Software and determine whether they are fair. In particular, the hiring pipeline using AI is of most interest. Factors that may be of interest are gpa, gender, number of extracurricular activity, number of previous work experience, presence of cv, presence of cover letter, etc.
 
-
 ## Key findings
 
-```{r include = FALSE, fig.show='hide'}
-# This chunk provides an example of some things you can do with RMarkdown to make your report creation process easier
+* 1
+* 2
+* 3 
+* 4
+* 5
+* 6
 
+## Limitations
+
+* 1 
+* 2
+* 3
+
+
+\newpage
+
+```{r, warning=FALSE, message=FALSE, fig.show="hold", out.width="80%", fig.align="center"}
 # read in the data
 current_employees <- read_csv("data/black-saber-current-employees.csv")
 
 gender_to_currentroles <- select(current_employees, gender, role_seniority) 
 hierarchy <- c('Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president')
+
 #creating visual to display reported gender ratios of current employees
 gender_to_currentroles%>%
   gather(gender,role_seniority)%>%
@@ -65,10 +79,55 @@ gender_to_currentroles%>%
   ylab("Number of Employees")+
   theme(plot.caption = element_text(hjust = 0, size = 10, 
                                     face = "bold"))
+
+# read in the data
+phase1_applicants <- read_csv("data/phase1-new-grad-applicants-2020.csv")
+phase2_applicants <- read_csv("data/phase2-new-grad-applicants-2020.csv")
+phase3_applicants <- read_csv("data/phase3-new-grad-applicants-2020.csv")
+final_hires <- read_csv("data/final-hires-newgrad_2020.csv")
+# Adds Applicant Info to Phase 3
+phase3_applicants <- phase3_applicants %>%
+  left_join(phase2_applicants, by = "applicant_id")
+# Adds Applicant Info to Final Hires
+final_hires <- final_hires %>%  
+  left_join(phase3_applicants, by = "applicant_id")
+# Add phase variable
+phase1 <- cbind.data.frame(phase1_applicants$applicant_id, phase1_applicants$gender) 
+colnames(phase1) <- c("applicant_id", "gender")
+phase1 <- phase1 %>% 
+  mutate(phase = "Phase 1")
+phase2 <- cbind.data.frame(phase2_applicants$applicant_id, phase2_applicants$gender) 
+colnames(phase2) <- c("applicant_id", "gender")
+phase2 <- phase2 %>% 
+  mutate(phase = "Phase 2")
+phase3 <- cbind.data.frame(phase3_applicants$applicant_id, phase3_applicants$gender) 
+colnames(phase3) <- c("applicant_id", "gender")
+phase3 <- phase3 %>% 
+  mutate(phase = "Phase 3")
+hires <- cbind.data.frame(final_hires$applicant_id, final_hires$gender) 
+colnames(hires) <- c("applicant_id", "gender")
+hires <- hires %>% 
+  mutate(phase = "Final Hires")
+
+all_phases <- rbind.data.frame(phase1, phase2, phase3, hires)
+
+gender_to_phase <- select(all_phases, gender, phase) 
+phase_order <- c('Phase 1','Phase 2','Phase 3','Final Hires')
+
+#creating visual to display reported gender ratios of current employees
+gender_to_phase%>%
+  gather(gender,phase)%>%
+  ggplot(aes(phase,fill=gender))+
+  geom_bar(preserve="single",position="dodge")+
+  scale_fill_brewer(palette="Dark2") +
+  scale_x_discrete(limits = phase_order) +
+  theme(axis.text.x = element_text(angle=30))+
+  labs(title = "Gender Parity of Applicants",fill="Gender", caption = "Figure 2. Bar chart for the number of applicants by different genders")+
+  xlab("Phase")+
+  ylab("Number of Applicants")+
+  theme(plot.caption = element_text(hjust = 0, size = 10, 
+                                    face = "bold"))
 ```
-
-## Limitations
-
 
 \newpage
 # Technical report
@@ -78,7 +137,9 @@ gender_to_currentroles%>%
   The following report will be utilizing statistical concepts to properly investigate the research questions revolving around the fairness of hiring, promotion and salary assignment processes within Black Saber.  Concepts revolving around data wrangling and explanatory variable analysis will be demonstrated throughout the technical report and be performed through R programming language. Binomial and Poisson distributions will be involved in selecting appropriate models to investigate the factors of interest. Generalized linear mixed models and linear mixed models will be used to model these factors. In order to investigate the general distributions of genders across different areas of interests, marginal probabilities and odds ratio will also be present. 
 
 ### Research questions
-The following research questions are going to be addressed within this report. 
+
+The following research questions are going to be addressed within this report.
+
 * What factors play a role in being hired through Black Saber's recruitment pipeline manager?
 * What factors contribute to promotions of Black Saber's current employee's?
 * What factors dictate the salary assignment of current employees at Black Saber?
@@ -248,7 +309,7 @@ The third phase of the hiring pipeline is the final interview. Each line of \new
 * `interviewer_rating_1` = First interviewer's rating from 0 to 100 for overall job fit
 * `interviewer_rating_2` = Second interviewer's rating from 0 to 100 for overall job fit
 
-In this phase, we are interested in what factors from the application form and the AI scoring/rating affect the overall job rating given by each interviewer. Thus we will be using the data from `phase1-new-grad-applicants-2020.csv` and `phase2-new-grad-applicants-2020.csv`, which has been explained in the previous sections. We will have 2 models with the response variables being the overall job fit ratings given to the applicants by the first and second interviewer. For the fixed effects and random effects, we will be using the exact same found in the models presented for phase 2 with the inclusion of the 4 variables which were the response variables. That is, the AI scores for the techincal and writing tasks ans rating for speaking and leadership presence will be added as fixed effects. We will also scale up the ratings for speaking and leadership presence by 10, so that they are on the same scale as the scores for the technical and writing tasks. Based on the response variables, the model will be similar to that of phase 2, hence we will be using a linear mixed model for each. \newpage
+In this phase, we are interested in what factors from the application form and the AI scoring/rating affect the overall job rating given by each interviewer. Thus we will be using the data from `phase1-new-grad-applicants-2020.csv` and `phase2-new-grad-applicants-2020.csv`, which has been explained in the previous sections. We will have 2 models with the response variables being the overall job fit ratings given to the applicants by the first and second interviewer. For the fixed effects and random effects, we will be using the exact same found in the models presented for phase 2 with the inclusion of the 4 variables which were the response variables. That is, the AI scores for the techincal and writing tasks ans rating for speaking and leadership presence will be added as fixed effects. We will also scale up the ratings for speaking and leadership presence by 10, so that they are on the same scale as the scores for the technical and writing tasks. Based on the response variables, the model will be similar to that of phase 2, hence we will be using a linear mixed model for each. 
 
 ```{r}
 # Re-scaling speaking and leadership ratings
@@ -422,7 +483,7 @@ pmfd <- pmfd %>% group_by(employee_id, role_seniority) %>%
 
 Given the response variable is a count we will be consider a Poisson Regression model. Before constructing the model, we want to first consider the gender distribution in number of promotions of current employees. In addition, consider also the joint probabilities.\newpage
 
-```{r gender_to_promotion}
+```{r gender_to_promotion, fig.align="center"}
 # Promoted_employees_dist takes only the most recent role seniority, and tracks average of all features and initial position.
 promoted_employees_dist <- promoted_employees %>%
   slice(n())
@@ -432,7 +493,7 @@ ggplot(promoted_employees_dist, aes(number_of_promotions)) +
   geom_bar(aes(fill = gender), position = "fill") + 
   scale_fill_brewer(palette="Dark2") +
   geom_hline(yintercept = 0.5) +
-  labs(title = "Gender Parity in Number of Promotions of Current Employees",fill="Gender", caption = "Figure 2. Gender distribution in the number of promotions of employees. \nThe line in the middle assumes equal proportion of promotions \nin both genders.")+
+  labs(title = "Gender Parity in Number of Promotions of Current Employees",fill="Gender", caption = "Figure 3. Gender distribution in the number of promotions of employees. \nThe line in the middle assumes equal proportion of promotions \nin both genders.")+
   xlab("Number of Promotions") +
   ylab("Proportion of Employees by Gender") +
   theme(plot.caption = element_text(hjust = 0, size = 10, face = "bold"))
@@ -463,7 +524,8 @@ pm_0 <- lme4::glmer(number_of_promotions ~ gender + avg_productivity + avg_leade
 # With employee id as random intercept
 pm_1 <- lme4::glmer(number_of_promotions ~ gender + avg_productivity + avg_leadership_level + quarters_since_hiring + (1|team) + (1|role_seniority) + (1 | employee_id), data = pmfd, family = poisson(link = "log"))
 
-lmtest::lrtest(pm_0,pm_1)
+kbl(lmtest::lrtest(pm_0,pm_1), caption = "Likelihood ratio test for Poisson GLMM with ID Random Effect", booktabs = T)%>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position")
 
 ```
 
@@ -506,7 +568,7 @@ salary_employees <- current_employees %>%
  
 First, let's compare gender parity in the salaries of the most recent quarter for every employee.
  
-```{r gender_to_salary}
+```{r gender_to_salary, fig.align="center"}
 hierarchy <- c('Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president')
 
 cur_salary_employees <- salary_employees %>% 
@@ -519,13 +581,13 @@ cur_salary_employees %>%
   geom_boxplot() + 
   scale_fill_brewer(palette="Dark2") +
   scale_x_discrete(limits = hierarchy) + 
-  labs(title = "Gender Parity in Salaries of Current Employees",fill="Gender", caption = "Figure 5.")+
+  labs(title = "Gender Parity in Salaries of Current Employees",fill="Gender", caption = "Figure 4. Gender and Salary Distribution based on roles of current employees")+
   xlab("Role") +
   ylab("Salary") +
-  theme(plot.caption = element_text(hjust = 0, size = 10, face = "bold"))
+  theme(plot.caption = element_text(hjust = 0, size = 10, face = "bold"), axis.text.x = element_text(angle=30))
 ```
  
-This figure shows, as would make sense, that salary increases as role increases in seniority. It also seems that within the same roles, males tend to be paid more than their female counterparts across almost all positions. Howeveer, before we were to reach any conclusions, we should refer to a model.
+This figure shows, as would make sense, that salary increases as role increases in seniority. It also seems that within the same roles, males tend to be paid more than their female counterparts across almost all positions. However, before we were to reach any conclusions, we should refer to a model.
  
  
  <!-- Make and compare Models -->
