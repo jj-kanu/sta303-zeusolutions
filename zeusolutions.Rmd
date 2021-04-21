@@ -22,7 +22,6 @@ titlepage-rule-height: 2
 
 ```{r, message = FALSE, echo=FALSE}
 library(tidyverse)
-# Run `install.packages("kableExtra")`, install.packages("gtsummary"), install.packages('huxtable') and install.packages("broom.mixed") if needed
 library(huxtable)
 library(kableExtra)
 library(gtsummary)
@@ -52,7 +51,7 @@ The aim of the present research is to examine factors that contribute to hiring,
 
 ## Limitations
 
-* 1 
+*  
 * 2
 * 3
 
@@ -514,7 +513,7 @@ prop.table(table_gender_promotion, margin = 2) %>%
 
 From the figure Gender Parity in Number of Promotions of Current Employees, we see that the proportion of male to female is only balanced at 0 promotions, becoming more male-dominated as we increase in promotions.
 
-Similarly, from the tables above, the only time the probability of an employee being a woman is higher is given the employee has not had any promotions. Conversely, seeing that given a higher number of promotions, the probability of being a man becomes proportionally larger, a gender bias may be suspected however we will withold any conclusions until we consider our model. Factors such as quarters since an employee was hired may still be a more influential variable as more time at the company could lead to more promotions.
+Similarly, from Table 17, the only time the probability of an employee being a woman is higher is given the employee has not had any promotions. Conversely, seeing that given a higher number of promotions, the probability of being a man becomes proportionally larger, a gender bias may be suspected however we will withold any conclusions until we consider our model. Factors such as quarters since an employee was hired may still be a more influential variable as more time at the company could lead to more promotions.
 
 ```{r message=FALSE, warning=FALSE}
 # Without employee id as random intercept; using pmfd ((grouped by employee and role_seniority))
@@ -540,7 +539,7 @@ tbl_regression(pm_0) %>%
    set_bottom_padding(0.5)
 ```
 
-From the model above, we can see gender has an effect on whether or not a employee is promoted. It is evidently the case that women get -0.33 less promotions for every promotion a male employee would recieve.  This may indicate a gender bias in the promotions of employees at Black Saber. 
+From the model represented in Table 19, we can see gender has an effect on whether or not a employee is promoted. It is evidently the case that women get -0.33 less promotions for every promotion a male employee would recieve.  This may indicate a gender bias in the promotions of employees at Black Saber. 
 
 
 ## Fairness of Salary assignment for current employees at Black Saber
@@ -566,7 +565,9 @@ salary_employees <- current_employees %>%
   slice(n())
 ```
  
-First, let's compare gender parity in the salaries of the most recent quarter for every employee.
+First, let's compare gender parity in the salaries of the most recent quarter for every employee. Figure 4 shows, as would make sense, that salary increases as role increases in seniority. It also seems that within the same roles, males tend to be paid more than their female counterparts across almost all positions. However, before we were to reach any conclusions, we should refer to a model.
+
+Comparing nested linear mixed models using likelihood ratio tests, we settled on a model, seen in Table 20, accounting for team and role seniority as random effects, while using gender and average productivity as fixed effects.
  
 ```{r gender_to_salary, fig.align="center", out.width="80%"}
 hierarchy <- c('Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president')
@@ -587,8 +588,6 @@ cur_salary_employees %>%
   theme(plot.caption = element_text(hjust = 0, size = 10, face = "bold"), axis.text.x = element_text(angle=30))
 ```
  
-This figure shows, as would make sense, that salary increases as role increases in seniority. It also seems that within the same roles, males tend to be paid more than their female counterparts across almost all positions. However, before we were to reach any conclusions, we should refer to a model.
- 
  
  <!-- Make and compare Models -->
 ```{r play_with_salary_models, message=FALSE}
@@ -607,8 +606,6 @@ lmtest::lrtest(salary_model1, salary_model3)
 ```
 <!-- The following likelihood test performed across varying linear mixed model indicates that we should use salary_model2. This model which consist of salary as a response variable with `gender`and `avg_productivity` as fixed effects, and `team`, `role_seniority` as random effects.  -->
 
-Comparing nested linear mixed models using likelihood ratio tests, we settled on a model accounting for team and role seniority as random effects, while using gender and average productivity as fixed effects.
-
 ```{r}
 #salary_model2
 
@@ -625,15 +622,23 @@ Taking into account the gender and average productivity of a given current emplo
 
 ## Discussion
 
+For the first phase of the hiring pipeline, we fitted a generalized linear model to predict whether a candidate passed phase 1 using six fixed effects and one random effect. We found that the most significant factors that contribute to whether a candidate passes phase 1 are GPA, skills from extracurricular activities, and work experience, in the order of most to least importance. 
 
-<<<<<<< HEAD
-### Limitations and Concerns
-=======
->>>>>>> 3fd61b97870dd8a8c5de3078e8ac7ac1efe76de8
+Next, we fitted four linear mixed models for response variables: score for the technical task, scores for writing task, ratings for speaking skills, and leadership presence. Overall, we found similar results to the first phase where GPA and skills from extracurricular activities, and work experience are the dominant factors. Across four assessed aspects, gender has a generally small effect on final ratings. Hence, we can conclude that there is no evidence for gender bias in the AI system for Phase 2. 
+
+For phase 3 in the hiring pipeline, AI is no longer involved. Two interviewers are in charge of rating the candidates. We fitted two linear mixed models for two response variables, which are the job rating by the first interviewer and the second interviewer. We found that work experience and GPA are the two most influential factors in predicting the overall job rating by the first interviewer. However for the second interviewer, those with a higher GPA and more work experience are graded with a lower score than those who have a lower GPA and less relevant work experience. We find that gender has a minimal effect on predicting the job rating score of the first interviewer and nearly 0 for the second. Thus, we can conclude that in phase 3, the interviewers have different preferences for qualities that they value in candidates.
+
+The problem arises clearly when looking at the applicants who received an offer letter. We find that there there is a higher probability that an applicant whose gender is a 'Man', receives an offer letter compared to a 'Women'. In the end, although the scoring and grading is fair, the final decision on who gets a position is gender bias.
+
+For promotion assignment, we had a count response in the form of number of promotions. Initially, visualizing the data showed an increased proportion of men to women given a larger number of promotions. To continue this further, based on our response, we used a Poisson GLM and Poisson GLMM but decided for the GLMM to account for random effects of repeated employee observations and difference in teams. For our GLMM model, we have the number of promotions as the response variable, team and role seniority as random effects and the rest as fixed. Using our model, we see that quarters since hiring and gender had the most effect on number of promotions. Surprisingly, average productivity and average leadership for level did not contribute much to the response. 
+While quarters since hiring would make sense as the longer an employee worked at a company the more promotions they may receive, gender still plays a negative role when an employee is a woman. Women on average received 0.33 less promotions for every promotion received by their male counterparts.
+
+Evidently we see that salary generally increases as role increases in seniority. Initially it seemed that within the same roles, males tend to be paid more than their female counterparts across almost all positions. When looking at a linear mixed model in which we have Salary as the response and gender and average productivity as fixed effects, we see that women, on average, are paid $1998 less than men. This is taken into account for randomly selecting team and role seniority. 
 
 ### Limitations and Concerns
-  Findings from this report analysis on Black Saber’s hiring, promotion and salary processes are limited to the data provided. Evidently we recognize that race and ethnicity was not information that was collected or provided by Black Saber. While we attempt to perform analysis on fairness in gender disparity across these processes in Black Saber, we did not consider the race and ethnicity of current and possible hired employees. It is suggested that collecting information on race and ethnicity would be beneficial towards analyzing fairness across race/ethnicity for future considerations.
-  ra
+
+Findings from this report analysis on Black Saber’s hiring, promotion and salary processes are limited to the data provided. Evidently we recognize that race and ethnicity was not information that was collected or provided by Black Saber. While we attempt to perform analysis on fairness in gender disparity across these processes in Black Saber, we did not consider the race and ethnicity of current and possible hired employees. It is suggested that collecting information on race and ethnicity would be beneficial towards analyzing fairness across race/ethnicity for future considerations.
+
 \newpage
 # Consultant information
 

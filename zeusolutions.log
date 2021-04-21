@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.11)  21 APR 2021 18:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.11)  21 APR 2021 19:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1137,27 +1137,27 @@ LaTeX Warning: Label `tab:promo_prob' multiply defined.
 )
 \openout1 = `zeusolutions.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 265.
-LaTeX Font Info:    ... okay on input line 265.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 265.
-LaTeX Font Info:    ... okay on input line 265.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 265.
-LaTeX Font Info:    ... okay on input line 265.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 265.
-LaTeX Font Info:    ... okay on input line 265.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 265.
-LaTeX Font Info:    ... okay on input line 265.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 265.
-LaTeX Font Info:    ... okay on input line 265.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 265.
-LaTeX Font Info:    ... okay on input line 265.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 265.
-LaTeX Font Info:    ... okay on input line 265.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 265.
-LaTeX Font Info:    ... okay on input line 265.
-Package scrbase Info: activating english \contentsname on input line 265.
-Package scrbase Info: activating english \listfigurename on input line 265.
-Package scrbase Info: activating english \listtablename on input line 265.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 266.
+LaTeX Font Info:    ... okay on input line 266.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 266.
+LaTeX Font Info:    ... okay on input line 266.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 266.
+LaTeX Font Info:    ... okay on input line 266.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 266.
+LaTeX Font Info:    ... okay on input line 266.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 266.
+LaTeX Font Info:    ... okay on input line 266.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 266.
+LaTeX Font Info:    ... okay on input line 266.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 266.
+LaTeX Font Info:    ... okay on input line 266.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 266.
+LaTeX Font Info:    ... okay on input line 266.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 266.
+LaTeX Font Info:    ... okay on input line 266.
+Package scrbase Info: activating english \contentsname on input line 266.
+Package scrbase Info: activating english \listfigurename on input line 266.
+Package scrbase Info: activating english \listtablename on input line 266.
 
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstop
 df-base.sty
@@ -1177,7 +1177,7 @@ f-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 265.
+Package hyperref Info: Link coloring OFF on input line 266.
 
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.st
 y
@@ -1193,9 +1193,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count344
 )
-LaTeX Info: Redefining \ref on input line 265.
-LaTeX Info: Redefining \pageref on input line 265.
-LaTeX Info: Redefining \nameref on input line 265.
+LaTeX Info: Redefining \ref on input line 266.
+LaTeX Info: Redefining \pageref on input line 266.
+LaTeX Info: Redefining \nameref on input line 266.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -1240,48 +1240,48 @@ reviations.cfg
 File: siunitx-abbreviations.cfg 2021-04-09 v2.8d siunitx: Abbreviated units
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
-65.
+66.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-65.
+66.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-265.
+266.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-265.
+266.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 265.
+(Font)              <10.95> on input line 266.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 265.
+(Font)              <8> on input line 266.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 265.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 265
+(Font)              <6> on input line 266.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 266
 .
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 265
+LaTeX Font Info:    Trying to load font information for U+msb on input line 266
 .
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 
-265.
+266.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 
-265.
+266.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1318,7 +1318,7 @@ File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 2
-86.
+87.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [1
@@ -1333,34 +1333,34 @@ File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 
 ]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 3
-41.
+43.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [3]
-<zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf, id=57, 469.755pt x 325.
+<zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf, id=55, 469.755pt x 325.
 215pt>
 File: zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type 
 pdf)
 <use zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf>
 Package pdftex.def Info: zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf 
- used on input line 372.
+ used on input line 377.
 (pdftex.def)             Requested size: 364.19672pt x 252.1333pt.
-<zeusolutions_files/figure-latex/unnamed-chunk-2-2.pdf, id=58, 469.755pt x 325.
+<zeusolutions_files/figure-latex/unnamed-chunk-2-2.pdf, id=56, 469.755pt x 325.
 215pt>
 File: zeusolutions_files/figure-latex/unnamed-chunk-2-2.pdf Graphic file (type 
 pdf)
 <use zeusolutions_files/figure-latex/unnamed-chunk-2-2.pdf>
 Package pdftex.def Info: zeusolutions_files/figure-latex/unnamed-chunk-2-2.pdf 
- used on input line 372.
+ used on input line 377.
 (pdftex.def)             Requested size: 364.19672pt x 252.1333pt.
 [4 <./zeusolutions_files/figure-latex/unnamed-chunk-2-1.pdf> <./zeusolutions_fi
 les/figure-latex/unnamed-chunk-2-2.pdf>]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
-34.
+39.
 (c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [5]
-Overfull \hbox (39.31245pt too wide) in paragraph at lines 466--477
+Overfull \hbox (39.31245pt too wide) in paragraph at lines 471--482
 [][] 
  []
 
@@ -1371,18 +1371,18 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 537--539
+Underfull \hbox (badness 10000) in paragraph at lines 542--544
 
  []
 
 [7]
-Overfull \hbox (33.64662pt too wide) in paragraph at lines 680--684
+Overfull \hbox (33.64662pt too wide) in paragraph at lines 685--689
 \T1/lmr/m/n/10.95 writ-ing sam-ple and sub-mit a pre-recorded video. Each line 
 of \T1/lmtt/m/n/10.95 phase2-new-grad-applicants-2020.csv
  []
 
 [8] [9] [10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 1316--1322
+Underfull \hbox (badness 10000) in paragraph at lines 1321--1327
 
  []
 
@@ -1391,57 +1391,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 1316--1322
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [13] [14]
-Overfull \hbox (4.9483pt too wide) in paragraph at lines 1707--1707
+Overfull \hbox (4.9483pt too wide) in paragraph at lines 1712--1712
  [][]|
  []
 
 
-Overfull \hbox (9.12111pt too wide) in paragraph at lines 1707--1707
+Overfull \hbox (9.12111pt too wide) in paragraph at lines 1712--1712
 [][]|  
  []
 
 
-Overfull \hbox (31.91876pt too wide) in paragraph at lines 1707--1707
+Overfull \hbox (31.91876pt too wide) in paragraph at lines 1712--1712
 [][]|  
  []
 
 
-Overfull \hbox (3.67984pt too wide) in paragraph at lines 1707--1707
+Overfull \hbox (3.67984pt too wide) in paragraph at lines 1712--1712
  [][]|
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1707--1707
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1712--1712
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
 
-Overfull \hbox (4.09636pt too wide) in paragraph at lines 1707--1707
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1712--1712
+[]\T1/lmr/m/n/10.95 Appropriate 
+ []
+
+
+Overfull \hbox (4.09636pt too wide) in paragraph at lines 1712--1712
 []\T1/lmr/m/n/10.95 Marketing 
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1707--1707
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1712--1712
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1707--1707
-[]\T1/lmr/m/n/10.95 Appropriate 
- []
-
-
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1707--1707
-[]\T1/lmr/m/n/10.95 Appropriate 
- []
-
-
-Overfull \hbox (4.09636pt too wide) in paragraph at lines 1707--1707
+Overfull \hbox (4.09636pt too wide) in paragraph at lines 1712--1712
 []\T1/lmr/m/n/10.95 Marketing 
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1707--1707
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1712--1712
+[]\T1/lmr/m/n/10.95 Appropriate 
+ []
+
+
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1712--1712
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
@@ -1449,13 +1449,13 @@ Overfull \hbox (13.25102pt too wide) in paragraph at lines 1707--1707
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [15]
-<zeusolutions_files/figure-latex/gender_to_promotion-1.pdf, id=173, 469.755pt x
+<zeusolutions_files/figure-latex/gender_to_promotion-1.pdf, id=171, 469.755pt x
  325.215pt>
 File: zeusolutions_files/figure-latex/gender_to_promotion-1.pdf Graphic file (t
 ype pdf)
 <use zeusolutions_files/figure-latex/gender_to_promotion-1.pdf>
 Package pdftex.def Info: zeusolutions_files/figure-latex/gender_to_promotion-1.
-pdf  used on input line 1726.
+pdf  used on input line 1731.
 (pdftex.def)             Requested size: 318.66953pt x 220.61726pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1464,16 +1464,22 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [16 <./zeusolutions_files/figure-latex/gender_to_promotion-1.pdf>] [17]
-<zeusolutions_files/figure-latex/gender_to_salary-1.pdf, id=193, 469.755pt x 32
+<zeusolutions_files/figure-latex/gender_to_salary-1.pdf, id=191, 469.755pt x 32
 5.215pt>
 File: zeusolutions_files/figure-latex/gender_to_salary-1.pdf Graphic file (type
  pdf)
 <use zeusolutions_files/figure-latex/gender_to_salary-1.pdf>
 Package pdftex.def Info: zeusolutions_files/figure-latex/gender_to_salary-1.pdf
-  used on input line 1919.
+  used on input line 1934.
 (pdftex.def)             Requested size: 364.19672pt x 252.1333pt.
-[18] [19 <./zeusolutions_files/figure-latex/gender_to_salary-1.pdf>] [20]
-Underfull \hbox (badness 10000) in paragraph at lines 2072--2075
+[18]
+Overfull \hbox (77.95816pt too wide) in paragraph at lines 2025--2029
+\T1/lmr/m/n/10.95 <<<<<<< HEAD ### Lim-i-ta-tions and Con-cerns ======= >>>>>>>
+ 3fd61b97870dd8a8c5de3078e8ac7ac1efe76de8 
+ []
+
+[19 <./zeusolutions_files/figure-latex/gender_to_salary-1.pdf>] [20]
+Underfull \hbox (badness 10000) in paragraph at lines 2081--2084
 
  []
 
@@ -1483,29 +1489,28 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 24030 strings out of 480954
- 486137 string characters out of 5905582
- 992515 words of memory out of 5000000
- 40707 multiletter control sequences out of 15000+600000
- 464784 words of font info for 66 fonts, out of 8000000 for 9000
+ 24023 strings out of 480954
+ 486035 string characters out of 5905582
+ 993020 words of memory out of 5000000
+ 40704 multiletter control sequences out of 15000+600000
+ 460521 words of font info for 65 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  111i,19n,116p,10639b,935s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.en
-c}{c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathi
-t.enc}{c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-t
+{c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathi
+t.enc}{c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-e
+c.enc}{c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-t
 s1.enc}<c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/
 lmbx10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public
 /lm/lmmi10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/pu
 blic/lm/lmr10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
-/public/lm/lmri10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/t
-ype1/public/lm/lmss10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fon
-ts/type1/public/lm/lmss12.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist
-/fonts/type1/public/lm/lmssbx10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texm
-f-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on zeusolutions.pdf (21 pages, 236744 bytes).
+/public/lm/lmss10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fonts/t
+ype1/public/lm/lmss12.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fon
+ts/type1/public/lm/lmssbx10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-di
+st/fonts/type1/public/lm/lmtt10.pfb>
+Output written on zeusolutions.pdf (21 pages, 220891 bytes).
 PDF statistics:
- 337 PDF objects out of 1000 (max. 8388607)
- 295 compressed objects within 3 object streams
- 118 named destinations out of 1000 (max. 500000)
- 125 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 326 PDF objects out of 1000 (max. 8388607)
+ 285 compressed objects within 3 object streams
+ 115 named destinations out of 1000 (max. 500000)
+ 117 words of extra memory for PDF output out of 10000 (max. 10000000)
 
