@@ -1,18 +1,22 @@
 ---
 title: "Report title"
-subtitle: "Subtitle"
 author: "Report prepared for Black Saber Software by Zeusolutions"
-date: 2021-04-21
-lang: "en"
+date: '2021-04-21'
 output:
   pdf_document:
     template: report.tex
-    toc: true
+    toc: yes
     toc_depth: 2
-titlepage: true
-titlepage-color: "6C3082"
-titlepage-text-color: "FFFFFF"
-titlepage-rule-color: "FFFFFF"
+  html_document:
+    toc: yes
+    toc_depth: '2'
+    df_print: paged
+lang: en
+subtitle: Subtitle
+titlepage: yes
+titlepage-color: 6C3082
+titlepage-text-color: FFFFFF
+titlepage-rule-color: FFFFFF
 titlepage-rule-height: 2
 ---
 
@@ -27,29 +31,9 @@ library(lme4)
 knitr::opts_chunk$set(echo=FALSE)
 ```
 
-# General comments (you can delete this section)
-
-_You can delete this section, and if you want to check what it said, just open a template from the package again. You don't have to use this particular template, but you DO need to write you report in RMarkdown and include a cover page._
-
-_The cover page must have:_
-
-*	_A title and subtitle_
-* _"Report prepared for Black Saber Software by" your company name_
-*	_Date (assessment submission date is fine)_
-
-_You can change the colour of this cover to any colour you would like by replacing 6C3082 in the YAML above (line 11) to another hex code. You could use this tool to help you:_ https://htmlcolorcodes.com/color-picker/
 
 \newpage
 # Executive summary
-
-_Guidelines for the executive summary:_
-
-* _No more than two pages_
-* _Language is appropriate for a non-technical audience_
-* _Bullet points are used where appropriate_
-*	_A small number of key visualizations and/or tables are included_
-*	_All three research questions are addressed_
-
 
 ## Background and Aim
 Black Saber Software has been implementing an AI service in its application screening process. The AI system is responsible for rating candidates from a pre-recorded video and assessing both a timed technical coding task and a writing sample that are submitted by the candidates. The final interview in Phase 3 is conducted and scored by people while the final hiring decision is made by the HR team. No data on ethnicity or race is collected, thus the AI system does not take those factors into account. However, the company is interested in knowing whether they may influence the salary of an individual. 
@@ -75,9 +59,7 @@ _Provide a brief introduction to your report and outline what the report will co
 ### Research questions
 _Use bullet points to to describe the research questions you are going to address. Write in full sentences._
 
-## Informative title for section addressing a research question
-
-_For each research question, you will want to briefly describe any data manipulation, show some exploratory plots/summary tables, report on any methods you use (i.e. models you fit) and the conclusions you draw from these_
+\newpage
 
 ```{r include = FALSE, fig.show='hide'}
 # This chunk provides an example of some things you can do with RMarkdown to make your report creation process easier
@@ -99,19 +81,24 @@ ggsave("images/example.png", width = 7, height = 4)
 # notice how the image is included with the ![](file/path.png) below
 ```
 
+
 ```{r, warning=FALSE}
 gender_to_currentroles <- select(current_employees, gender, role_seniority) 
 hierarchy <- c('Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president')
-#creating visual to display  reported gender ratios of current employees
+#creating visual to display reported gender ratios of current employees
 gender_to_currentroles%>%
   gather(gender,role_seniority)%>%
   mutate(roles = factor(role_seniority))%>%
   ggplot(aes(roles,fill=gender))+
   geom_bar(preserve="single",position="dodge")+
+  scale_fill_brewer(palette="Dark2") +
   scale_x_discrete(limits = hierarchy) +
   theme(axis.text.x = element_text(angle=30))+
-  labs(title = "Gender Parity of Current Employees",fill="Gender")+
-  xlab("Role Seniority")
+  labs(title = "Gender Parity of Current Employees",fill="Gender", caption = "Figure 1. Bar chart for the number of employees of three different genders")+
+  xlab("Role Seniority")+
+  ylab("Number of Employees")+
+  theme(plot.caption = element_text(hjust = 0, size = 10, 
+                                    face = "bold"))
 ggsave("images/currentgender.png", width = 7, height = 4)
 ```
 ![](images/currentgender.png)
@@ -120,7 +107,7 @@ ggsave("images/currentgender.png", width = 7, height = 4)
 current_employees <- current_employees
 ```
 
-## (Hiring Question) Fairness of the AI Recruitment Pipeline Manager
+## Hiring Question: Fairness of the AI Recruitment Pipeline Manager
 
 The company Black Saber has a new AI recruitment pipeline manager that has been trialing for the Data and Software teams. The board has concerns about the process and questions whether or not it is fair and based on value and talent of each applicant. We have been given the data for each phase of the process, in which there are a total of three. Through each phase there is certain data collected through question and tasks in which the AI uses to narrow down the field of applicants from one phase to another. We want to determine what factors play a major role in being hired through Black Saber's recruitment pipeline manager.
 
@@ -270,6 +257,7 @@ The linear mixed model of the Leadership Presence Rating shows that the most inf
 
 After analyzing all of the possible factors that can affect the scores and rating given by the AI. we conclude that the top most influential factors are no other than `gpa`, `extracurriculars` and `work_experience`. We also find that those who put 'Woman' as their gender, score higher than those who put 'Man' on average for the Technical and Writing Task. On the other hand, those who put 'Man' as their gender, were rated higher than those who put 'Woman' on average for the Speaking Skills and Leadership Presence. Ultimately the differences between the genders are small relative to the other factors, hence there is no concern about bias in gender parity for the AI scores and ratings.
 
+<<<<<<< HEAD
 ### (Phase 3) Human Rating Differences
 
 The third phase of the hiring pipeline is the final interview. Each line of \newline
@@ -347,7 +335,7 @@ prop.table(table_gender_offered, margin = 1) %>%
 odds_mw_offered <- (table_gender_offered[2,2]/table_gender_offered[2,1])/(table_gender_offered[1,2]/table_gender_offered[1,1]) 
 ```
 
-Hence from the table above, given that the applicant got an offer letter, the probability that their gender is a 'Man' is 80%, whereas a 'Woman' is 20%. We also see that the probability of getting an offer letter for an applicant whose gender is 'Man' is 53%, whereas a 'Woman' is 29%. Also, the odds ratio of Woman vs Man who pass phase 1 is approximately 0.35. That is, the odds of a 'Woman' passing phase 1 is less than that of a 'Man'. This odds ratio is relatively close to 0, hence there is reason to suspect that there are possible gender biases in those who received an offer letter. That is, if we have not taken a look at the bigger picture. Thus lets now look at the model and see if there is possible bias between those who received and not revieved an offer letter. \newpage
+Hence from the table above, given that the applicant got an offer letter, the probability that their gender is a 'Man' is 80%, whereas a 'Woman' is 20%. We also see that the probability of getting an offer letter for an applicant whose gender is 'Man' is 53%, whereas a 'Woman' is 29%. Also, the odds ratio of Woman vs Man who pass phase 1 is approximately 0.35. That is, the odds of a 'Woman' passing phase 1 is less than that of a 'Man'. This odds ratio is relatively close to 0, hence there is reason to suspect that there are possible gender biases in those who received an offer letter. That is, if we have not taken a look at the bigger picture. Thus lets now look at the model and see if there is possible bias between those who received and not received an offer letter. \newpage
 
 ```{r message=FALSE, warning=FALSE, results='hide'}
 final_model_full <- lme4::glmer(offered ~ gender + interviewer_rating_1 + interviewer_rating_2 + (1|team_applied_for), family = binomial(link="logit"), nAGQ=0, data = phase3_applicants)
@@ -366,6 +354,10 @@ From the model above, we can see that the coefficients and p-values are absurdly
 
 ## (Promotion Question)
 
+=======
+\newpage
+## Promotion Question: Fairness of Promotion process
+>>>>>>> dc1b87d9ac91639bff5cf69de9fb771a4a1fcc5e
 Black Saber aims to promote an equitable and inclusive work environment based on merit. The board wants to assure that its promotion processes are not only fair, but strictly based on talent to the company. We have been given the data for the company's current employees and their key performance indicators throughout their time at the company marked by financial quarters. We wish to determine which factors contribute to employees moving up the ranks of Black Saber seniority.
 
 ### Features Recorded of Black Saber's Current Employees
@@ -384,7 +376,7 @@ While employed at Black Saber Software, employee performance indicators are reco
 ```{r five_current_employees}
 sample_n(distinct(current_employees, employee_id, .keep_all = TRUE), 5) %>% 
   kbl(caption = "Five Anonymous Employees at Black Saber Software", booktabs = T) %>% 
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position") %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = TRUE, position = "left", latex_options = "hold_position") %>% 
   row_spec(0, angle = 45)
 
 ```
@@ -409,14 +401,33 @@ promoted_employees <- read.csv("data/black-saber-current-employees.csv")  %>%
     mutate(avg_productivity = round(mean(productivity), digits = 2)) %>%
     select(-n)
 
-pmfd <- promoted_employees %>% 
-  transform(leadership_for_level=as.numeric(factor(leadership_for_level,  levels = c("Needs improvement", "Appropriate for level", "Exceeds expectations")))) %>% 
-  mutate(avg_leadership_level = round(mean(leadership_for_level), digits = 2)) %>% 
-  select(-c(financial_q, leadership_for_level, productivity, salary, avg_leadership)) %>% 
-  group_by(employee_id) %>% 
-  slice(n())
+tmp_var <- current_employees  %>% group_by(employee_id, role_seniority) %>% slice(n()) %>% arrange(employee_id, financial_q)
+number_of_promotions_vec <- c(0)
+for (i in 2:nrow(tmp_var)){
+  if(tmp_var$employee_id[i] == tmp_var$employee_id[i-1]){
+    number_of_promotions_vec[i] = number_of_promotions_vec[i-1] + 1
+  } else {
+    number_of_promotions_vec[i] = 0
+  }
+}
+# number_of_promotions_vec
 
-  # tmp <- c("Needs improvement", "Appropriate for level", "Exceeds expectations")
+pmfd <- current_employees %>%
+  group_by(employee_id, role_seniority) %>% 
+  mutate(avg_productivity = round(mean(productivity), digits = 2)) %>%
+  transform(leadership_for_level=as.numeric(factor(leadership_for_level,  levels = c("Needs improvement", "Appropriate for level", "Exceeds expectations")))) %>% 
+  group_by(employee_id, role_seniority) %>% 
+  mutate(avg_leadership_level = round(mean(leadership_for_level), digits = 2)) %>% 
+  select(-c(leadership_for_level, productivity, salary)) %>% 
+  group_by(employee_id, role_seniority) %>% 
+  mutate(quarters_since_hiring = n()) %>% 
+  group_by(employee_id, role_seniority) %>% 
+  slice(n()) %>% 
+  arrange(employee_id, financial_q)
+
+pmfd$number_of_promotions = number_of_promotions_vec
+pmfd <- pmfd %>% group_by(employee_id, role_seniority) %>% 
+  mutate(promotions_per_quarter = number_of_promotions/(quarters_since_hiring))
 
 ```
 
@@ -430,10 +441,14 @@ promoted_employees_dist <- promoted_employees %>%
 
 ggplot(promoted_employees_dist, aes(number_of_promotions)) + 
   geom_bar(aes(fill = gender), position = "fill") + 
+  scale_fill_brewer(palette="Dark2") +
   geom_hline(yintercept = 0.5) +
-  labs(title = "Gender Parity in Number of Promotions of Current Employees",fill="Gender")+
+  labs(title = "Gender Parity in Number of Promotions of Current Employees",fill="Gender", caption = "Figure 2. Gender distribution in the number of promotions of employees. \nThe line in the middle assumes equal proportion of promotions \nin both genders.")+
   xlab("Number of Promotions") +
-  ylab("Proportion of Employees by Gender")
+  ylab("Proportion of Employees by Gender") +
+  theme(plot.caption = element_text(hjust = 0, size = 10, face = "bold"))
+
+
 ggsave("images/currentgender_promotion.png", width = 7, height = 4)
 ```
 
@@ -447,10 +462,12 @@ gender_to_quarters <- select(promoted_employees_dist, gender, quarters_since_hir
 gender_to_quarters%>%
   ggplot(aes(quarters_since_hiring,fill=gender))+
   geom_bar(preserve="single",position="dodge")+
+  scale_fill_brewer(palette="Dark2") +
   theme(axis.text.x = element_text(angle=30))+
-  labs(title = "Gender Parity in Number of Quarters Worked of Current Employees",fill="Gender")+
+  labs(title = "Gender Parity in Number of Quarters Worked of Current Employees",fill="Gender", caption = "Figure 3. ")+
   xlab("Number of Quarters") +
-  ylab("Number of Employees")
+  ylab("Number of Employees") +
+  theme(plot.caption = element_text(hjust = 0, size = 10, face = "bold"))
 # ggsave("images/currentgender_promotion.png", width = 7, height = 4)
 ```
 ```{r gender_to_positions, warning=FALSE, message = FALSE}
@@ -462,11 +479,13 @@ gender_to_positions <- select(promoted_employees_dist, gender, starting_role_sen
 gender_to_positions%>%
   ggplot(aes(starting_role_seniority,fill=gender))+
   geom_bar(preserve="single",position="dodge")+
+  scale_fill_brewer(palette="Dark2")+
   theme(axis.text.x = element_text(angle=30))+
   scale_x_discrete(limits = hierarchy) + 
-  labs(title = "Gender Parity in Starting Roles of Current Employees",fill="Gender")+
+  labs(title = "Gender Parity in Starting Roles of Current Employees",fill="Gender", caption = "Figure 4.")+
   xlab("Starting Positions") +
-  ylab("Number of Employees")
+  ylab("Number of Employees") + 
+  theme(plot.caption = element_text(hjust = 0, size = 10, face = "bold"))
 # ggsave("images/currentgender_promotion.png", width = 7, height = 4)
 ```
 
@@ -492,18 +511,42 @@ From the tables above, the only time the probability of an employee being a woma
 # 
 # promo_model <- glm(number_of_promotions ~ gender + avg_leadership + avg_productivity, family = poisson, offset = log(quarters_since_hiring), data = promoted_employees_dist)
 
+<<<<<<< HEAD
 # tbl_regression(promo_model1) %>% 
 #   as_hux_table() %>%
 #   set_caption("Generalized linear model of employee promotions") %>% 
 #   set_position("center") %>% 
 #   set_top_padding(0.5) %>% 
 #   set_bottom_padding(0.5)
+=======
+promo_model0 <- lme4::lmer(promotions_per_quarter ~ (1|team) + (1|role_seniority), data = pmfd)
+promo_model1 <- lme4::lmer(promotions_per_quarter ~ gender + (1|team) + (1|role_seniority), data = pmfd)
+promo_model2 <- lme4::lmer(promotions_per_quarter ~ gender + avg_productivity + (1|team) + (1|role_seniority), data = pmfd)
+promo_model3 <- lme4::lmer(promotions_per_quarter ~ gender + avg_productivity + avg_leadership_level + (1|team) + (1|role_seniority), data = pmfd)
+
+# tbl_regression(promo_model2) %>% 
+#   as_hux_table() %>%
+#   set_caption("Generalized linear model of employee promotions") %>% 
+#   set_position("left") %>% 
+#   set_top_padding(0.5) %>% 
+#   set_bottom_padding(0.5)
+
+lmtest::lrtest(promo_model0, promo_model1)
+lmtest::lrtest(promo_model2, promo_model3)
+lmtest::lrtest(promo_model0, promo_model3)
+>>>>>>> dc1b87d9ac91639bff5cf69de9fb771a4a1fcc5e
 
 # promo_model3
 ```
 
+<<<<<<< HEAD
 ## (Salary Question) Fairness of Salary assignment for current employees at Black Saber
 
+=======
+\newpage
+
+## Salary Question: Fairness of Salary assignment for current employees at Black Saber
+>>>>>>> dc1b87d9ac91639bff5cf69de9fb771a4a1fcc5e
 Along with the fairness of their promotion practices, the Black Saber board members also want to know that compensation of employees is set by the same standards of merit. Using the same dataset of Black Saber's current employees, we wish to determine which factors contribute to setting employee salaries.
 
  Information of each employee at the financial quarters they were employed will be utilized again from `black-saber-current-employees.csv`.
@@ -518,6 +561,7 @@ salary_employees <- current_employees %>%
   mutate(avg_productivity = round(mean(productivity), digits = 2)) %>%
   transform(salary = as.numeric(gsub('[$,]', '', salary))) %>% 
   transform(leadership_for_level=as.numeric(factor(leadership_for_level,  levels = c("Needs improvement", "Appropriate for level", "Exceeds expectations")))) %>% 
+  group_by(employee_id, role_seniority) %>% 
   mutate(avg_leadership_level = round(mean(leadership_for_level), digits = 2)) %>% 
   select(-c(leadership_for_level, productivity)) %>% 
   group_by(employee_id, role_seniority) %>% 
@@ -537,10 +581,12 @@ cur_salary_employees <- salary_employees %>%
 cur_salary_employees %>%
   ggplot(aes(x = role_seniority, y= salary, fill=gender))+
   geom_boxplot() + 
+  scale_fill_brewer(palette="Dark2") +
   scale_x_discrete(limits = hierarchy) + 
-  labs(title = "Gender Parity in Salaries of Current Employees",fill="Gender")+
+  labs(title = "Gender Parity in Salaries of Current Employees",fill="Gender", caption = "Figure 5.")+
   xlab("Role") +
-  ylab("Salary")
+  ylab("Salary") +
+  theme(plot.caption = element_text(hjust = 0, size = 10, face = "bold"))
 ```
  
 Just by looking at this figure, it seems that within the same roles, males tend to be paid more than their female counterparts. Before we reach any conclusions, let's compare some models.
@@ -558,6 +604,7 @@ salary_model3 <- lme4::lmer(salary ~ gender + avg_productivity + avg_leadership_
 lmtest::lrtest(salary_model0, salary_model1)
 lmtest::lrtest(salary_model2, salary_model3)
 lmtest::lrtest(salary_model1, salary_model2)
+lmtest::lrtest(salary_model1, salary_model3)
 ```
 The following likelihood test performed across varying linear mixed model indicates that we should use salary_model2. This model which consist of salary as a response variable with `gender`and `avg_productivity` as fixed effects, and `team`, `role_seniority` as random effects. 
 
@@ -605,3 +652,14 @@ Zeusolutions strives to be a forefront in professional statistical work while ma
 5.	Ensure the disclosure of all limitations and assumptions made in relevance to data of any particular work. 
 
 We recognize these importance’s and responsibilities we ought to uphold to our customers. 
+<<<<<<< HEAD
+=======
+
+_This section should be fairly short, no more than half a page. Assume a general audience, much like your executive summary._
+
+* _Make at least three relevant statements about your company’s approach to ethical statistical consulting. These should be appropriately in line with professional conduct advice like the (Statistical Society of Canada Code of Conduct)[https://ssc.ca/sites/default/files/data/Members/public/Accreditation/ethics_e.pdf] or the (Ethical Guidelines for Statistical Practice from the American Statistical Society)[https://www.amstat.org/ASA/Your-Career/Ethical-Guidelines-for-Statistical-Practice.aspx]. For example, "the customer is always right" ISN’T the type of thing an ethical statistical consultant would include._
+*	_Be very careful not to just copy and paste from these other documents! Put things in your own words._
+
+
+__Final advice: KNIT EARLY AND OFTEN!__
+>>>>>>> dc1b87d9ac91639bff5cf69de9fb771a4a1fcc5e
