@@ -43,7 +43,10 @@ The aim of the present research is to examine factors that contribute to hiring,
 
 ## Key findings
 
-```{r, warning=FALSE}
+```{r include = FALSE, fig.show='hide'}
+# This chunk provides an example of some things you can do with RMarkdown to make your report creation process easier
+
+# read in the data
 current_employees <- read_csv("data/black-saber-current-employees.csv")
 
 gender_to_currentroles <- select(current_employees, gender, role_seniority) 
@@ -67,13 +70,12 @@ gender_to_currentroles%>%
 ## Limitations
 
 
-
 \newpage
 # Technical report
 
 ## Introduction
 
-_Provide a brief introduction to your report and outline what the report will cover. This section is valuable for setting scope and expectations. _
+  The following report will be utilizing statistical concepts to properly investigate the research questions revolving around the fairness of hiring, promotion and salary assignment processes within Black Saber.  Concepts revolving around data wrangling and explanatory variable analysis will be demonstrated throughout the technical report and be performed through R programming language. Binomial and Poisson distributions will be involved in selecting appropriate models to investigate the factors of interest. Generalized linear mixed models and linear mixed models will be used to model these factors. In order to investigate the general distributions of genders across different areas of interests, marginal probabilities and odds ratio will also be present. 
 
 ### Research questions
 The following research questions are going to be addressed within this report. 
