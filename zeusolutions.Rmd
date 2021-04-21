@@ -332,7 +332,7 @@ prop.table(table_gender_offered, margin = 1) %>%
 odds_mw_offered <- (table_gender_offered[2,2]/table_gender_offered[2,1])/(table_gender_offered[1,2]/table_gender_offered[1,1]) 
 ```
 
-Hence from the table above, given that the applicant got an offer letter, the probability that their gender is a 'Man' is 80%, whereas a 'Woman' is 20%. We also see that the probability of getting an offer letter for an applicant whose gender is 'Man' is 53%, whereas a 'Woman' is 29%. Also, the odds ratio of Woman vs Man who pass phase 1 is approximately 0.35. That is, the odds of a 'Woman' passing phase 1 is less than that of a 'Man'. This odds ratio is relatively close to 0, hence there is reason to suspect that there are possible gender biases in those who received an offer letter. That is, if we have not taken a look at the bigger picture. Thus lets now look at the model and see if there is possible bias between those who received and not received an offer letter. 
+Hence from the table above, given that the applicant got an offer letter, the probability that their gender is a 'Man' is 80%, whereas a 'Woman' is 20%. We also see that the probability of getting an offer letter for an applicant whose gender is 'Man' is 53%, whereas a 'Woman' is 29%. Also, the odds ratio of Woman vs Man who pass phase 1 is approximately 0.35. That is, the odds of a 'Woman' passing phase 1 is less than that of a 'Man'. This odds ratio is relatively close to 0, hence there is reason to suspect that there are possible gender biases in those who received an offer letter. Thus lets now look at the model and see if there is a possible case of bias between those who received and not received an offer letter. 
 
 ```{r message=FALSE, warning=FALSE, results='hide'}
 final_model_full <- lme4::glmer(offered ~ gender + interviewer_rating_1 + interviewer_rating_2 + (1|team_applied_for), family = binomial(link="logit"), nAGQ=0, data = phase3_applicants)
@@ -347,7 +347,7 @@ tbl_regression(final_model_full) %>%
   set_bottom_padding(0.1)
 ```
 
-From the model above, we can see that the coefficients and p-values are absurdly large, however it is still useful to interpret. We see that the coefficient of 'Women' is negative, where as the ones for the interview ratings are positive. The odds of the gender, 'Women' are essentially 0 compared to 'Man', due to the fact that a majority of those who got offer letters are of the gender, 'Man'. However, this does not change the fact that the overall job fit ratings from the interview increases the odds of getting an offer letter significantly. This is knowing that the overall job fit ratings giver by the interviewers are unbiased bases on the analysis in the previous section. Hence it is to say that those who got an offer letter, got one because they were well suited for the position.   
+From the model above, we can see that the coefficients and p-values are absurdly large, however it is still useful to interpret. We see that the coefficient of 'Women' is a large negative, where as the ones for the interview ratings are only somewhat large positives. Hence, the odds of the gender, 'Women' are essentially 0 compared to 'Man'. However, this does not change the fact that the overall job fit ratings from the interview increases the odds of getting an offer letter significantly. This is knowing that the overall job fit ratings giver by the interviewers are unbiased bases on the analysis in the previous section. In either case, for whatever reason, those who are the gender 'Woman', do not have the a chance at getting an offer letter compared to those who are of the gender, 'Man'. Though the process of the recruitment pipeline seemed fair, there seems to be a gender disparity in the selection of those who were sent an offer letter in the end.   
 
 ## Promotion Question: Fairness of Promotion process
 
@@ -453,9 +453,6 @@ ggplot(promoted_employees_dist, aes(number_of_promotions)) +
 ggsave("images/currentgender_promotion.png", width = 7, height = 4)
 ```
 
-
-
-
 ```{r promo_prob}
 table_gender_promotion <- table(promoted_employees_dist$gender, promoted_employees_dist$number_of_promotions)
 table_gender_promotion %>% 
@@ -494,7 +491,7 @@ tbl_regression(pm_0) %>%
    set_bottom_padding(0.5)
 ```
 
-From the model above, we can see gender has an effect on whether or not a employlee is promoted. It is evidently the case that woman are 49% less likely to be promoted than men.  Therefore, we can say that the evidence shows the promotion processes at Black Saber are unfair. 
+From the model above, we can see gender has an effect on whether or not a employee is promoted. It is evidently the case that woman are 49% less likely to be promoted than men.  Therefore, we can say that the evidence shows the promotion processes at Black Saber are unfair. 
 
 ## Salary Question: Fairness of Salary assignment for current employees at Black Saber
 
@@ -573,7 +570,7 @@ tbl_regression(salary_model2) %>%
   set_bottom_padding(0.5)
 ```
 
-Taking into account the gender and average productivity of a given current employee while randomly selecting based team and role seniority, we see that women are, on average, paid $1998 less than men. We evidently see that there is a disparity between the salary assignment of current employees as women are being paid less. As a result, we can conclude that the salary processes at Black Saber show evidence of beig unfair.
+Taking into account the gender and average productivity of a given current employee while randomly selecting based team and role seniority, we see that women are, on average, paid $1998 less than men. We evidently see that there is a disparity between the salary assignment of current employees as women are being paid less. As a result, we can conclude that the salary processes at Black Saber show evidence of being unfair.
 
 
 ## Discussion
