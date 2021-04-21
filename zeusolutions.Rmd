@@ -541,7 +541,8 @@ tbl_regression(pm_0) %>%
    set_bottom_padding(0.5)
 ```
 
-From the model above, we can see gender has an effect on whether or not a employee is promoted. It is evidently the case that woman are 49% less likely to be promoted than men.  Therefore, we can say that the evidence shows the promotion processes at Black Saber are unfair. 
+From the model above, we can see gender has an effect on whether or not a employee is promoted. It is evidently the case that women get -0.33 less promotions for every promotion a male employee would recieve.  This may indicate a gender bias in the promotions of employees at Black Saber. 
+
 
 ## Fairness of Salary assignment for current employees at Black Saber
 
