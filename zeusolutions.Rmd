@@ -379,8 +379,6 @@ For this question, we are interested in how many promotions an employee received
 <!-- If using pmfd (ie poisson glmm)-->
 Additionally we will group employees by their ID and each role seniority they have had to create variables averaging productivity, leadership levels as a numeric, and counting number of quarters an employee has worked since they were hired.
 
-<!-- If using promotion_employee_f (ie poisson glm) -->
-Additionally we will group employees by their ID and create variables averaging productivity, leadership levels as a numeric, starting role seniority, and counting number of quarters an employee has worked since they were hired.
 
 ```{r promotion_data, message = FALSE}
 promoted_employees <- read.csv("data/black-saber-current-employees.csv")  %>% 
@@ -480,18 +478,23 @@ pm_0 <- lme4::glmer(number_of_promotions ~ gender + avg_productivity + avg_leade
 # With employee id as random intercept
 pm_1 <- lme4::glmer(number_of_promotions ~ gender + avg_productivity + avg_leadership_level + quarters_since_hiring + (1|team) + (1|role_seniority) + (1 | employee_id), data = pmfd, family = poisson(link = "log"))
 
-# Using promoted_employees_f (one row per employee)
-pm_test <- glm(number_of_promotions ~ gender + starting_role_seniority + avg_leadership_level + avg_productivity, family = poisson, offset = log(quarters_since_hiring), data = promoted_employees_f)
+lmtest::lrtest(pm_0,pm_1)
 
-# tbl_regression() %>% 
-#   as_hux_table() %>%
-#   set_caption("Generalized linear model of employee promotions") %>% 
-#   set_position("left") %>% 
-#   set_top_padding(0.5) %>% 
-#   set_bottom_padding(0.5)
 ```
 
-From the model above, we can see ...  Therefore, we can say that...
+After creating to variants of a Poisson GLMM model, we conduct a likelihood ratio tests to settle on which model. The results show that we take the Poisson GLMM model that takes gender , average productivity, average leadership and quarters since hiring as fixed effects, and team, role seniority as random effects.
+
+
+```{r}
+tbl_regression(pm_0) %>% 
+   as_hux_table() %>%
+   set_caption("Generalized linear model of employee promotions") %>% 
+   set_position("left") %>% 
+   set_top_padding(0.5) %>% 
+   set_bottom_padding(0.5)
+```
+
+From the model above, we can see gender has an effect on whether or not a employlee is promoted. It is evidently the case that woman are 49% less likely to be promoted than men.  Therefore, we can say that the evidence shows the promotion processes at Black Saber are unfair. 
 
 ## Salary Question: Fairness of Salary assignment for current employees at Black Saber
 
@@ -570,7 +573,7 @@ tbl_regression(salary_model2) %>%
   set_bottom_padding(0.5)
 ```
 
-Taking into account the gender and average productivity of a given current employee while randomly selecting based team and role seniority, we see that women are paid -$1998 less than men. We evidently see that there is a disparity between the salary assignment of current employees as women are being paid less.
+Taking into account the gender and average productivity of a given current employee while randomly selecting based team and role seniority, we see that women are, on average, paid $1998 less than men. We evidently see that there is a disparity between the salary assignment of current employees as women are being paid less. As a result, we can conclude that the salary processes at Black Saber show evidence of beig unfair.
 
 
 ## Discussion
