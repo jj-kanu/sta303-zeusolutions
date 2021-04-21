@@ -45,10 +45,10 @@ The aim of the present research is to examine factors that contribute to hiring,
 
 * The AI recruitment pipeline is unbiased in its scoring/rating, but gender biased in those who proceed from one phase to another.
 * In Figure 2, one can see the gender disposition between each phase and the final hires, where in a 'Woman' dominated pool of applicants, 'Man' dominated the final hires.
-* 3 
-* 4
-* 5
-* 6
+* Average productivity and average leadership for level do not have a great effect on promotion.
+* Women on average received 0.33 less promotions for every promotion received by their male counterparts.
+* Within the same roles, males tend to be paid more than their female counterparts across almost all positions.
+* We see that women, on average, are paid $1998 less than men.
 
 ## Limitations
 
