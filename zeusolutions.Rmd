@@ -51,6 +51,18 @@ _Guidelines for the executive summary:_
 *	_All three research questions are addressed_
 
 
+## Background and Aim
+Black Saber Software has been implementing an AI service in its application screening process. The AI system is responsible for rating candidates from a pre-recorded video and assessing both a timed technical coding task and a writing sample that are submitted by the candidates. The final interview in Phase 3 is conducted and scored by people while the final hiring decision is made by the HR team. No data on ethnicity or race is collected, thus the AI system does not take those factors into account. However, the company is interested in knowing whether they may influence the salary of an individual. 
+
+The aim of the present research is to examine factors that contribute to hiring, promotion and salary processes of Black Saber Software and determine whether they are fair. In particular, the hiring pipeline using AI is of most interest. Factors that may be of interest are gpa, gender, number of extracurricular activity, number of previous work experience, presence of cv, presence of cover letter, etc.
+
+
+## Key findings
+
+## Limitations
+
+
+
 \newpage
 # Technical report
 _This part of the report is much more comprehensive than the executive summary. The audience is statistics/data-minded people, but you should NOT include code or unformatted R output here._
@@ -270,7 +282,7 @@ While employed at Black Saber Software, employee performance indicators are reco
 * `team` = Divisions of Black Saber staff categorized into: "Software", "People and talent", "Operations", "Marketing and sales", "Legal and financial", "Design", "Data", and "Client services".
 * `financial_q` = Financial quarter where following features were recorded.
 * `role_seniority` = Hierarchy of employees within each team. Rank order from least senior to most senior: 'Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president'. 
-* `leadership_for_level` = Quality of demonstrated leadership, taking into account role level. (i.e. “Appropriate for level” requires much less for entry-levelemployees than for a manager). Categorized into "Needs Improvement", "Appropriate for Level", and "Exceeds Expectations".
+* `leadership_for_level` = Quality of demonstrated leadership, taking into account role level. (i.e. “Appropriate for level” requires much less for entry-level employees than for a manager). Categorized into "Needs Improvement", "Appropriate for Level", and "Exceeds Expectations".
 * `productivity` = Work output in relation to job description, rated on a 0-100 scale with 50 being satisfactory and above 50 indicating better than expected productivity.
 * `salary` = Salary at at the given financial quarter (note: these are effective yearly values for the current wage, but don’t take in to account previous salary steps in the same year, etc.)
 
@@ -283,42 +295,87 @@ sample_n(distinct(current_employees, employee_id, .keep_all = TRUE), 5) %>%
 ```
 
 For this question, we are interested in how many promotions an employee received while working at Black Saber Software. For this reason, we will create a variable called `number_of_promotions` counting the change in role_seniority of each employee. 
-This will be the response variable we are interested in for developing our model. The other variables will be fixed effects besides `team_applied_for`. We believe that `team_applied_for` should be added as a random effect because each team has a different set of required skills and/or experiences. Other than that, since each row corresponds to a unique applicant, this suggests that the observations are independent, hence our assumptions are not violated. We want to determine which is the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process.
+This will be the response variable we are interested in for developing our model. 
+
+<!-- The other variables will be fixed effects besides `team_applied_for`. We believe that `team_applied_for` should be added as a random effect because each team has a different set of required skills and/or experiences. Other than that, since each row corresponds to a unique applicant, this suggests that the observations are independent, hence our assumptions are not violated. We want to determine which is the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process. -->
 
 ```{r promotion_data, message = FALSE}
 promoted_employees <- read.csv("data/black-saber-current-employees.csv")  %>% 
     arrange(employee_id, financial_q) %>% 
     group_by(employee_id) %>% 
-    mutate(number_of_promotions = max(length(unique(role_seniority)))-1)
-```
+    mutate(number_of_promotions = max(length(unique(role_seniority)))-1) %>% 
+    group_by(employee_id) %>%
+    mutate(quarters_since_hiring = n()) %>% 
+    mutate(promotions_per_quarter = number_of_promotions/(quarters_since_hiring)) %>% 
+    group_by(employee_id) %>% 
+    mutate(starting_role_seniority = first(role_seniority)) %>% 
+    add_count(employee_id, leadership_for_level) %>%
+    mutate(avg_leadership = leadership_for_level[n == max(n)][1]) %>%
+    mutate(avg_productivity = round(mean(productivity), digits = 2)) %>%
+    select(-n)
 
-Given the ... response variable and random effect, we will be constructing a ... model. Before constructing the model, we want to first consider the gender distribution in number of promotions of current employees. In addition, consider also the joint probabilities.\newpage
-
-
-```{r gender_to_promotion, warning=FALSE, message = FALSE}
-# Promoted_employees_dist takes only the most recent role seniority, and tracks average of all features and initial position.
-promoted_employees_dist <- promoted_employees %>% 
-  group_by(employee_id) %>%
-  mutate(quarters_since_hiring = n()) %>% 
+pmfd <- promoted_employees %>% 
+  transform(leadership_for_level=as.numeric(factor(leadership_for_level,  levels = c("Needs improvement", "Appropriate for level", "Exceeds expectations")))) %>% 
+  mutate(avg_leadership_level = round(mean(leadership_for_level), digits = 2)) %>% 
+  select(-c(financial_q, leadership_for_level, productivity, salary, avg_leadership)) %>% 
   group_by(employee_id) %>% 
-  mutate(starting_role_seniority = first(role_seniority)) %>% 
-  add_count(employee_id, leadership_for_level) %>%
-  mutate(avg_leadership = leadership_for_level[n == max(n)][1]) %>%
-  mutate(avg_productivity = round(mean(productivity), digits = 0)) %>%
-  select(-n) %>% 
   slice(n())
 
-gender_to_promotion <- select(promoted_employees_dist, gender, number_of_promotions) 
-#creating visual to display  reported gender ratios of current employees
-gender_to_promotion%>%
-  ggplot(aes(number_of_promotions,fill=gender))+
-  geom_bar(preserve="single",position="dodge")+
-  theme(axis.text.x = element_text(angle=30))+
+  # tmp <- c("Needs improvement", "Appropriate for level", "Exceeds expectations")
+
+```
+
+Given the response variable is a count we will be consider a Poisson Regression model. Before constructing the model, we want to first consider the gender distribution in number of promotions of current employees. In addition, consider also the joint probabilities.\newpage
+
+```{r gender_to_promotion}
+# Promoted_employees_dist takes only the most recent role seniority, and tracks average of all features and initial position.
+promoted_employees_dist <- promoted_employees %>%
+  slice(n())
+
+
+ggplot(promoted_employees_dist, aes(number_of_promotions)) + 
+  geom_bar(aes(fill = gender), position = "fill") + 
+  geom_hline(yintercept = 0.5) +
   labs(title = "Gender Parity in Number of Promotions of Current Employees",fill="Gender")+
   xlab("Number of Promotions") +
-  ylab("Number of Employees")
+  ylab("Proportion of Employees by Gender")
 ggsave("images/currentgender_promotion.png", width = 7, height = 4)
 ```
+
+
+
+```{r gender_to_quarters, warning=FALSE, message = FALSE}
+# Promoted_employees_dist takes only the most recent role seniority, and tracks average of all features and initial position.
+
+gender_to_quarters <- select(promoted_employees_dist, gender, quarters_since_hiring) 
+#creating visual to display  reported gender ratios of current employees
+gender_to_quarters%>%
+  ggplot(aes(quarters_since_hiring,fill=gender))+
+  geom_bar(preserve="single",position="dodge")+
+  theme(axis.text.x = element_text(angle=30))+
+  labs(title = "Gender Parity in Number of Quarters Worked of Current Employees",fill="Gender")+
+  xlab("Number of Quarters") +
+  ylab("Number of Employees")
+# ggsave("images/currentgender_promotion.png", width = 7, height = 4)
+```
+```{r gender_to_positions, warning=FALSE, message = FALSE}
+# Promoted_employees_dist takes only the most recent role seniority, and tracks average of all features and initial position.
+hierarchy <- c('Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president')
+
+gender_to_positions <- select(promoted_employees_dist, gender, starting_role_seniority) 
+#creating visual to display  reported gender ratios of current employees
+gender_to_positions%>%
+  ggplot(aes(starting_role_seniority,fill=gender))+
+  geom_bar(preserve="single",position="dodge")+
+  theme(axis.text.x = element_text(angle=30))+
+  scale_x_discrete(limits = hierarchy) + 
+  labs(title = "Gender Parity in Starting Roles of Current Employees",fill="Gender")+
+  xlab("Starting Positions") +
+  ylab("Number of Employees")
+# ggsave("images/currentgender_promotion.png", width = 7, height = 4)
+```
+
+
 
 
 ```{r promo_prob}
@@ -334,17 +391,93 @@ prop.table(table_gender_promotion, margin = 2) %>%
 
 From the tables above, the only time the probability of an employee being a woman is higher is given the employee has not had any promotions. Conversely, seeing that given a higher number of promotions, the probability of being a man becomes proportionally larger, a gender bias may be suspected however we will withold any conclusions until we consider our model.
 
+```{r message=FALSE, warning=FALSE}
+# pm_1 <- lme4::glmer(number_of_promotions ~ 1 + gender + (1 | employee_id), data = promoted_employees, family = poisson(link = "log"), nAGQ = 100)
+# summary(pm_1)
+# 
+# promo_model <- glm(number_of_promotions ~ gender + avg_leadership + avg_productivity, family = poisson, offset = log(quarters_since_hiring), data = promoted_employees_dist)
+
+tbl_regression(promo_model1) %>% 
+  as_hux_table() %>%
+  set_caption("Generalized linear model of employee promotions") %>% 
+  set_position("left") %>% 
+  set_top_padding(0.5) %>% 
+  set_bottom_padding(0.5)
+
+promo_model3
+```
+
 ## (Salary Question) Fairness of Salary assignment for current employees at Black Saber
+Along with the fairness of their promotion practices, the Black Saber board members also want to know that compensation of employees is set by the same standards of merit. Using the same dataset of Black Saber's current employees, we wish to determine which factors contribute to setting employee salaries.
+
  Information of each employee at the financial quarters they were employed will be utilized again from `black-saber-current-employees.csv`.
  
- In this section, we are interested in the fairness of salary assignment for current employees at Black Saber. We will be looking how `role_seniority`, `leadership_for_level`,`productivity`, and `gender`.
+ In this section, we are interested in the fairness of salary assignment for current employees at Black Saber. We will be looking how `role_seniority`, `leadership_for_level`,`productivity`, and `gender` effeect salary assignment.
  
- 
-
-```{r, include = FALSE}
-library(tidyverse)
-library(lme4)
+```{r wrangle_salary_data}
+# In form where each row contributes to a different role seniority and salary at the time. leadership and productivity are averaged for length of time in each role.
+salary_employees <- black_saber_current_employees %>%
+  arrange(employee_id, financial_q) %>% 
+  group_by(employee_id, role_seniority) %>% 
+  mutate(avg_productivity = round(mean(productivity), digits = 2)) %>%
+  transform(salary = as.numeric(gsub('[$,]', '', salary))) %>% 
+  transform(leadership_for_level=as.numeric(factor(leadership_for_level,  levels = c("Needs improvement", "Appropriate for level", "Exceeds expectations")))) %>% 
+  mutate(avg_leadership_level = round(mean(leadership_for_level), digits = 2)) %>% 
+  select(-c(leadership_for_level, productivity)) %>% 
+  group_by(employee_id, role_seniority) %>% 
+  slice(n())
 ```
+ 
+First, let's compare gender parity in the salaries of the most recent quarter for every employee.
+ 
+```{r gender_to_salary}
+hierarchy <- c('Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president')
+
+cur_salary_employees <- salary_employees %>% 
+  arrange(employee_id, financial_q) %>% 
+  group_by(employee_id) %>% 
+  slice(n())
+
+cur_salary_employees %>%
+  ggplot(aes(x = role_seniority, y= salary, fill=gender))+
+  geom_boxplot() + 
+  scale_x_discrete(limits = hierarchy) + 
+  labs(title = "Gender Parity in Salaries of Current Employees",fill="Gender")+
+  xlab("Role") +
+  ylab("Salary")
+```
+ 
+Just by looking at this figure, it seems that within the same roles, males tend to be paid more than their female counterparts. Before we reach any conclusions, let's compare some models.
+ 
+ 
+```{r play_with_salary_models}
+salary_model0 <- lme4::lmer(salary ~ (1|team) + (1|role_seniority), data = salary_employees)
+salary_model1 <- lme4::lmer(salary ~ gender + (1|team) + (1|role_seniority), data = salary_employees)
+salary_model2 <- lme4::lmer(salary ~ gender + avg_productivity + (1|team) + (1|role_seniority), data = salary_employees)
+salary_model3 <- lme4::lmer(salary ~ gender + avg_productivity + avg_leadership_level + (1|team) + (1|role_seniority), data = salary_employees)
+
+```
+
+```{r}
+lmtest::lrtest(salary_model0, salary_model1)
+lmtest::lrtest(salary_model2, salary_model3)
+lmtest::lrtest(salary_model1, salary_model2)
+```
+The following likelihood test performed across varying linear mixed model indicates that we should use salary_model2. This model which consist of salary as a response variable with `gender`and `avg_productivity` as fixed effects, and `team`, `role_seniority` as random effects. 
+
+```{r}
+salary_model2
+
+tbl_regression(salary_model2) %>% 
+  as_hux_table() %>%
+  set_caption("Linear mixed model of employee salaries") %>% 
+  set_position("left") %>% 
+  set_top_padding(0.5) %>% 
+  set_bottom_padding(0.5)
+```
+
+Taking into account the gender and average productivity of a given current employee while randomly selecting based team and role seniority, we see that women are paid -$1997.94 less than men. We evidently see that there is a lack of fairness within the salary assignment of current employees as women are being paid less.
+
 
 ## Discussion
 
@@ -360,7 +493,7 @@ _In this section you will summarize your findings across all the research questi
 
 **Andy Vu**. Andy is a junior consultant with Zeusolutions. He specializes in statistical modeling. Andy earned his Bachelor of Science, Specializing in Mathematics & Its Applications (Probability/Statistics) and Majoring in Statistics from the University of Toronto in 2021. 
 
-**Ethelia Choi**. 
+**Ethelia Choi**. Ethelia is a junior consultant with Zeusolutions. She specializes in data analytics. Ethelia earned her Bachelor of Science, Majoring in Statistics and Mathematics from the University of Toronto in 2021. 
 
 **James F. Kanu**. James is a junior consultant with Zeusolutions. He specializes in data visualization. James earned his Bachelor of Science, Majoring in Mathematics and Minoring in Computer Science and Statistics from the University of Toronto in 2021.
 
