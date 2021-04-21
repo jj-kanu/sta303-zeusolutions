@@ -314,14 +314,33 @@ promoted_employees <- read.csv("data/black-saber-current-employees.csv")  %>%
     mutate(avg_productivity = round(mean(productivity), digits = 2)) %>%
     select(-n)
 
-pmfd <- promoted_employees %>% 
-  transform(leadership_for_level=as.numeric(factor(leadership_for_level,  levels = c("Needs improvement", "Appropriate for level", "Exceeds expectations")))) %>% 
-  mutate(avg_leadership_level = round(mean(leadership_for_level), digits = 2)) %>% 
-  select(-c(financial_q, leadership_for_level, productivity, salary, avg_leadership)) %>% 
-  group_by(employee_id) %>% 
-  slice(n())
+tmp_var <- black_saber_current_employees  %>% group_by(employee_id, role_seniority) %>% slice(n()) %>% arrange(employee_id, financial_q)
+number_of_promotions_vec <- c(0)
+for (i in 2:nrow(tmp_var)){
+  if(tmp_var$employee_id[i] == tmp_var$employee_id[i-1]){
+    number_of_promotions_vec[i] = number_of_promotions_vec[i-1] + 1
+  } else {
+    number_of_promotions_vec[i] = 0
+  }
+}
+# number_of_promotions_vec
 
-  # tmp <- c("Needs improvement", "Appropriate for level", "Exceeds expectations")
+pmfd <- black_saber_current_employees %>%
+  group_by(employee_id, role_seniority) %>% 
+  mutate(avg_productivity = round(mean(productivity), digits = 2)) %>%
+  transform(leadership_for_level=as.numeric(factor(leadership_for_level,  levels = c("Needs improvement", "Appropriate for level", "Exceeds expectations")))) %>% 
+  group_by(employee_id, role_seniority) %>% 
+  mutate(avg_leadership_level = round(mean(leadership_for_level), digits = 2)) %>% 
+  select(-c(leadership_for_level, productivity, salary)) %>% 
+  group_by(employee_id, role_seniority) %>% 
+  mutate(quarters_since_hiring = n()) %>% 
+  group_by(employee_id, role_seniority) %>% 
+  slice(n()) %>% 
+  arrange(employee_id, financial_q)
+
+pmfd$number_of_promotions = number_of_promotions_vec
+pmfd <- pmfd %>% group_by(employee_id, role_seniority) %>% 
+  mutate(promotions_per_quarter = number_of_promotions/(quarters_since_hiring))
 
 ```
 
@@ -397,12 +416,21 @@ From the tables above, the only time the probability of an employee being a woma
 # 
 # promo_model <- glm(number_of_promotions ~ gender + avg_leadership + avg_productivity, family = poisson, offset = log(quarters_since_hiring), data = promoted_employees_dist)
 
-tbl_regression(promo_model1) %>% 
-  as_hux_table() %>%
-  set_caption("Generalized linear model of employee promotions") %>% 
-  set_position("left") %>% 
-  set_top_padding(0.5) %>% 
-  set_bottom_padding(0.5)
+promo_model0 <- lme4::lmer(promotions_per_quarter ~ (1|team) + (1|role_seniority), data = pmfd)
+promo_model1 <- lme4::lmer(promotions_per_quarter ~ gender + (1|team) + (1|role_seniority), data = pmfd)
+promo_model2 <- lme4::lmer(promotions_per_quarter ~ gender + avg_productivity + (1|team) + (1|role_seniority), data = pmfd)
+promo_model3 <- lme4::lmer(promotions_per_quarter ~ gender + avg_productivity + avg_leadership_level + (1|team) + (1|role_seniority), data = pmfd)
+
+# tbl_regression(promo_model2) %>% 
+#   as_hux_table() %>%
+#   set_caption("Generalized linear model of employee promotions") %>% 
+#   set_position("left") %>% 
+#   set_top_padding(0.5) %>% 
+#   set_bottom_padding(0.5)
+
+lmtest::lrtest(promo_model0, promo_model1)
+lmtest::lrtest(promo_model2, promo_model3)
+lmtest::lrtest(promo_model0, promo_model3)
 
 promo_model3
 ```
@@ -422,6 +450,7 @@ salary_employees <- black_saber_current_employees %>%
   mutate(avg_productivity = round(mean(productivity), digits = 2)) %>%
   transform(salary = as.numeric(gsub('[$,]', '', salary))) %>% 
   transform(leadership_for_level=as.numeric(factor(leadership_for_level,  levels = c("Needs improvement", "Appropriate for level", "Exceeds expectations")))) %>% 
+  group_by(employee_id, role_seniority) %>% 
   mutate(avg_leadership_level = round(mean(leadership_for_level), digits = 2)) %>% 
   select(-c(leadership_for_level, productivity)) %>% 
   group_by(employee_id, role_seniority) %>% 
@@ -462,6 +491,7 @@ salary_model3 <- lme4::lmer(salary ~ gender + avg_productivity + avg_leadership_
 lmtest::lrtest(salary_model0, salary_model1)
 lmtest::lrtest(salary_model2, salary_model3)
 lmtest::lrtest(salary_model1, salary_model2)
+lmtest::lrtest(salary_model1, salary_model3)
 ```
 The following likelihood test performed across varying linear mixed model indicates that we should use salary_model2. This model which consist of salary as a response variable with `gender`and `avg_productivity` as fixed effects, and `team`, `role_seniority` as random effects. 
 
