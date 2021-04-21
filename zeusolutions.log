@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.11)  21 APR 2021 08:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.11)  21 APR 2021 15:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1135,12 +1135,6 @@ LaTeX Warning: Label `tab:unnamed-chunk-19' multiply defined.
 
 LaTeX Warning: Label `tab:promo_prob' multiply defined.
 
-
-LaTeX Warning: Label `tab:unnamed-chunk-22' multiply defined.
-
-
-LaTeX Warning: Label `tab:unnamed-chunk-22' multiply defined.
-
 )
 \openout1 = `zeusolutions.aux'.
 
@@ -1393,42 +1387,62 @@ Underfull \hbox (badness 10000) in paragraph at lines 1284--1289
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [13] [14]
-Overfull \hbox (4.9483pt too wide) in paragraph at lines 1669--1669
+Overfull \hbox (4.9483pt too wide) in paragraph at lines 1673--1673
  [][]|
  []
 
 
-Overfull \hbox (9.12111pt too wide) in paragraph at lines 1669--1669
+Overfull \hbox (9.12111pt too wide) in paragraph at lines 1673--1673
 [][]|  
  []
 
 
-Overfull \hbox (31.91876pt too wide) in paragraph at lines 1669--1669
+Overfull \hbox (31.91876pt too wide) in paragraph at lines 1673--1673
 [][]|  
  []
 
 
-Overfull \hbox (3.67984pt too wide) in paragraph at lines 1669--1669
+Overfull \hbox (3.67984pt too wide) in paragraph at lines 1673--1673
  [][]|
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1669--1669
+Overfull \hbox (7.80681pt too wide) in paragraph at lines 1673--1673
+[]\T1/lmr/m/n/10.95 Operations|  
+ []
+
+
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1673--1673
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1669--1669
+Overfull \hbox (7.80681pt too wide) in paragraph at lines 1673--1673
+[]\T1/lmr/m/n/10.95 Operations|  
+ []
+
+
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1673--1673
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1669--1669
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1673--1673
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
 
-Overfull \hbox (13.25102pt too wide) in paragraph at lines 1669--1669
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1673--1673
+[]\T1/lmr/m/n/10.95 Appropriate 
+ []
+
+
+Overfull \hbox (7.80681pt too wide) in paragraph at lines 1673--1673
+[]\T1/lmr/m/n/10.95 Operations|  
+ []
+
+
+Overfull \hbox (13.25102pt too wide) in paragraph at lines 1673--1673
 []\T1/lmr/m/n/10.95 Appropriate 
  []
 
@@ -1449,58 +1463,35 @@ Overfull \hbox (10.9519pt too wide) in paragraph at lines 1692--1693
 [][] 
  []
 
-<zeusolutions_files/figure-latex/gender_to_quarters-1.pdf, id=173, 469.755pt x 
-325.215pt>
-File: zeusolutions_files/figure-latex/gender_to_quarters-1.pdf Graphic file (ty
-pe pdf)
-<use zeusolutions_files/figure-latex/gender_to_quarters-1.pdf>
-Package pdftex.def Info: zeusolutions_files/figure-latex/gender_to_quarters-1.p
-df  used on input line 1694.
-(pdftex.def)             Requested size: 455.24608pt x 315.17035pt.
-<zeusolutions_files/figure-latex/gender_to_positions-1.pdf, id=174, 469.755pt x
- 325.215pt>
-File: zeusolutions_files/figure-latex/gender_to_positions-1.pdf Graphic file (t
-ype pdf)
-<use zeusolutions_files/figure-latex/gender_to_positions-1.pdf>
-Package pdftex.def Info: zeusolutions_files/figure-latex/gender_to_positions-1.
-pdf  used on input line 1695.
-(pdftex.def)             Requested size: 455.24608pt x 315.17035pt.
-
-Overfull \hbox (10.9519pt too wide) in paragraph at lines 1694--1696
-[] 
- []
-
-[17 <./zeusolutions_files/figure-latex/gender_to_promotion-1.pdf>] [18 <./zeuso
-lutions_files/figure-latex/gender_to_quarters-1.pdf>] [19 <./zeusolutions_files
-/figure-latex/gender_to_positions-1.pdf>]
-<zeusolutions_files/figure-latex/gender_to_salary-1.pdf, id=209, 469.755pt x 32
+[17 <./zeusolutions_files/figure-latex/gender_to_promotion-1.pdf>] [18]
+<zeusolutions_files/figure-latex/gender_to_salary-1.pdf, id=195, 469.755pt x 32
 5.215pt>
 File: zeusolutions_files/figure-latex/gender_to_salary-1.pdf Graphic file (type
  pdf)
 <use zeusolutions_files/figure-latex/gender_to_salary-1.pdf>
 Package pdftex.def Info: zeusolutions_files/figure-latex/gender_to_salary-1.pdf
-  used on input line 1912.
+  used on input line 1925.
 (pdftex.def)             Requested size: 455.24608pt x 315.17035pt.
 
-Overfull \hbox (10.9519pt too wide) in paragraph at lines 1912--1913
+Overfull \hbox (10.9519pt too wide) in paragraph at lines 1925--1926
 [][] 
  []
 
-[20] [21 <./zeusolutions_files/figure-latex/gender_to_salary-1.pdf>] [22]
-Underfull \hbox (badness 10000) in paragraph at lines 2063--2066
+[19 <./zeusolutions_files/figure-latex/gender_to_salary-1.pdf>] [20]
+Underfull \hbox (badness 10000) in paragraph at lines 2078--2081
 
  []
 
-[23] (./zeusolutions.aux)
+[21] (./zeusolutions.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 24037 strings out of 480954
- 486493 string characters out of 5905582
+ 24023 strings out of 480954
+ 485783 string characters out of 5905582
  991541 words of memory out of 5000000
- 40708 multiletter control sequences out of 15000+600000
+ 40700 multiletter control sequences out of 15000+600000
  464784 words of font info for 66 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  111i,20n,116p,10639b,935s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1516,10 +1507,10 @@ ype1/public/lm/lmss10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist/fon
 ts/type1/public/lm/lmss12.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texmf-dist
 /fonts/type1/public/lm/lmssbx10.pfb><c:/Users/Andy/AppData/Roaming/TinyTeX/texm
 f-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on zeusolutions.pdf (23 pages, 245192 bytes).
+Output written on zeusolutions.pdf (21 pages, 236063 bytes).
 PDF statistics:
- 357 PDF objects out of 1000 (max. 8388607)
- 310 compressed objects within 4 object streams
- 123 named destinations out of 1000 (max. 500000)
- 130 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 331 PDF objects out of 1000 (max. 8388607)
+ 291 compressed objects within 3 object streams
+ 119 named destinations out of 1000 (max. 500000)
+ 120 words of extra memory for PDF output out of 10000 (max. 10000000)
 
