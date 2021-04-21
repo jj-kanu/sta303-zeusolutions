@@ -43,46 +43,9 @@ The aim of the present research is to examine factors that contribute to hiring,
 
 ## Key findings
 
-## Limitations
-
-
-
-\newpage
-
-## Introduction
-
-_Provide a brief introduction to your report and outline what the report will cover. This section is valuable for setting scope and expectations. _
-
-### Research questions
-The following research questions are going to be addressed within this report. 
-* What factors play a role in being hired through Black Saber's recruitment pipeline manager?
-* What factors contribute to promotions of Black Saber's current employee's?
-* What factors dictate the salary assignment of current employees at Black Saber?
-
-\newpage
-
-```{r include = FALSE, fig.show='hide'}
-# This chunk provides an example of some things you can do with RMarkdown to make your report creation process easier
-
-# read in the data
+```{r, warning=FALSE}
 current_employees <- read_csv("data/black-saber-current-employees.csv")
 
-# create a visualisation
-my_plot <- current_employees %>% 
-  ggplot(aes(x = productivity)) +
-  geom_histogram(colour = "grey", fill = "#6C3082") +
-  theme_minimal() +
-  labs(title = "Look! A title. But do you want a title or a caption for your report?", x = "This is a changed x label")
-
-# save your plot in your images folder, you can specify the height and width, too
-# saving this means you can add the image to your exectuve summary without having to run or rerun the code, if you wish
-ggsave("images/example.png", width = 7, height = 4)
-
-# notice how the image is included with the ![](file/path.png) below
-```
-
-
-```{r, warning=FALSE}
 gender_to_currentroles <- select(current_employees, gender, role_seniority) 
 hierarchy <- c('Entry-level','Junior I','Junior II','Senior I','Senior II','Senior III','Manager', 'Director','Vice president')
 #creating visual to display reported gender ratios of current employees
@@ -101,12 +64,26 @@ gender_to_currentroles%>%
                                     face = "bold"))
 ```
 
-```{r wrangle_employee_data, message = FALSE}
-current_employees <- current_employees
-```
+## Limitations
+
+
+
+\newpage
 # Technical report
 
-## Hiring Question: Fairness of the AI Recruitment Pipeline Manager
+## Introduction
+
+_Provide a brief introduction to your report and outline what the report will cover. This section is valuable for setting scope and expectations. _
+
+### Research questions
+The following research questions are going to be addressed within this report. 
+* What factors play a role in being hired through Black Saber's recruitment pipeline manager?
+* What factors contribute to promotions of Black Saber's current employee's?
+* What factors dictate the salary assignment of current employees at Black Saber?
+
+\newpage
+
+## Fairness of the AI Recruitment Pipeline Manager
 
 The company Black Saber has a new AI recruitment pipeline manager that has been trialing for the Data and Software teams. The board has concerns about the process and questions whether or not it is fair and based on value and talent of each applicant. We have been given the data for each phase of the process, in which there are a total of three. Through each phase there is certain data collected through question and tasks in which the AI uses to narrow down the field of applicants from one phase to another. We want to determine what factors play a major role in being hired through Black Saber's recruitment pipeline manager.
 
@@ -124,7 +101,7 @@ final_hires <- final_hires %>%
   left_join(phase3_applicants, by = "applicant_id")
 ```
 
-### (Phase 1) Defining Features of the Application Form
+### Defining Features of the Application Form
 
 The first phase of the hiring pipeline is the submission of an application form, cover letter and CV. Each line of `phase1-new-grad-applicants-2020.csv` contains the information of each applicant in phase 1:
 
@@ -138,16 +115,17 @@ The first phase of the hiring pipeline is the submission of an application form,
 * `work_experience` = 0, 1 or 2. Description in which is accessed automatically by keywords where 2 indicates high, 1 indicates some and 0 indicates no relevant work experiences.
 
 ```{r}
+# Show the first 5 applicants in the dataset
 phase1_applicants[1:5,] %>% 
   kbl(caption = "The first five applicants from phase 1 of the hiring pipeline", booktabs = T) %>% 
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = FALSE, position = "left", latex_options = "hold_position") %>% 
   row_spec(0, angle = 45)
-
 ```
 
 Similarly, we are also given the list of applicants who have made it to phase 2 along with the factors assessed in phase 2. However, in this section we are only interested in which applicants made it to phase 2. For this reason we will create a variable called `passed_1` and set it to 1, if the applicant made it from phase 1 to phase 2 and 0, if not. This will be the response variable we are interested in for developing our model. The other variables will be fixed effects besides team that the applicant applied for. We believe that team that the applicant applied for should be added as a random effect because each team has a different set of required skills and/or experiences. Other than that, since each row corresponds to a unique applicant, this suggests that the observations are independent, hence our assumptions are not violated. We want to determine which is the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process.
 
 ```{r}
+# add a new binary variable to account for whoever passed phase 1
 phase1_applicants <- phase1_applicants %>% 
   mutate(passed_1 = as.integer(applicant_id %in% phase2_applicants$applicant_id)) 
 ```
@@ -155,6 +133,7 @@ phase1_applicants <- phase1_applicants %>%
 Given the binomial response variable and random effect, we will be constructing a generalized linear mixed model. Before constructing the model, we want to first consider the gender distribution for those who passed phase 1 and those who did not. In addition, consider also the marginal probabilities and odd ratios.
 
 ```{r}
+# Calculations with tables
 table_gender_passsed <- table(phase1_applicants$gender, phase1_applicants$passed_1)
 
 table_gender_passsed %>% 
@@ -174,6 +153,7 @@ Hence from the table above, given that the applicant passes phase 1, the probabi
 Then, based on the response variable and random effect we will be considering a generalized linear mixed model. \newline
 
 ```{r message=FALSE, warning=FALSE, results='hide'}
+# GLMM for those who passes phase 1
 p1_model_full <- lme4::glmer(passed_1 ~ cover_letter + cv + gpa + gender + extracurriculars + work_experience + (1|team_applied_for), family = binomial(link="logit"), data = phase1_applicants)
 ```
 
@@ -188,7 +168,7 @@ tbl_regression(p1_model_full) %>%
 
 It is evident that GPA, relevant extracurriculars and relevant work experience have the most significant effect on passing Phase 1, based on their log odds. We cannot interpret the odds ratio of GPA because their is no one with a 0.0 GPA, however we can interpret the odds ratio of the coefficients for relevant skills from extracurriculars and work experience to an extent. Since the variables for relevant skills from extracurriculars and work experience are given scores of either 0, 1 or 2, the odds ratio is an average of scores 1 and 2. Nonetheless, we find that the the odds of passing Phase 1 with some to high relevant skills from extracurriculars is 21267.4 times that of those without and the odds of passing Phase 1 with some to high relevant work experience is 107591 times that of those without. Overall, we can conclude that the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process in order of is GPA, followed by relevant skills from extracurriculars and work experience.
 
-### (Phase 2) AI Grading Influences
+### AI Grading Influences
 
 The second phase of the hiring pipeline invites applicants to do a timed technical coding task, writing sample and submit a pre-recorded video. Each line of `phase2-new-grad-applicants-2020.csv` contains the AI graded scores for skills relevant to each task:
 
@@ -201,6 +181,7 @@ The second phase of the hiring pipeline invites applicants to do a timed technic
 In this phase, we are interested in what factors from the application form affect the AI scoring/rating of technical, writing, and speaking skills and leadership presence. Thus we will be using the data from `phase1-new-grad-applicants-2020.csv`, which has been explained in the previous section. We will have 4 models with the response variables being  the scores for technical and writing task, and rating for the speaking skills and leadership presence. For the fixed effects and random effects, we will be using the exact same found in the final model presented for phase 1 except for the variables for cover letter and CV. The reason for this is because every applicant who made it to phase 2 had a cover letter and CV present with their application form. Based on the response variables, we will be using a linear mixed model for each.
 
 ```{r message=FALSE, warning=FALSE}
+#LMM for each AI graded skill/factor
 p2_model_tech <- lmer(technical_skills ~ gpa + gender + extracurriculars + work_experience + (1|team_applied_for), data = phase2_applicants)
 
 p2_model_write <- lmer(writing_skills ~ gpa + gender + extracurriculars + work_experience + (1|team_applied_for), data = phase2_applicants)
@@ -256,7 +237,7 @@ The linear mixed model of the Leadership Presence Rating shows that the most inf
 
 After analyzing all of the possible factors that can affect the scores and rating given by the AI. we conclude that the top most influential factors are GPA, and relevant skills from extracurriculars and work experiences. We also find that those who put 'Woman' as their gender, score higher than those who put 'Man' on average for the Technical and Writing Task. On the other hand, those who put 'Man' as their gender, were rated higher than those who put 'Woman' on average for the Speaking Skills and Leadership Presence. Ultimately the differences between the genders are small relative to the other factors, hence there is no concern about bias in gender parity for the AI scores and ratings.
 
-### (Phase 3) Human Rating Differences
+### Human Rating Differences
 
 The third phase of the hiring pipeline is the final interview. Each line of \newline
 `phase3-new-grad-applicants-2020.csv` contains the overall job fit rating given by the interviewers:
@@ -268,12 +249,14 @@ The third phase of the hiring pipeline is the final interview. Each line of \new
 In this phase, we are interested in what factors from the application form and the AI scoring/rating affect the overall job rating given by each interviewer. Thus we will be using the data from `phase1-new-grad-applicants-2020.csv` and `phase2-new-grad-applicants-2020.csv`, which has been explained in the previous sections. We will have 2 models with the response variables being the overall job fit ratings given to the applicants by the first and second interviewer. For the fixed effects and random effects, we will be using the exact same found in the models presented for phase 2 with the inclusion of the 4 variables which were the response variables. That is, the AI scores for the techincal and writing tasks ans rating for speaking and leadership presence will be added as fixed effects. We will also scale up the ratings for speaking and leadership presence by 10, so that they are on the same scale as the scores for the technical and writing tasks. Based on the response variables, the model will be similar to that of phase 2, hence we will be using a linear mixed model for each. \newpage
 
 ```{r}
+# Re-scaling speaking and leadership ratings
 phase3_applicants <- phase3_applicants %>% 
   mutate(speaking_skills = speaking_skills*10) %>% 
   mutate(leadership_presence = leadership_presence*10)
 ```
 
 ```{r message=FALSE, warning=FALSE}
+# LMM for each interviewer rating
 p3_model_int1 <- lmer(interviewer_rating_1 ~ gpa + gender + extracurriculars + work_experience + technical_skills + writing_skills + speaking_skills + leadership_presence + (1|team_applied_for), data = phase3_applicants)
 
 p3_model_int2  <- lmer(interviewer_rating_2 ~ gpa + gender + extracurriculars + work_experience + technical_skills + writing_skills + speaking_skills + leadership_presence + (1|team_applied_for), data = phase3_applicants)
@@ -286,7 +269,6 @@ tbl_regression(p3_model_int1) %>%
   set_position("center") %>% 
   set_top_padding(0.5) %>% 
   set_bottom_padding(0.5)
-
 ```
 
 Looking at the model for the ratings given by Interviewer 1, we only need to look at each coefficient relative to each other. It is evident that the least influential factor is in fact gender. It is seen that on average, those of the gender 'Women' have a score that is 0.24 higher than that of those who are the gender 'Man'. \newline 
@@ -304,11 +286,12 @@ The same results are evident in the ratings given by Interviewer 2. In fact, the
 
 All in all, there are no strong evidence that suggest applicants are not judged on their talents and value to the company.
 
-### (Final Hires) The Cost of the Job Offer
+### The Quintessential Element of a Job Offer
 
 Since there are only three phases of the recruitment pipeline, in this section we will be looking at those who were sent an offer letter. Each line of `data/final-hires-newgrad_2020.csv` contains the unique IDs of those who were sent an offer letter at the end of the recruitment pipeline. We are only interested in which applicants got an offer letter after phase 3. For this reason we will create a variable called `offered` and set it to 1, if the applicant got an offer letter after phase 3 and 0, if not. This will be the response variable we are interested in for developing our model. As for the fixed effects, we will be using gender and the two interview ratings. The reason for only using the interview ratings is because we find that the interview rating encompasses all of the data collected from each applicant from phases 1 and 2. Furthermore, the interview is usually the make or break situation for the applicants to prove themselves to the employer that they are worthy of a job offer. Then similar to the previous models, we will add the team the applicant applied for as a random effect.
 
 ```{r}
+# Add variable for applicants who got an offer letter
 phase3_applicants <- phase3_applicants %>% 
   mutate(offered = as.integer(applicant_id %in% final_hires$applicant_id)) 
 ```
@@ -316,6 +299,7 @@ phase3_applicants <- phase3_applicants %>%
 Analogous to the analysis in phase 1, we will be constructing a generalized linear mixed model, but before that we want to first consider the gender distribution for those who got an offered letter to those who did not. In addition, consider also the marginal probabilities and odd ratios.
 
 ```{r}
+# Calculations with tables
 table_gender_offered <- table(phase3_applicants$gender, phase3_applicants$offered)
 
 table_gender_offered %>% 
@@ -336,6 +320,7 @@ odds_mw_offered <- (table_gender_offered[2,2]/table_gender_offered[2,1])/(table_
 Hence from the table above, given that the applicant got an offer letter, the probability that their gender is a 'Man' is 80%, whereas a 'Woman' is 20%. We also see that the probability of getting an offer letter for an applicant whose gender is 'Man' is 53%, whereas a 'Woman' is 29%. Also, the odds ratio of Woman vs Man who pass phase 1 is approximately 0.35. That is, the odds of a 'Woman' passing phase 1 is less than that of a 'Man'. This odds ratio is relatively close to 0, hence there is reason to suspect that there are possible gender biases in those who received an offer letter. Thus lets now look at the model and see if there is a possible case of bias between those who received and not received an offer letter. 
 
 ```{r message=FALSE, warning=FALSE, results='hide'}
+# GLMM for applicants who got an offer letter after phase 3
 final_model_full <- lme4::glmer(offered ~ gender + interviewer_rating_1 + interviewer_rating_2 + (1|team_applied_for), family = binomial(link="logit"), nAGQ=0, data = phase3_applicants)
 ```
 
@@ -350,7 +335,7 @@ tbl_regression(final_model_full) %>%
 
 From the model above, we can see that the coefficients and p-values are absurdly large, however it is still useful to interpret. We see that the coefficient of 'Women' is a large negative, where as the ones for the interview ratings are only somewhat large positives. Hence, the odds of the gender, 'Women' are essentially 0 compared to 'Man'. However, this does not change the fact that the overall job fit ratings from the interview increases the odds of getting an offer letter significantly. This is knowing that the overall job fit ratings giver by the interviewers are unbiased bases on the analysis in the previous section. In either case, for whatever reason, those who are the gender 'Woman', do not have the a chance at getting an offer letter compared to those who are of the gender, 'Man'. Though the process of the recruitment pipeline seemed fair, there seems to be a gender disparity in the selection of those who were sent an offer letter in the end.   
 
-## Promotion Question: Fairness of Promotion process
+## Fairness of Promotion process
 
 Let us now shift focus from the hiring pipeline to the current employees at the company. Black Saber aims to promote an equitable and inclusive work environment based on merit. The board wants to assure that its promotion processes are not only fair, but strictly based on talent to the company. We have been given the data for the company's current employees and their key performance indicators throughout their time at the company marked by financial quarters. We wish to determine which factors contribute to employees moving up the ranks of Black Saber seniority.
 
@@ -494,7 +479,7 @@ tbl_regression(pm_0) %>%
 
 From the model above, we can see gender has an effect on whether or not a employee is promoted. It is evidently the case that woman are 49% less likely to be promoted than men.  Therefore, we can say that the evidence shows the promotion processes at Black Saber are unfair. 
 
-## Salary Question: Fairness of Salary assignment for current employees at Black Saber
+## Fairness of Salary assignment for current employees at Black Saber
 
 Along with the fairness of their promotion practices, the Black Saber board members also want to know that compensation of employees is set by the same standards of merit. Using the same dataset of Black Saber's current employees, we wish to determine which factors contribute to setting employee salaries.
 
