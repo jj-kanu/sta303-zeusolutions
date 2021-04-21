@@ -352,12 +352,8 @@ tbl_regression(final_model_full) %>%
 
 From the model above, we can see that the coefficients and p-values are absurdly large, however it is still useful to interpret. We see that the coefficient of 'Women' is negative, where as `interviewer_rating_1` and `interviewer_rating_2` are positive. The odds of the `gender`, 'Women' are essentially 0 compared to 'Man', due to the fact that a majority of those who got offer letters are of the `gender`, 'Man'. However, this does not change the fact that the overall job fit ratings from the interview increases the odds of getting an offer letter significantly. This is knowing that `interviewer_rating_1` and `interviewer_rating_2` are unbiased bases on the analysis in the previous section. Hence it is to say that those who got an offer letter, got one because they were well suited for the position.   
 
-## (Promotion Question)
-
-=======
-\newpage
 ## Promotion Question: Fairness of Promotion process
->>>>>>> dc1b87d9ac91639bff5cf69de9fb771a4a1fcc5e
+
 Black Saber aims to promote an equitable and inclusive work environment based on merit. The board wants to assure that its promotion processes are not only fair, but strictly based on talent to the company. We have been given the data for the company's current employees and their key performance indicators throughout their time at the company marked by financial quarters. We wish to determine which factors contribute to employees moving up the ranks of Black Saber seniority.
 
 ### Features Recorded of Black Saber's Current Employees
@@ -384,7 +380,7 @@ sample_n(distinct(current_employees, employee_id, .keep_all = TRUE), 5) %>%
 For this question, we are interested in how many promotions an employee received while working at Black Saber Software. For this reason, we will create a variable called `number_of_promotions` counting the change in role_seniority of each employee. 
 This will be the response variable we are interested in for developing our model. 
 
-<!-- The other variables will be fixed effects besides `team_applied_for`. We believe that `team_applied_for` should be added as a random effect because each team has a different set of required skills and/or experiences. Other than that, since each row corresponds to a unique applicant, this suggests that the observations are independent, hence our assumptions are not violated. We want to determine which is the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process. -->
+The other variables will be fixed effects besides `team_applied_for`. We believe that `team_applied_for` should be added as a random effect because each team has a different set of required skills and/or experiences. Other than that, since each row corresponds to a unique applicant, this suggests that the observations are independent, hence our assumptions are not violated. We want to determine which is the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process. 
 
 ```{r promotion_data, message = FALSE}
 promoted_employees <- read.csv("data/black-saber-current-employees.csv")  %>% 
@@ -511,14 +507,13 @@ From the tables above, the only time the probability of an employee being a woma
 # 
 # promo_model <- glm(number_of_promotions ~ gender + avg_leadership + avg_productivity, family = poisson, offset = log(quarters_since_hiring), data = promoted_employees_dist)
 
-<<<<<<< HEAD
 # tbl_regression(promo_model1) %>% 
 #   as_hux_table() %>%
 #   set_caption("Generalized linear model of employee promotions") %>% 
 #   set_position("center") %>% 
 #   set_top_padding(0.5) %>% 
 #   set_bottom_padding(0.5)
-=======
+
 promo_model0 <- lme4::lmer(promotions_per_quarter ~ (1|team) + (1|role_seniority), data = pmfd)
 promo_model1 <- lme4::lmer(promotions_per_quarter ~ gender + (1|team) + (1|role_seniority), data = pmfd)
 promo_model2 <- lme4::lmer(promotions_per_quarter ~ gender + avg_productivity + (1|team) + (1|role_seniority), data = pmfd)
@@ -534,19 +529,12 @@ promo_model3 <- lme4::lmer(promotions_per_quarter ~ gender + avg_productivity + 
 lmtest::lrtest(promo_model0, promo_model1)
 lmtest::lrtest(promo_model2, promo_model3)
 lmtest::lrtest(promo_model0, promo_model3)
->>>>>>> dc1b87d9ac91639bff5cf69de9fb771a4a1fcc5e
 
 # promo_model3
 ```
 
-<<<<<<< HEAD
-## (Salary Question) Fairness of Salary assignment for current employees at Black Saber
-
-=======
-\newpage
-
 ## Salary Question: Fairness of Salary assignment for current employees at Black Saber
->>>>>>> dc1b87d9ac91639bff5cf69de9fb771a4a1fcc5e
+
 Along with the fairness of their promotion practices, the Black Saber board members also want to know that compensation of employees is set by the same standards of merit. Using the same dataset of Black Saber's current employees, we wish to determine which factors contribute to setting employee salaries.
 
  Information of each employee at the financial quarters they were employed will be utilized again from `black-saber-current-employees.csv`.
@@ -652,14 +640,4 @@ Zeusolutions strives to be a forefront in professional statistical work while ma
 5.	Ensure the disclosure of all limitations and assumptions made in relevance to data of any particular work. 
 
 We recognize these importance’s and responsibilities we ought to uphold to our customers. 
-<<<<<<< HEAD
-=======
 
-_This section should be fairly short, no more than half a page. Assume a general audience, much like your executive summary._
-
-* _Make at least three relevant statements about your company’s approach to ethical statistical consulting. These should be appropriately in line with professional conduct advice like the (Statistical Society of Canada Code of Conduct)[https://ssc.ca/sites/default/files/data/Members/public/Accreditation/ethics_e.pdf] or the (Ethical Guidelines for Statistical Practice from the American Statistical Society)[https://www.amstat.org/ASA/Your-Career/Ethical-Guidelines-for-Statistical-Practice.aspx]. For example, "the customer is always right" ISN’T the type of thing an ethical statistical consultant would include._
-*	_Be very careful not to just copy and paste from these other documents! Put things in your own words._
-
-
-__Final advice: KNIT EARLY AND OFTEN!__
->>>>>>> dc1b87d9ac91639bff5cf69de9fb771a4a1fcc5e
