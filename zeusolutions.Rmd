@@ -625,10 +625,11 @@ Taking into account the gender and average productivity of a given current emplo
 
 ## Discussion
 
-_In this section you will summarize your findings across all the research questions and discuss the strengths and limitations of your work. It doesn't have to be long, but keep in mind that often people will just skim the intro and the discussion of a document like this, so make sure it is useful as a semi-standalone section (doesn't have to be completely standalone like the executive summary)._
 
-### Strengths and limitations
 
+### Limitations and Concerns
+  Findings from this report analysis on Black Saber’s hiring, promotion and salary processes are limited to the data provided. Evidently we recognize that race and ethnicity was not information that was collected or provided by Black Saber. While we attempt to perform analysis on fairness in gender disparity across these processes in Black Saber, we did not consider the race and ethnicity of current and possible hired employees. It is suggested that collecting information on race and ethnicity would be beneficial towards analyzing fairness across race/ethnicity for future considerations.
+  
 \newpage
 # Consultant information
 
