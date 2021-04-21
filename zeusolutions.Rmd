@@ -22,6 +22,7 @@ library(tidyverse)
 library(huxtable)
 library(kableExtra)
 library(gtsummary)
+library(lme4)
 # this should supress all code and messages
 knitr::opts_chunk$set(echo=FALSE)
 ```
@@ -127,7 +128,7 @@ final_hires <- final_hires %>%
 
 ### (Phase 1) Defining Features of the Application Form
 
-The first phase of the hiring pipeline is submission of an application form, cover letter and CV. Each line of `phase1-new-grad-applicants-2020.csv` contains the information of each applicant in phase 1:
+The first phase of the hiring pipeline is the submission of an application form, cover letter and CV. Each line of `phase1-new-grad-applicants-2020.csv` contains the information of each applicant in phase 1:
 
 * `applicant_id` = A unique ID given to each applicant in Phase 1
 * `team_applied_for` = Software or Data
@@ -153,7 +154,7 @@ phase1_applicants <- phase1_applicants %>%
   mutate(passed_1 = as.integer(applicant_id %in% phase2_applicants$applicant_id)) 
 ```
 
-Given the binomial response variable and random effect, we will be constructing a generalized linear mixed model. Before constructing the model, we want to first consider the gender distribution for those who passed phase 1 and those who did not. In addition, consider also the marginal probabilities and odd ratios.\newpage
+Given the binomial response variable and random effect, we will be constructing a generalized linear mixed model. Before constructing the model, we want to first consider the gender distribution for those who passed phase 1 and those who did not. In addition, consider also the marginal probabilities and odd ratios.
 
 ```{r}
 table_gender_passsed <- table(phase1_applicants$gender, phase1_applicants$passed_1)
@@ -171,23 +172,92 @@ odds_mw_passes <- (table_mw_passed[2,2]/table_mw_passed[2,1])/(table_mw_passed[1
 
 Hence from the table above, given that the applicant passes phase 1, the probability that their gender is a 'Man' is 48%, whereas a 'Woman' is 51%. Also, the odds ratio of Woman vs Man who pass phase 1 is approximately 0.96. That is, the odds of a 'Woman' passing phase 1 is less than that of a 'Man'. This odds ratio is relatively close to 1, hence there is no reason to suspect that there are any gender biases in those who passed phase 1. 
 
-Now consider the Generalized linear mixed model.
+Then, based on the response variable and random effect we will be considering a generalized linear mixed model. \newline
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+p1_model_full <- lme4::glmer(passed_1 ~ cover_letter + cv + gpa + gender + extracurriculars + work_experience + (1|team_applied_for), family = binomial(link="logit"), data = phase1_applicants)
+```
 
 ```{r message=FALSE, warning=FALSE}
-full_p1_model <- lme4::glmer(passed_1 ~ cover_letter + cv + gpa + gender + extracurriculars + work_experience + (1|team_applied_for), family = binomial(link="logit"), data = phase1_applicants)
-
-tbl_regression(full_p1_model) %>% 
+tbl_regression(p1_model_full) %>% 
   as_hux_table() %>%
   set_caption("Generalized linear mixed model of applicants who passed Phase 1") %>% 
-  set_position("left") %>% 
+  set_position("center") %>% 
   set_top_padding(0.5) %>% 
   set_bottom_padding(0.5)
 ```
 
-Based on the model, it is evident that `gpa`, `extracurriculars` and `work_experience` have the most significant effect on passing Phase 1, based on their p-values. Hence we can conclude that the most impactful components of the application form that allowd the applicants to proceed to phase 2 of the hiring process are `gpa`, `extracurriculars` and `work_experience`.
+It is evident that `gpa`, `extracurriculars` and `work_experience` have the most significant effect on passing Phase 1, based on their log odds. We cannot interpret the odds ratio of `gpa` because their is no one with a 0.0 GPA, however we can interpret the odds ratio of `extracurriculars` and `work_experience` to an extent. Since `extracurriculars` and `work_experience` are given scores of either 0, 1 or 2, the odds ratio is an average of scores 1 and 2. Nonetheless, we find that the the odds of passing Phase 1 with some to high relevant skills from extracurriculars is 21267.4 times that of those without and the odds of passing Phase 1 with some to high relevant work experience is 107591 times that of those without. Overall, we can conclude that the most impactful component of the application form that allows the applicants to proceed to phase 2 of the hiring process in order of is `gpa`, followed by `extracurriculars` and `work_experience`.
 
 ### (Phase 2) AI Scoring Influences
 
+The second phase of the hiring pipeline invites applicants to do a timed technical coding task, writing sample and submit a pre-recorded video. Each line of `phase2-new-grad-applicants-2020.csv` contains the AI graded scores for skills relevant to each task:
+
+* `applicant_id` = A unique ID given to each applicant in Phase 1
+* `technical_skills` = AI graded score from 0 to 100 for the timed technical task
+* `writing_skills` = AI graded score from 0 to 100 for the timed writing task
+* `speaking_skills` = AI graded rating from 0 to 10 for the speaking ability in the pre-recorded video
+* `leadership_presence` = AI graded rating from 0 to 10 for 'leadership presence' in the pre-recorded video
+
+In this phase, we are interested in what factors from the application form affect the AI scoring/rating of technical, writing, and speaking skills and leadership presence. Thus we will be using the data from `phase1-new-grad-applicants-2020.csv`, which has been explained in the previous section. We will have 4 models with the response variables being `technical_skills`, `writing_skills`, `speaking_skills` and `leadership_presence`. For the fixed effects and random effects, we will be using the exact same found in the final model presented for phase 1 except for `cover_letter` and `cv`. The reason for not including `cover_letter` and `cv` is because only those who had submitted both a cover letter and CV made it to phase 2. Based on the response variables, we will be using a linear mixed model for each.
+
+```{r message=FALSE, warning=FALSE}
+p2_model_tech <- lmer(technical_skills ~ gpa + gender + extracurriculars + work_experience + (1|team_applied_for), data = phase2_applicants)
+
+p2_model_write <- lmer(writing_skills ~ gpa + gender + extracurriculars + work_experience + (1|team_applied_for), data = phase2_applicants)
+
+p2_model_speak <- lmer(speaking_skills ~ gpa + gender + extracurriculars + work_experience + (1|team_applied_for), data = phase2_applicants)
+
+p2_model_lead <- lmer(leadership_presence ~ gpa + gender + extracurriculars + work_experience + (1|team_applied_for), data = phase2_applicants)
+```
+
+```{r message=FALSE, warning=FALSE}
+tbl_regression(p2_model_tech) %>% 
+  as_hux_table() %>%
+  set_caption("Linear mixed model of the Technical Skills Score") %>% 
+  set_position("center") %>% 
+  set_top_padding(0.5) %>% 
+  set_bottom_padding(0.5)
+```
+
+From the linear mixed model of the Technical Skill Score, it follows that the most influential fixed effect is `gpa` followed by `extracurriculars`. Similar to before, we cannot interpret `gpa` because there is no one with a 0.0 GPA. As for `extracurriculars`, those with relevant skills from extracurriculars have a higher score than those who do not by an average of 4.6. We also notice that those who put 'Prefer not to say' for their gender have higher score than those who put 'Man' by an average of 23. This is not concerning because the sample of those who put 'Prefer not to say' is very small and thus can be seen as outliers to the overall average. Besides that, those who put 'Woman' for their gender only have a higher score than those who put 'Man' by an average of 1. \newpage 
+
+```{r message=FALSE, warning=FALSE}
+tbl_regression(p2_model_write) %>% 
+  as_hux_table() %>%
+  set_caption("Linear mixed model of the Technical Skills Score") %>% 
+  set_position("center") %>% 
+  set_top_padding(0.5) %>% 
+  set_bottom_padding(0.5)
+```
+
+The linear mixed model of the Writing Skill Score shows similar results to the one for the Technical Skill Score with the most influential fixed effect being `gpa`. Unlike the Technical Skill Score, the second most influential fixed effect for the of the Writing Skill Score is `work_experience`. That is, those with relevant work experience have a higher score than those who do not by an average of 4.1. We also find that those who put 'Woman' for their gender only have a higher score than those who put 'Man' by an average of 3.8.
+
+```{r message=FALSE, warning=FALSE}
+tbl_regression(p2_model_speak) %>% 
+  as_hux_table() %>%
+  set_caption("Linear mixed model of the Speaking Skills Rating") %>% 
+  set_position("center") %>% 
+  set_top_padding(0.5) %>% 
+  set_bottom_padding(0.5)
+```
+
+The linear mixed model of the Speaking Skills Rating is significantly different from the previous models. The model shows that the most influential factor of the rating is `work_experience`. More specifically, those with relevant work experience have a higher rating than those who do not by an average of 0.93. The second most influential factor of the rating is `extracurriculars`, showing a higher rating on average of 0.47 for those who have relevant skills from extracurriculars compared to those who do not. Surprisingly, there is a negative coefficient for `gpa`, showing that those with higher GPAs have a lower rating on average. We also see a negative coefficient for those who put 'Woman' for their gender as they have a lower rating compared to those who put 'Man' by an average of 1.8.
+
+```{r message=FALSE, warning=FALSE}
+tbl_regression(p2_model_lead) %>% 
+  as_hux_table() %>%
+  set_caption("Linear mixed model of the Leadership Presence Rating") %>% 
+  set_position("center") %>% 
+  set_top_padding(0.5) %>% 
+  set_bottom_padding(0.5)
+```
+
+The linear mixed model of the Leadership Presence Rating shows that the most influential factor is no other than `extracurriculars`. This is followed by `gpa` and then `work_wxperience`. By interpreting the coefficients of `extracurriculars` and `work_wxperience`, we find that those who have the relevant skills for each, compared to those who do not, have a higher rating on average of 0.76 and 0.16, respectively. Similar to the Speaking Skills Rating, we also see a negative coefficient for those who put 'Woman' for their gender as they have a lower rating compared to those who put 'Man' by an average of 0.91.
+
+After analyzing all of the possible factors that can affect the scores and rating given by the AI. we conclude that the top most influential factors are no other than `gpa`, `extracurriculars` and `work_experience`. We also find that those who put 'Woman' as their gender, score higher than those who put 'Man' on average for the Technical and Writing Task. On the other hand, those who put 'Man' as their gender, were rated higher than those who put 'Woman' on average for the Speaking Skills and Leadership Presence. Ultimately the differences between the genders are small relative to the other factors, hence there is no concern about bias in gender parity for the AI scores and ratings.
+
+\newpage
 ## (Promotion Question)
 Black Saber aims to promote an equitable and inclusive work environment based on merit. The board wants to assure that its promotion processes are not only fair, but strictly based on talent to the company. We have been given the data for the company's current employees and their key performance indicators throughout their time at the company marked by financial quarters. We wish to determine which factors contribute to employees moving up the ranks of Black Saber seniority.
 
